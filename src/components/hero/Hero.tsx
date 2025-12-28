@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { InteractiveImageAccordion } from '@/components/ui/interactive-image-accordion'
+import { NeonButton } from '@/components/ui/neon-button'
+import { DottedSurface } from '@/components/ui/dotted-surface'
 import { trackEvent } from '@/lib/analytics'
 
 type Category = 'startups' | 'scaleups' | 'smes' | null
@@ -48,22 +50,25 @@ function getCategoryFromHref(href: string | undefined): Category {
 export function Hero() {
   const router = useRouter()
   const [activeCategory, setActiveCategory] = useState<Category>(null)
-  const [bgImageUrl, setBgImageUrl] = useState<string | null>(null)
 
   const handleStrategyCallClick = useCallback(() => {
     trackEvent('strategy_call_click', { location: 'hero' })
-    window.location.href = '/contact'
-  }, [])
+    router.push('/contact')
+  }, [router])
+
+  const handleExploreSolutionsClick = useCallback(() => {
+    trackEvent('explore_solutions_click', { location: 'hero' })
+    router.push('/services')
+  }, [router])
 
   const handleActiveChange = (item: { href?: string; imageUrl: string } | null) => {
     if (item) {
       const category = getCategoryFromHref(item.href)
       setActiveCategory(category)
-      setBgImageUrl(item.imageUrl)
+      // Background image change disabled - keeping text changes only
       trackEvent('hero_accordion_hover', { category, title: item.href })
     } else {
       setActiveCategory(null)
-      setBgImageUrl(null)
     }
   }
 
@@ -71,31 +76,8 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen pt-20 pb-16 lg:pb-24 flex items-center bg-deep-void overflow-hidden">
-      {/* Background image layer */}
-      <AnimatePresence>
-        {bgImageUrl && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="absolute inset-0 pointer-events-none z-0"
-          >
-            <div className="absolute inset-0">
-              <Image
-                src={bgImageUrl}
-                alt=""
-                fill
-                className="object-cover scale-110 blur-xl"
-                style={{ opacity: 0.08 }}
-                unoptimized
-              />
-            </div>
-            {/* Dark overlay gradient to maintain contrast */}
-            <div className="absolute inset-0 bg-gradient-to-b from-deep-void/60 via-deep-void/80 to-deep-void" />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Dotted Surface Background */}
+      <DottedSurface theme="dark" className="absolute inset-0 z-0" />
 
       <Container size="xl" className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -155,10 +137,15 @@ export function Hero() {
               </motion.div>
             </motion.div>
 
-            {/* Button - Static wrapper, prevents re-animation */}
-            <StaticButton
-              onClick={handleStrategyCallClick}
-            />
+            {/* Buttons - Static wrapper, prevents re-animation */}
+            <div className="flex flex-col gap-4 items-start">
+              <StaticButton
+                onClick={handleStrategyCallClick}
+              />
+              <StaticNeonButton
+                onClick={handleExploreSolutionsClick}
+              />
+            </div>
           </div>
 
           {/* Right Column - Interactive Image Accordion */}
@@ -190,15 +177,27 @@ export function Hero() {
 // Static button component to prevent re-animation on category changes
 const StaticButton = memo(function StaticButton({ onClick }: { onClick: () => void }) {
   return (
-    <div>
-      <Button
-        onClick={onClick}
-        variant="primary"
-        size="lg"
-        className="text-lg"
-      >
-        Book a Strategy Call
-      </Button>
-    </div>
+    <Button
+      onClick={onClick}
+      variant="primary"
+      size="lg"
+      className="text-lg w-[280px] h-[56px]"
+    >
+      Book a Strategy Call
+    </Button>
+  )
+})
+
+// Static neon button component to prevent re-animation on category changes
+const StaticNeonButton = memo(function StaticNeonButton({ onClick }: { onClick: () => void }) {
+  return (
+    <NeonButton
+      onClick={onClick}
+      variant="default"
+      size="lg"
+      className="text-lg font-medium tracking-tight w-[280px] h-[56px]"
+    >
+      Explore Solutions
+    </NeonButton>
   )
 })

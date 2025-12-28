@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import 'antd/dist/reset.css'
 import './globals.css'
 import { Header } from '@/components/ui/header-1'
 import { Footer } from '@/components/layout/Footer'

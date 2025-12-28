@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button, buttonVariants } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
@@ -9,13 +10,13 @@ import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
 import { useScroll } from '@/components/ui/use-scroll';
 import { createPortal } from 'react-dom';
 import { trackEvent } from '@/lib/analytics';
+import { ServicesDropdown } from '@/components/ui/dropdown';
 
 export function Header() {
 	const [open, setOpen] = React.useState(false);
 	const [openDropdown, setOpenDropdown] = React.useState(false);
 	const scrolled = useScroll(10);
 	const router = useRouter();
-	const dropdownRef = React.useRef<HTMLDivElement>(null);
 
 	const handleStrategyCallClick = () => {
 		trackEvent('strategy_call_click', { location: 'navbar' });
@@ -33,15 +34,6 @@ export function Header() {
 		};
 	}, [open]);
 
-	React.useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-				setOpenDropdown(false);
-			}
-		};
-		document.addEventListener('mousedown', handleClickOutside);
-		return () => document.removeEventListener('mousedown', handleClickOutside);
-	}, []);
 
 	const servicesLinks = {
 		primary: [
@@ -73,66 +65,43 @@ export function Header() {
 		>
 			<nav className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 				<Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
-					<span className="text-2xl font-normal tracking-tight text-white">Velricon</span>
+					<img
+						src="/assets/images/logo.png"
+						alt="Velricon"
+						className="h-10 w-auto object-contain"
+					/>
 				</Link>
 
-				<div className="hidden items-center gap-2 md:flex">
+				<div className="hidden items-center gap-6 md:flex">
 					{/* Services Dropdown */}
-					<div
-						ref={dropdownRef}
-						className="relative"
-						onMouseEnter={() => setOpenDropdown(true)}
-						onMouseLeave={() => setOpenDropdown(false)}
+					<ServicesDropdown
+						items={[
+							...servicesLinks.primary.map((link, index) => ({
+								key: `primary-${index}`,
+								label: link.label,
+								href: link.href,
+							})),
+							{
+								key: 'divider',
+								label: null,
+								type: 'divider' as any,
+							},
+							...servicesLinks.secondary.map((link, index) => ({
+								key: `secondary-${index}`,
+								label: link.label,
+								href: link.href,
+							})),
+						]}
 					>
 						<button
 							className={cn(
 								buttonVariants({ variant: 'ghost' }),
 								'text-platinum hover:text-white'
 							)}
-							aria-expanded={openDropdown}
-							aria-haspopup="true"
 						>
 							Services
 						</button>
-						{openDropdown && (
-							<div className="absolute top-full left-0 mt-2 w-64 bg-elevation-layer rounded-2xl border border-surface-border shadow-xl p-2">
-								{/* First Section - Bold */}
-								<div className="px-4 py-2">
-									{servicesLinks.primary.map((link) => (
-										<Link
-											key={link.href}
-											href={link.href}
-											onClick={() => {
-												trackEvent('nav_service_click', { service: link.label });
-												setOpenDropdown(false);
-											}}
-											className="block px-4 py-3 rounded-xl text-white hover:bg-deep-void transition-colors font-medium tracking-tight"
-										>
-											{link.label}
-										</Link>
-									))}
-								</div>
-								{/* Divider */}
-								<div className="border-t border-surface-border my-1" />
-								{/* Second Section - Normal */}
-								<div className="px-4 py-2">
-									{servicesLinks.secondary.map((link) => (
-										<Link
-											key={link.href}
-											href={link.href}
-											onClick={() => {
-												trackEvent('nav_service_click', { service: link.label });
-												setOpenDropdown(false);
-											}}
-											className="block px-4 py-3 rounded-xl text-platinum hover:text-white hover:bg-deep-void transition-colors font-normal tracking-tight"
-										>
-											{link.label}
-										</Link>
-									))}
-								</div>
-							</div>
-						)}
-					</div>
+					</ServicesDropdown>
 
 					{/* Other Links */}
 					{links.map((link) => (

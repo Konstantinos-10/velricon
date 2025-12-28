@@ -67,3 +67,52 @@
   }
 }
 
+/* Ant Design Dropdown Custom Styling */
+.ant-dropdown {
+  z-index: 1000;
+}
+
+.ant-dropdown-menu {
+  background-color: #1A1F2E !important; /* elevation-layer */
+  border: 1px solid #1E293B !important; /* surface-border */
+  border-radius: 1rem !important; /* rounded-2xl */
+  padding: 0.5rem !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+.ant-dropdown-menu-item {
+  color: #E2E8F0 !important; /* platinum */
+  border-radius: 0.75rem !important; /* rounded-xl */
+  padding: 0.75rem 1rem !important;
+  margin: 0.25rem 0 !important;
+  font-weight: 400 !important;
+  transition: all 0.2s !important;
+}
+
+.ant-dropdown-menu-item:hover {
+  background-color: #0E101A !important; /* deep-void */
+  color: #FFFFFF !important; /* white */
+}
+
+.ant-dropdown-menu-item-selected {
+  background-color: #0E101A !important;
+  color: #FFFFFF !important;
+}
+
+.ant-dropdown-menu-item-divider {
+  background-color: #1E293B !important; /* surface-border */
+  margin: 0.25rem 0 !important;
+}
+
+/* First 3 items (primary) - bold */
+.ant-dropdown-menu-item:nth-child(-n+3) {
+  font-weight: 500 !important;
+  color: #FFFFFF !important; /* white */
+}
+
+/* Items after divider - normal weight */
+.ant-dropdown-menu-item:nth-child(n+5) {
+  font-weight: 400 !important;
+  color: #E2E8F0 !important; /* platinum */
+}
+
