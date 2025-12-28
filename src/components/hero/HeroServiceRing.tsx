@@ -267,7 +267,6 @@ function DonutSegment({
     </g>
   );
 }
-
 function createDonutPath(
   startAngle: number,
   endAngle: number,
