@@ -41,10 +41,10 @@ export default function ServicesPage() {
   return (
     <Section background="deep-void" className="pt-32">
       <div className="text-center mb-16">
-        <h1 className="text-4xl lg:text-5xl font-header font-bold text-white mb-4">
+        <h1 className="text-4xl lg:text-5xl font-light tracking-tight leading-[1.05] text-white mb-4">
           Our Services
         </h1>
-        <p className="text-xl text-platinum font-body max-w-3xl mx-auto">
+        <p className="text-base md:text-lg font-light tracking-tight text-white/70 max-w-3xl mx-auto">
           Financial leadership tailored to your business stage and goals
         </p>
       </div>
@@ -52,10 +52,10 @@ export default function ServicesPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         {services.map((service) => (
           <Card key={service.href} hover>
-            <h2 className="text-2xl font-header font-semibold text-white mb-3">
+            <h2 className="text-2xl font-light tracking-tight leading-[1.05] text-white mb-3">
               {service.title}
             </h2>
-            <p className="text-platinum font-body mb-6">
+            <p className="text-platinum font-normal tracking-tight leading-relaxed mb-6">
               {service.description}
             </p>
             <Link href={service.href}>

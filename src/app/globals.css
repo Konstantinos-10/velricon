@@ -4,11 +4,7 @@
 
 @layer base {
   body {
-    @apply font-body text-dark-ink bg-soft-white;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-header;
+    @apply font-sans text-dark-ink bg-soft-white;
   }
 }
 

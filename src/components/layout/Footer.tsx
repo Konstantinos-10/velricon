@@ -9,28 +9,28 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-header font-bold text-white mb-4">Velricon</h3>
-            <p className="text-slate font-body max-w-md">
+            <h3 className="text-2xl font-normal tracking-tight text-white mb-4">Velricon</h3>
+            <p className="text-slate font-normal tracking-tight leading-relaxed max-w-md">
               Financial leadership without the cost of a full-time CFO.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-header font-semibold mb-4">Services</h4>
+            <h4 className="text-white font-medium tracking-tight mb-4">Services</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/services/startups" className="text-slate hover:text-white transition-colors font-body">
+                <Link href="/services/startups" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
                   For Startups
                 </Link>
               </li>
               <li>
-                <Link href="/services/scaleups" className="text-slate hover:text-white transition-colors font-body">
+                <Link href="/services/scaleups" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
                   For Scaleups
                 </Link>
               </li>
               <li>
-                <Link href="/services/smes" className="text-slate hover:text-white transition-colors font-body">
+                <Link href="/services/smes" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
                   For SMEs
                 </Link>
               </li>
@@ -39,20 +39,20 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="text-white font-header font-semibold mb-4">Company</h4>
+            <h4 className="text-white font-medium tracking-tight mb-4">Company</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/who-we-are" className="text-slate hover:text-white transition-colors font-body">
+                <Link href="/who-we-are" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
                   Who we are
                 </Link>
               </li>
               <li>
-                <Link href="/insights" className="text-slate hover:text-white transition-colors font-body">
+                <Link href="/insights" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
                   Insights
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-slate hover:text-white transition-colors font-body">
+                <Link href="/contact" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
                   Contact
                 </Link>
               </li>
@@ -61,7 +61,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-surface-border">
-          <p className="text-slate text-sm font-body text-center">
+          <p className="text-slate text-sm font-normal tracking-tight text-center">
             © {currentYear} Velricon. All rights reserved.
           </p>
         </div>

@@ -6,8 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { HeroServiceRing } from './HeroServiceRing'
 import { trackEvent } from '@/lib/analytics'
-
-type SegmentKey = 'startups' | 'scaleups' | 'smes' | null
+import type { SegmentKey } from './heroServiceRing.config'
 
 const segmentContent = {
   startups: {
@@ -29,14 +28,14 @@ const segmentContent = {
 }
 
 export function Hero() {
-  const [hoveredSegment, setHoveredSegment] = useState<SegmentKey>(null)
+  const [hoveredSegment, setHoveredSegment] = useState<SegmentKey | null>(null)
 
   const handleStrategyCallClick = () => {
     trackEvent('strategy_call_click', { location: 'hero' })
     window.location.href = '/contact'
   }
 
-  const handleHoverChange = (key: SegmentKey) => {
+  const handleHoverChange = (key: SegmentKey | null) => {
     setHoveredSegment(key)
   }
 
@@ -48,19 +47,13 @@ export function Hero() {
     ? segmentContent[hoveredSegment]
     : segmentContent.default
 
+  // Subtle background tint shift based on hover (optional - can be enhanced)
+  const bgTint = hoveredSegment
+    ? 'bg-deep-void' // Could add subtle color shifts here if desired
+    : 'bg-deep-void'
+
   return (
-    <section
-      className="relative min-h-screen pt-20 pb-16 lg:pb-24 flex items-center transition-colors duration-500"
-      style={{
-        backgroundColor: hoveredSegment === 'startups'
-          ? '#0E101A'
-          : hoveredSegment === 'scaleups'
-          ? '#0E101A'
-          : hoveredSegment === 'smes'
-          ? '#0E101A'
-          : '#0E101A',
-      }}
-    >
+    <section className={`relative min-h-screen pt-20 pb-16 lg:pb-24 flex items-center ${bgTint} transition-colors duration-500`}>
       <Container size="xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Content */}
@@ -75,14 +68,14 @@ export function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-header font-bold text-white leading-tight"
+              className="text-[clamp(2.5rem,6vw,4rem)] font-extralight tracking-tight leading-[0.95] text-white"
             >
               {hoveredSegment ? (
                 content.heading
               ) : (
                 <>
                   Financial Leadership{' '}
-                  <span className="font-accent text-strategy-blue">without the cost</span>{' '}
+                  <span className="text-strategy-blue">without the cost</span>{' '}
                   of a full time CFO
                 </>
               )}
@@ -93,7 +86,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.05 }}
-              className="text-xl lg:text-2xl text-platinum font-body max-w-2xl"
+              className="text-base md:text-lg font-light tracking-tight text-white/70 max-w-2xl"
             >
               {content.subheading}
             </motion.p>

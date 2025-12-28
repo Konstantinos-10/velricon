@@ -86,7 +86,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="text-2xl font-header font-bold text-white">Velricon</span>
+            <span className="text-2xl font-normal tracking-tight text-white">Velricon</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -100,7 +100,7 @@ export function Navbar() {
                     className="relative"
                   >
                     <button
-                      className="flex items-center gap-1 text-platinum hover:text-white transition-colors font-header"
+                      className="flex items-center gap-1 text-platinum hover:text-white transition-colors font-normal tracking-tight"
                       aria-expanded={openDropdown === item.label}
                       aria-haspopup="true"
                     >
@@ -124,7 +124,7 @@ export function Navbar() {
                                 trackEvent('nav_service_click', { service: child.label })
                                 setOpenDropdown(null)
                               }}
-                              className="block px-4 py-3 rounded-xl text-platinum hover:text-white hover:bg-deep-void transition-colors font-body"
+                              className="block px-4 py-3 rounded-xl text-platinum hover:text-white hover:bg-deep-void transition-colors font-normal tracking-tight"
                             >
                               {child.label}
                             </Link>
@@ -136,7 +136,7 @@ export function Navbar() {
                 ) : (
                   <Link
                     href={item.href!}
-                    className="text-platinum hover:text-white transition-colors font-header"
+                    className="text-platinum hover:text-white transition-colors font-normal tracking-tight"
                   >
                     {item.label}
                   </Link>
@@ -179,7 +179,7 @@ export function Navbar() {
                     {item.children ? (
                       <div>
                         <button
-                          className="w-full text-left px-4 py-2 text-platinum font-header"
+                          className="w-full text-left px-4 py-2 text-platinum font-normal tracking-tight"
                           onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
                         >
                           {item.label}
