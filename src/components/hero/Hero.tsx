@@ -33,33 +33,41 @@ export function Hero() {
           {/* Left Column - Content */}
           <div className="space-y-8">
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="space-y-6"
             >
               <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.02 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                 className="font-accent text-sm tracking-widest text-strategy-blue uppercase"
               >
                 Make sense of your money
               </motion.p>
               <motion.h1
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.05 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 className="text-[clamp(2.5rem,6vw,4rem)] font-extralight tracking-tight leading-[0.95] text-white"
               >
                 CFO-level financial leadership,{' '}
-                <span className="text-strategy-blue">without the full-time cost</span>.
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="text-strategy-blue"
+                >
+                  without the full-time cost
+                </motion.span>
+                .
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="text-base md:text-lg font-light tracking-tight text-platinum max-w-2xl"
               >
                 Make clearer decisions, control cash flow, and scale with confidence — backed by senior financial expertise.
@@ -67,18 +75,28 @@ export function Hero() {
             </motion.div>
 
             {/* Buttons - Static wrapper, prevents re-animation */}
-            <div className="flex flex-col gap-4 items-start">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col gap-4 items-start"
+            >
               <StaticButton
                 onClick={handleStrategyCallClick}
               />
               <StaticNeonButton
                 onClick={handleExploreSolutionsClick}
               />
-            </div>
+            </motion.div>
           </div>
 
           {/* Right Column - Interactive Image Accordion */}
-          <div className="hidden lg:flex items-center justify-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden lg:flex items-center justify-center relative z-10"
+          >
             <InteractiveImageAccordion
               onSelect={(item) => {
                 trackEvent('hero_accordion_select', { title: item.title, href: item.href })
@@ -86,7 +104,7 @@ export function Hero() {
               }}
               className="w-full"
             />
-          </div>
+          </motion.div>
         </div>
       </Container>
     </section>

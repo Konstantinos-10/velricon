@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { useAnimate } from "framer-motion";
+import { useAnimate, motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { HighlighterItem, HighlightGroup, Particles } from "@/components/ui/highlighter";
 import { Container } from "@/components/ui/Container";
@@ -62,11 +62,17 @@ export function ConnectSection() {
       />
       
       <Container size="xl" className="relative z-10">
-        <HighlightGroup className="group h-full">
-          <div
-            className="group/item h-full"
-            data-aos="fade-down"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <HighlightGroup className="group h-full">
+            <div
+              className="group/item h-full"
+              data-aos="fade-down"
+            >
             <HighlighterItem className="rounded-3xl p-6">
               <div className="relative z-20 h-full overflow-hidden rounded-3xl border border-surface-border bg-elevation-layer">
                 <Particles
@@ -158,6 +164,7 @@ export function ConnectSection() {
             </HighlighterItem>
           </div>
         </HighlightGroup>
+        </motion.div>
       </Container>
     </section>
   );
