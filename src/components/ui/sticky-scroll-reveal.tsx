@@ -7,13 +7,16 @@ import { cn } from '@/lib/utils';
 export const StickyScroll = ({
   content,
   contentClassName,
+  onActiveCardChange,
 }: {
   content: {
     title: string;
     description: string;
     content?: React.ReactNode;
+    backgroundColor?: string;
   }[];
   contentClassName?: string;
+  onActiveCardChange?: (index: number) => void;
 }) => {
   const [activeCard, setActiveCard] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -53,7 +56,9 @@ export const StickyScroll = ({
         }
       });
 
-      setActiveCard(closestIndex);
+      if (closestIndex !== activeCard) {
+        setActiveCard(closestIndex);
+      }
     };
 
     // Initial check
@@ -78,7 +83,12 @@ export const StickyScroll = ({
       window.removeEventListener('scroll', throttledHandleScroll);
       window.removeEventListener('resize', throttledHandleScroll);
     };
-  }, [content.length]);
+  }, [content.length, activeCard]);
+
+  // Notify parent when activeCard changes
+  useEffect(() => {
+    onActiveCardChange?.(activeCard);
+  }, [activeCard, onActiveCardChange]);
 
   return (
     <div className="relative w-full py-10 md:py-12">
@@ -131,11 +141,15 @@ export const StickyScroll = ({
 
           {/* Right: sticky reveal panel */}
           <div className="lg:sticky lg:top-24 lg:self-start">
-            <div
+            <motion.div
               className={cn(
-                'overflow-hidden rounded-2xl border border-[#1E293B] bg-transparent h-[400px]',
+                'overflow-hidden rounded-2xl border border-[#1E293B] h-[400px]',
                 contentClassName,
               )}
+              animate={{
+                backgroundColor: content[activeCard]?.backgroundColor || '#1A1F2E',
+              }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
             >
               <motion.div
                 key={activeCard}
@@ -146,7 +160,7 @@ export const StickyScroll = ({
               >
                 {content[activeCard]?.content ?? null}
               </motion.div>
-            </div>
+            </motion.div>
 
             <div className="mt-4 text-sm text-[#94A3B8]">
               Scroll to progress through stages.

@@ -14,8 +14,6 @@ export default function Home() {
       <WhatWeDo />
       
       <WhoWeServe />
-      
-      <ConnectSection />
         
       <RotatingGradientRight />
           
