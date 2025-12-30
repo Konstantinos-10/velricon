@@ -5,19 +5,42 @@ import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 // Shadcn Card components
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      'rounded-lg border bg-card text-card-foreground shadow-sm',
-      className,
-    )}
-    {...props}
-  />
-))
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  hover?: boolean
+}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, hover, ...props }, ref) => {
+    if (hover) {
+      return (
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          whileHover={{ y: -4 }}
+          className={cn(
+            'rounded-lg border bg-card text-card-foreground shadow-sm',
+            className,
+          )}
+          {...props}
+        />
+      )
+    }
+    
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          'rounded-lg border bg-card text-card-foreground shadow-sm',
+          className,
+        )}
+        {...props}
+      />
+    )
+  }
+)
 Card.displayName = 'Card'
 
 const CardHeader = React.forwardRef<
