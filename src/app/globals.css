@@ -3,9 +3,16 @@
 @tailwind utilities;
 
 @layer base {
+  /* Typography: Karla for body, Montserrat for headings */
   body {
-    @apply font-sans text-dark-ink bg-soft-white;
+    @apply font-body text-dark-ink bg-soft-white antialiased;
   }
+  
+  /* Headings use Montserrat with light weight and tight tracking */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-light tracking-tight;
+  }
+  
   :root {
     --background: 244 246 249; /* soft-white */
     --foreground: 15 23 42; /* dark-ink */
@@ -19,7 +26,7 @@
     --secondary-foreground: 0 40 87; /* velricon-navy */
     --muted: 244 246 249; /* soft-white */
     --muted-foreground: 148 163 184; /* slate */
-    --accent: 26 31 46; /* elevation-layer */
+    --accent: 213 100% 73%; /* strategy-blue (#74B3FF) - navigation hover */
     --accent-foreground: 226 232 240; /* platinum */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -46,7 +53,7 @@
     --secondary-foreground: 0 40 87; /* velricon-navy */
     --muted: 26 31 46; /* elevation-layer */
     --muted-foreground: 148 163 184; /* slate */
-    --accent: 30 41 59; /* surface-border */
+    --accent: 213 100% 73%; /* strategy-blue (#74B3FF) - navigation hover */
     --accent-foreground: 226 232 240; /* platinum */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
@@ -67,9 +74,47 @@
   }
 }
 
+/* Infinite Moving Cards Animation */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - 1rem));
+  }
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) linear infinite;
+  animation-direction: var(--animation-direction, forwards);
+}
+
 /* Ant Design Dropdown Custom Styling */
 .ant-dropdown {
   z-index: 1000;
+}
+
+/* Faster dropdown animations - entrance and exit */
+.ant-dropdown-enter,
+.ant-dropdown-appear {
+  animation-duration: 0.15s !important;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.ant-dropdown-enter-active,
+.ant-dropdown-appear-active {
+  animation-duration: 0.15s !important;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.ant-dropdown-leave {
+  animation-duration: 0.1s !important;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.ant-dropdown-leave-active {
+  animation-duration: 0.1s !important;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .ant-dropdown-menu {

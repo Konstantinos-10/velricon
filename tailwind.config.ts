@@ -72,18 +72,14 @@ const config: Config = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		fontFamily: {
-  			sans: [
-  				'ui-sans-serif',
-  				'system-ui',
-  				'-apple-system',
-  				'BlinkMacSystemFont',
-  				'Segoe UI"',
-  				'Roboto',
-  				'Helvetica Neue"',
-  				'Arial',
-  				'Noto Sans"',
-  				'sans-serif'
-  			]
+  			// Headers: Montserrat (light weight preferred, 300)
+  			heading: ['var(--font-montserrat)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  			// Body: Karla (regular, 400)
+  			body: ['var(--font-karla)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  			// Accent: Alegreya (used sparingly for emphasis)
+  			accent: ['var(--font-alegreya)', 'Georgia', 'serif'],
+  			// Default sans fallback
+  			sans: ['var(--font-karla)', 'ui-sans-serif', 'system-ui', 'sans-serif']
   		}
   	}
   },

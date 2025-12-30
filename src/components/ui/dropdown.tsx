@@ -2,9 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { DownOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Dropdown, Space } from 'antd';
+import { Dropdown } from 'antd';
 import { trackEvent } from '@/lib/analytics';
 
 interface DropdownItem {
@@ -56,12 +55,13 @@ export function ServicesDropdown({ items, children, className }: ServicesDropdow
 		<Dropdown
 			menu={{ items: menuItems }}
 			placement="bottomLeft"
-			trigger={['hover', 'click']}
+			trigger={['hover']}
 			className={className}
+			mouseEnterDelay={0}
+			mouseLeaveDelay={0.1}
 		>
-			<a onClick={(e) => e.preventDefault()} className="inline-flex items-center gap-1">
+			<a onClick={(e) => e.preventDefault()} className="inline-flex items-center">
 				{children}
-				<DownOutlined className="text-xs" />
 			</a>
 		</Dropdown>
 	);

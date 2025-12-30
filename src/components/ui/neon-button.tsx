@@ -40,9 +40,9 @@ const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>(
                 ref={ref}
                 {...props}
             >
-                <span className={cn("absolute h-px opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out inset-x-0 inset-y-0 bg-gradient-to-r w-3/4 mx-auto from-transparent via-strategy-blue to-transparent hidden", neon && "block")} />
+                <span className={cn("absolute h-px opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-out inset-x-0 inset-y-0 bg-gradient-to-r w-3/4 mx-auto from-transparent via-strategy-blue to-transparent hidden", neon && "block")} />
                 {children}
-                <span className={cn("absolute group-hover:opacity-30 transition-all duration-500 ease-in-out inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-strategy-blue to-transparent hidden", neon && "block")} />
+                <span className={cn("absolute group-hover:opacity-30 transition-opacity duration-200 ease-out inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-strategy-blue to-transparent hidden", neon && "block")} />
             </button>
         );
     }

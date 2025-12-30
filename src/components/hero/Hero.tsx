@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, memo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
+import { memo, useCallback } from 'react'
+import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
@@ -11,45 +10,8 @@ import { NeonButton } from '@/components/ui/neon-button'
 import { DottedSurface } from '@/components/ui/dotted-surface'
 import { trackEvent } from '@/lib/analytics'
 
-type Category = 'startups' | 'scaleups' | 'smes' | null
-
-interface CategoryContent {
-  heading: string
-  subheading: string
-}
-
-const categoryContent: Record<'startups' | 'scaleups' | 'smes', CategoryContent> = {
-  startups: {
-    heading: 'CFO-level clarity for founders moving fast.',
-    subheading: 'Runway, cash flow, and the numbers that matter, so you stop guessing and start executing.',
-  },
-  scaleups: {
-    heading: 'Finance leadership built for scaling decisions.',
-    subheading: 'Forecasts, KPIs, and control systems that keep growth profitable, not chaotic.',
-  },
-  smes: {
-    heading: 'Sharper performance for established businesses.',
-    subheading: 'Improve margins, tighten cash, and build disciplined planning without a full-time CFO.',
-  },
-}
-
-const defaultContent: CategoryContent = {
-  heading: 'CFO-level financial leadership, without the full-time cost.',
-  subheading: 'Make clearer decisions, control cash flow, and scale with confidence — backed by senior financial expertise.',
-}
-
-// Map href to category
-function getCategoryFromHref(href: string | undefined): Category {
-  if (!href) return null
-  if (href.includes('/startups')) return 'startups'
-  if (href.includes('/scaleups')) return 'scaleups'
-  if (href.includes('/smes')) return 'smes'
-  return null
-}
-
 export function Hero() {
   const router = useRouter()
-  const [activeCategory, setActiveCategory] = useState<Category>(null)
 
   const handleStrategyCallClick = useCallback(() => {
     trackEvent('strategy_call_click', { location: 'hero' })
@@ -61,19 +23,6 @@ export function Hero() {
     router.push('/services')
   }, [router])
 
-  const handleActiveChange = (item: { href?: string; imageUrl: string } | null) => {
-    if (item) {
-      const category = getCategoryFromHref(item.href)
-      setActiveCategory(category)
-      // Background image change disabled - keeping text changes only
-      trackEvent('hero_accordion_hover', { category, title: item.href })
-    } else {
-      setActiveCategory(null)
-    }
-  }
-
-  const content = activeCategory ? categoryContent[activeCategory] : defaultContent
-
   return (
     <section className="relative min-h-screen pt-20 pb-16 lg:pb-24 flex items-center bg-deep-void overflow-hidden">
       {/* Dotted Surface Background */}
@@ -84,57 +33,37 @@ export function Hero() {
           {/* Left Column - Content */}
           <div className="space-y-8">
             <motion.div
-              key="text-content"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              layout
-              className="min-h-[280px]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-6"
             >
-              <motion.div 
-                layout
-                className="relative min-h-[120px]"
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.02 }}
+                className="font-accent text-sm tracking-widest text-strategy-blue uppercase"
               >
-                <AnimatePresence mode="wait">
-                  <motion.h1
-                    key={content.heading}
-                    layout
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                    className="text-[clamp(2.5rem,6vw,4rem)] font-extralight tracking-tight leading-[0.95] text-white"
-                  >
-                    {activeCategory ? (
-                      content.heading
-                    ) : (
-                      <>
-                        CFO-level financial leadership,{' '}
-                        <span className="text-strategy-blue">without the full-time cost</span>.
-                      </>
-                    )}
-                  </motion.h1>
-                </AnimatePresence>
-              </motion.div>
+                Make sense of your money
+              </motion.p>
+              <motion.h1
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                className="text-[clamp(2.5rem,6vw,4rem)] font-extralight tracking-tight leading-[0.95] text-white"
+              >
+                CFO-level financial leadership,{' '}
+                <span className="text-strategy-blue">without the full-time cost</span>.
+              </motion.h1>
 
-              <motion.div 
-                layout
-                className="relative mt-6 min-h-[60px]"
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="text-base md:text-lg font-light tracking-tight text-platinum max-w-2xl"
               >
-                <AnimatePresence mode="wait">
-                  <motion.p
-                    key={content.subheading}
-                    layout
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.5, delay: 0.05, ease: [0.4, 0, 0.2, 1] }}
-                    className="text-base md:text-lg font-light tracking-tight text-white/70 max-w-2xl"
-                  >
-                    {content.subheading}
-                  </motion.p>
-                </AnimatePresence>
-              </motion.div>
+                Make clearer decisions, control cash flow, and scale with confidence — backed by senior financial expertise.
+              </motion.p>
             </motion.div>
 
             {/* Buttons - Static wrapper, prevents re-animation */}
@@ -149,22 +78,12 @@ export function Hero() {
           </div>
 
           {/* Right Column - Interactive Image Accordion */}
-          <div
-            className="hidden lg:flex items-center justify-center relative z-10"
-            onMouseLeave={() => handleActiveChange(null)}
-            onBlur={(e) => {
-              // Reset when focus leaves the accordion area
-              if (!e.currentTarget.contains(e.relatedTarget as Node)) {
-                handleActiveChange(null)
-              }
-            }}
-          >
+          <div className="hidden lg:flex items-center justify-center relative z-10">
             <InteractiveImageAccordion
               onSelect={(item) => {
                 trackEvent('hero_accordion_select', { title: item.title, href: item.href })
                 if (item.href) router.push(item.href)
               }}
-              onActiveChange={handleActiveChange}
               className="w-full"
             />
           </div>
@@ -195,7 +114,7 @@ const StaticNeonButton = memo(function StaticNeonButton({ onClick }: { onClick: 
       onClick={onClick}
       variant="default"
       size="lg"
-      className="text-lg font-medium tracking-tight w-[280px] h-[56px]"
+      className="text-lg font-light tracking-tight w-[280px] h-[56px]"
     >
       Explore Solutions
     </NeonButton>

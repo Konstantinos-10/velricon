@@ -37,13 +37,11 @@ export function Header() {
 
 	const servicesLinks = {
 		primary: [
-			{ label: 'For Startups', href: '/services/startups' },
-			{ label: 'For Scaleups', href: '/services/scaleups' },
-			{ label: 'For Established SMEs', href: '/services/smes' },
+			{ label: 'Fractional CFO', href: '/services/fractional-cfo' },
 		],
 		secondary: [
-			{ label: 'Investor Ready Package', href: '/services/investor-ready' },
-			{ label: 'Bank Ready Package', href: '/services/bank-ready' },
+			{ label: 'Bank Ready Packages', href: '/services/bank-ready' },
+			{ label: 'Investor ready packages', href: '/services/investor-ready' },
 		],
 	};
 
@@ -56,10 +54,12 @@ export function Header() {
 	return (
 		<header
 			className={cn(
-				'sticky top-0 z-50 w-full border-b border-transparent bg-deep-void transition-all duration-300 ease-out',
+				'fixed top-0 z-50 w-full border-b transition-all duration-300 ease-out',
 				{
-					'bg-elevation-layer border-surface-border backdrop-blur-lg':
+					'bg-elevation-layer/95 backdrop-blur-lg border-surface-border':
 						scrolled,
+					'bg-deep-void/95 backdrop-blur-sm border-transparent':
+						!scrolled,
 				}
 			)}
 		>
@@ -81,11 +81,6 @@ export function Header() {
 								label: link.label,
 								href: link.href,
 							})),
-							{
-								key: 'divider',
-								label: null,
-								type: 'divider' as any,
-							},
 							...servicesLinks.secondary.map((link, index) => ({
 								key: `secondary-${index}`,
 								label: link.label,
@@ -150,7 +145,6 @@ export function Header() {
 						</button>
 						{openDropdown && (
 							<div className="pl-4 mt-2 space-y-1">
-								{/* First Section - Bold */}
 								{servicesLinks.primary.map((link) => (
 									<Link
 										key={link.href}
@@ -160,14 +154,11 @@ export function Header() {
 											setOpenDropdown(false);
 											setOpen(false);
 										}}
-										className="block px-4 py-2 text-white rounded-lg font-medium"
+										className="block px-4 py-2 text-platinum rounded-lg font-normal"
 									>
 										{link.label}
 									</Link>
 								))}
-								{/* Divider */}
-								<div className="border-t border-surface-border my-1 mx-4" />
-								{/* Second Section - Normal */}
 								{servicesLinks.secondary.map((link) => (
 									<Link
 										key={link.href}

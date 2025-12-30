@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Montserrat, Karla, Alegreya } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import 'antd/dist/reset.css'
@@ -7,6 +8,30 @@ import { Header } from '@/components/ui/header-1'
 import { Footer } from '@/components/layout/Footer'
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
 import { siteConfig } from '@/config/site'
+
+// Headers: Montserrat (light weight preferred, 300)
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-montserrat',
+  display: 'swap',
+})
+
+// Body: Karla (regular, 400)
+const karla = Karla({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-karla',
+  display: 'swap',
+})
+
+// Accent: Alegreya (used sparingly for emphasis)
+const alegreya = Alegreya({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-alegreya',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -23,8 +48,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className={`${montserrat.variable} ${karla.variable} ${alegreya.variable}`}>
+      <body className="font-body antialiased">
         <Header />
         <main className="min-h-screen">
           {children}
