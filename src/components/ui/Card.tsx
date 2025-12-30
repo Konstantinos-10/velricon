@@ -10,7 +10,19 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, hover, onDrag, onDragStart, onDragEnd, ...props }, ref) => {
+  ({ className, hover, children, ...props }, ref) => {
+    // Extract safe props for motion.div (exclude event handlers that conflict)
+    const {
+      onDrag,
+      onDragStart,
+      onDragEnd,
+      onAnimationStart,
+      onAnimationEnd,
+      onAnimationIteration,
+      onTransitionEnd,
+      ...safeProps
+    } = props
+
     if (hover) {
       return (
         <motion.div
@@ -24,8 +36,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
             'rounded-lg border bg-card text-card-foreground shadow-sm',
             className,
           )}
-          {...props}
-        />
+          {...(safeProps as any)}
+        >
+          {children}
+        </motion.div>
       )
     }
     
@@ -36,11 +50,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           'rounded-lg border bg-card text-card-foreground shadow-sm',
           className,
         )}
-        onDrag={onDrag}
-        onDragStart={onDragStart}
-        onDragEnd={onDragEnd}
         {...props}
-      />
+      >
+        {children}
+      </div>
     )
   }
 )
