@@ -147,7 +147,7 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Button onClick={handleStrategyCallClick} variant="primary" size="md" shiny={false}>
+            <Button onClick={handleStrategyCallClick} variant="primary" size="default" shiny={false}>
               Strategy Call
             </Button>
           </div>
@@ -214,7 +214,7 @@ export function Navbar() {
                   </div>
                 ))}
                 <div className="px-4 pt-2">
-                  <Button onClick={handleStrategyCallClick} variant="primary" size="md" shiny={false} className="w-full">
+                  <Button onClick={handleStrategyCallClick} variant="primary" size="default" shiny={false} className="w-full">
                     Strategy Call
                   </Button>
                 </div>
