@@ -1,13 +1,10 @@
 "use client";
 
-import { Container } from "@/components/ui/Container";
-import { Card, CardContent } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 
-const rotatingGradientStyles = `
+const differenceStyles = `
   @keyframes grid-draw-light { 
     0% { stroke-dashoffset: 1000; opacity: 0; } 
     50% { opacity: 0.5; } 
@@ -32,157 +29,163 @@ const rotatingGradientStyles = `
   }
 `;
 
-const differentiators = [
-  {
-    label: 'Flexible CFO Expertise',
-    description: '30–50% cost of full-time, scale as needed',
-  },
-  {
-    label: 'Complete Solutions',
-    description: 'Virtual CFO + investor packages + bank packages',
-  },
-  {
-    label: 'Strategic + Technical',
-    description: "We don't just report—we guide decisions",
-  },
-  {
-    label: 'Investor Credibility',
-    description: 'Our financial models pass due diligence',
-  },
-  {
-    label: 'Bank Relationships',
-    description: 'We know what Cyprus banks require',
-  },
-  {
-    label: 'Cyprus Ecosystem',
-    description: 'Deep understanding of local startup/SME landscape',
-  },
-];
-
 export default function RotatingGradientRight() {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
   return (
     <>
-      <style>{rotatingGradientStyles}</style>
-    <section className="relative py-24 lg:py-32 overflow-hidden">
-      {/* Whitesmoke background */}
-      <div 
-        className="absolute inset-0"
-        style={{
-            backgroundColor: '#F5F5F5',
-            backgroundImage: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(245, 245, 245, 0.9), rgba(250, 250, 250, 0.95))',
-        }}
-      />
-        
+      <style>{differenceStyles}</style>
+      <section 
+        ref={sectionRef}
+        className="relative min-h-screen overflow-hidden"
+        style={{ background: '#FAFAFA' }}
+      >
         {/* Animated Grid Background */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
-            <pattern id="gridRotatingGradient" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(30, 41, 59, 0.2)" strokeWidth="0.5"/>
+            <pattern id="gridDifference" width="60" height="60" patternUnits="userSpaceOnUse">
+              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(30, 41, 59, 0.15)" strokeWidth="0.5"/>
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#gridRotatingGradient)" />
+          <rect width="100%" height="100%" fill="url(#gridDifference)" />
           <line x1="0" y1="20%" x2="100%" y2="20%" className="grid-line-light" style={{ animationDelay: '0.1s' }} />
           <line x1="0" y1="80%" x2="100%" y2="80%" className="grid-line-light" style={{ animationDelay: '0.2s' }} />
           <line x1="20%" y1="0" x2="20%" y2="100%" className="grid-line-light" style={{ animationDelay: '0.3s' }} />
           <line x1="80%" y1="0" x2="80%" y2="100%" className="grid-line-light" style={{ animationDelay: '0.4s' }} />
-          <line x1="50%" y1="0" x2="50%" y2="100%" className="grid-line-light" style={{ animationDelay: '0.5s' }} />
-          <line x1="0" y1="50%" x2="100%" y2="50%" className="grid-line-light" style={{ animationDelay: '0.6s' }} />
-          <circle cx="20%" cy="20%" r="3" className="detail-dot-light" style={{ animationDelay: '0.8s' }} />
-          <circle cx="80%" cy="20%" r="3" className="detail-dot-light" style={{ animationDelay: '0.9s' }} />
-          <circle cx="20%" cy="80%" r="3" className="detail-dot-light" style={{ animationDelay: '1s' }} />
-          <circle cx="80%" cy="80%" r="3" className="detail-dot-light" style={{ animationDelay: '1.1s' }} />
-          <circle cx="50%" cy="50%" r="2.5" className="detail-dot-light" style={{ animationDelay: '1.2s' }} />
         </svg>
-      
-      <Container size="xl" className="relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* LEFT: Rotating gradient with card */}
-          <div className="relative mx-auto flex h-[40rem] w-full max-w-[60rem] items-center justify-center overflow-hidden rounded-3xl">
-            {/* Rotating conic gradient glow - using brand colors */}
-            <div className="absolute -inset-10 flex items-center justify-center">
-              <div
-                className="
-                  h-[120%] w-[120%] rounded-[36px] blur-3xl opacity-60
-                  bg-[conic-gradient(from_0deg,#74B3FF,#3B82F6,#74B3FF,#002857,#74B3FF,#3B82F6,#74B3FF)]
-                  animate-[spin_8s_linear_infinite]
-                "
-              />
-            </div>
 
-            {/* Card inside the glow */}
-            <Card className="w-[340px] z-10 rounded-2xl border border-surface-border/50 bg-elevation-layer/95 shadow-2xl backdrop-blur-xl">
-              <CardContent className="p-6">
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="font-body text-sm font-medium" style={{ color: '#0E101A' }}>Velricon</span>
-                  <span className="font-body text-xs text-slate">CFO Services</span>
-                </div>
+        {/* Main Content - Editorial Layout */}
+        <div className="relative z-10 min-h-screen flex flex-col lg:flex-row">
+          
+          {/* Left: The Statement */}
+          <div className="flex-1 flex items-center px-8 lg:px-16 xl:px-24 py-24 lg:py-0">
+            <div className="max-w-2xl">
+              {/* Eyebrow */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mb-12"
+              >
+                <span className="inline-block w-12 h-px bg-[#74B3FF] mr-4 align-middle" />
+                <span className="text-[#74B3FF] font-accent text-xs tracking-[0.3em] uppercase">
+                  The difference
+                </span>
+              </motion.div>
 
-                {/* Progress bar */}
-                <div className="mb-4 h-1.5 w-full overflow-hidden rounded-full bg-surface-border/50">
-                  <div className="h-full w-[92%] rounded-full bg-[linear-gradient(90deg,#74B3FF,#3B82F6,#74B3FF)]" />
-                </div>
+              {/* The Main Statement */}
+              <motion.h2
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 1, delay: 0.4 }}
+                className="font-accent text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.95] tracking-tight mb-12"
+                style={{ color: '#0E101A' }}
+              >
+                Most CFOs
+                <br />
+                <span className="text-[#94A3B8]">report history.</span>
+              </motion.h2>
 
-                <p className="font-body text-xs text-slate leading-relaxed mb-4">
-                  Strategic financial leadership tailored to your business stage. Expert guidance when you need it.
+              <motion.h2
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 1, delay: 0.6 }}
+                className="font-accent text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.95] tracking-tight mb-16"
+                style={{ color: '#0E101A' }}
+              >
+                We architect
+                <br />
+                <span className="text-strategy-blue">possibility.</span>
+              </motion.h2>
+
+              {/* The Quiet Detail */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.8, delay: 1 }}
+                className="space-y-6"
+              >
+                <p className="text-[#475569] text-lg lg:text-xl font-light leading-relaxed max-w-md">
+                  Not outsourced accounting with a fancy title.
+                  <br />
+                  Strategic partnership that shapes your future.
                 </p>
-
-                <Button
-                  variant="secondary"
-                  className="mt-2 w-full rounded-lg bg-elevation-layer border border-surface-border text-platinum hover:bg-strategy-blue/10 hover:text-strategy-blue hover:border-strategy-blue/30 transition-colors"
-                >
-                  Learn More
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* RIGHT: The Velricon Difference Content */}
-          <div className="space-y-6">
-            <div>
-              <h2 className="font-accent text-3xl lg:text-4xl xl:text-5xl font-light tracking-tight leading-[1.05] mb-8" style={{ color: '#0E101A' }}>
-                The <span className="text-strategy-blue">Velricon</span> Difference
-              </h2>
-            </div>
-
-            {/* Differentiators list */}
-            <div className="space-y-4 mb-8">
-              {differentiators.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-3 group hover:bg-elevation-layer/30 rounded-lg p-2 -mx-2 transition-colors duration-200"
-                >
-                  <div className="flex-shrink-0 mt-0.5">
-                    <Icon
-                      name="check"
-                      className="w-5 h-5"
-                      style={{ color: '#002857' }}
-                    />
+                
+                {/* Subtle indicator */}
+                <div className="flex items-center gap-4 pt-4">
+                  <div className="flex gap-2">
+                    <span className="w-2 h-2 rounded-full bg-strategy-blue" />
+                    <span className="w-2 h-2 rounded-full bg-strategy-blue/50" />
+                    <span className="w-2 h-2 rounded-full bg-strategy-blue/25" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-body font-semibold tracking-tight mb-1" style={{ color: '#0E101A' }}>
-                      {item.label}
-                    </div>
-                    <div className="font-body text-sm tracking-tight leading-relaxed" style={{ color: '#1E293B' }}>
-                      {item.description}
-                    </div>
-                  </div>
+                  <span className="text-[#94A3B8] text-sm tracking-wide">
+                    Big-4 trained. Startup tested.
+                  </span>
                 </div>
-              ))}
+              </motion.div>
             </div>
-
-            {/* CTA Link */}
-            <Link
-              href="/who-we-are"
-              className="inline-flex items-center gap-2 font-body text-sm font-medium tracking-tight hover:opacity-80 transition-colors duration-200 group"
-              style={{ color: '#002857' }}
-            >
-              Learn how we work
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
           </div>
+
+          {/* Right: The Image */}
+          <motion.div 
+            initial={{ opacity: 0, x: 60 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 1.2, delay: 0.3 }}
+            className="lg:w-[45%] xl:w-[50%] relative"
+          >
+            <div className="relative h-[50vh] lg:h-full min-h-[400px] lg:min-h-0">
+              {/* Image Container */}
+              <div className="absolute inset-0 lg:inset-y-16 lg:right-0 lg:left-8 overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1974&auto=format&fit=crop"
+                  alt="Strategic perspective"
+                  fill
+                  className="object-cover"
+                  style={{
+                    objectPosition: '50% 30%',
+                  }}
+                />
+                
+                {/* Overlay gradient */}
+                <div 
+                  className="absolute inset-0"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(14, 16, 26, 0.4) 0%, transparent 50%, rgba(116, 179, 255, 0.1) 100%)',
+                  }}
+                />
+
+                {/* Corner accent */}
+                <div className="absolute bottom-0 left-0 w-24 h-24 border-l-2 border-b-2 border-strategy-blue/30" />
+                <div className="absolute top-0 right-0 w-24 h-24 border-r-2 border-t-2 border-strategy-blue/30" />
+              </div>
+
+              {/* Floating Quote */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 1.2 }}
+                className="absolute bottom-8 left-8 lg:bottom-24 lg:-left-8 bg-white/95 backdrop-blur-sm p-6 max-w-[280px] shadow-xl"
+              >
+                <p className="text-[#0E101A] font-accent text-lg leading-snug mb-3">
+                  "The numbers told a story we couldn't see. Now we write our own."
+                </p>
+                <p className="text-[#94A3B8] text-sm">
+                  — Series A Founder, Limassol
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
-      </Container>
-    </section>
+
+        {/* Bottom Edge Detail */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={isInView ? { scaleX: 1 } : {}}
+          transition={{ duration: 1.5, delay: 1.4 }}
+          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#74B3FF]/30 to-transparent origin-left"
+        />
+      </section>
     </>
   );
 }
