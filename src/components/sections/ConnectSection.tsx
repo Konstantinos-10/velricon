@@ -141,9 +141,9 @@ export function ConnectSection() {
 
                     <div className="-mt-20 flex h-full flex-col justify-center p-2 md:-mt-4 md:ml-10 md:w-[400px]">
                       <div className="flex flex-col items-center">
-                        <h3 className="mt-6 pb-1 font-heading font-light">
+                        <h3 className="mt-6 pb-1 font-accent font-light">
                           <span className="text-2xl md:text-4xl text-white tracking-tight">
-                            Ready to transform your finances?
+                            Ready to <span className="text-strategy-blue">transform your finances</span>?
                           </span>
                         </h3>
                       </div>

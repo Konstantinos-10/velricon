@@ -58,7 +58,7 @@ export function Header() {
 				{
 					'bg-elevation-layer/95 backdrop-blur-lg border-surface-border':
 						scrolled,
-					'bg-deep-void/95 backdrop-blur-sm border-transparent':
+					'bg-transparent border-transparent':
 						!scrolled,
 				}
 			)}

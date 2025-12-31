@@ -7,6 +7,31 @@ import { Icon } from "@/components/ui/Icon";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
+const rotatingGradientStyles = `
+  @keyframes grid-draw-light { 
+    0% { stroke-dashoffset: 1000; opacity: 0; } 
+    50% { opacity: 0.5; } 
+    100% { stroke-dashoffset: 0; opacity: 0.4; } 
+  }
+  .grid-line-light { 
+    stroke: rgba(30, 41, 59, 0.4); 
+    stroke-width: 1; 
+    opacity: 0; 
+    stroke-dasharray: 5 5; 
+    stroke-dashoffset: 1000; 
+    animation: grid-draw-light 1.5s ease-out forwards; 
+  }
+  .detail-dot-light { 
+    fill: rgba(30, 41, 59, 0.5); 
+    opacity: 0; 
+    animation: pulse-glow-light 3s ease-in-out infinite; 
+  }
+  @keyframes pulse-glow-light { 
+    0%, 100% { opacity: 0.3; transform: scale(1); } 
+    50% { opacity: 0.6; transform: scale(1.1); } 
+  }
+`;
+
 const differentiators = [
   {
     label: 'Flexible CFO Expertise',
@@ -36,14 +61,38 @@ const differentiators = [
 
 export default function RotatingGradientRight() {
   return (
+    <>
+      <style>{rotatingGradientStyles}</style>
     <section className="relative py-24 lg:py-32 overflow-hidden">
       {/* Whitesmoke background */}
       <div 
         className="absolute inset-0"
         style={{
-          background: '#F5F5F5',
+            backgroundColor: '#F5F5F5',
+            backgroundImage: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(245, 245, 245, 0.9), rgba(250, 250, 250, 0.95))',
         }}
       />
+        
+        {/* Animated Grid Background */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <pattern id="gridRotatingGradient" width="60" height="60" patternUnits="userSpaceOnUse">
+              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(30, 41, 59, 0.2)" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#gridRotatingGradient)" />
+          <line x1="0" y1="20%" x2="100%" y2="20%" className="grid-line-light" style={{ animationDelay: '0.1s' }} />
+          <line x1="0" y1="80%" x2="100%" y2="80%" className="grid-line-light" style={{ animationDelay: '0.2s' }} />
+          <line x1="20%" y1="0" x2="20%" y2="100%" className="grid-line-light" style={{ animationDelay: '0.3s' }} />
+          <line x1="80%" y1="0" x2="80%" y2="100%" className="grid-line-light" style={{ animationDelay: '0.4s' }} />
+          <line x1="50%" y1="0" x2="50%" y2="100%" className="grid-line-light" style={{ animationDelay: '0.5s' }} />
+          <line x1="0" y1="50%" x2="100%" y2="50%" className="grid-line-light" style={{ animationDelay: '0.6s' }} />
+          <circle cx="20%" cy="20%" r="3" className="detail-dot-light" style={{ animationDelay: '0.8s' }} />
+          <circle cx="80%" cy="20%" r="3" className="detail-dot-light" style={{ animationDelay: '0.9s' }} />
+          <circle cx="20%" cy="80%" r="3" className="detail-dot-light" style={{ animationDelay: '1s' }} />
+          <circle cx="80%" cy="80%" r="3" className="detail-dot-light" style={{ animationDelay: '1.1s' }} />
+          <circle cx="50%" cy="50%" r="2.5" className="detail-dot-light" style={{ animationDelay: '1.2s' }} />
+        </svg>
       
       <Container size="xl" className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -90,8 +139,8 @@ export default function RotatingGradientRight() {
           {/* RIGHT: The Velricon Difference Content */}
           <div className="space-y-6">
             <div>
-              <h2 className="font-heading text-3xl lg:text-4xl xl:text-5xl font-light tracking-tight leading-[1.05] mb-8" style={{ color: '#0E101A' }}>
-                The Velricon Difference
+              <h2 className="font-accent text-3xl lg:text-4xl xl:text-5xl font-light tracking-tight leading-[1.05] mb-8" style={{ color: '#0E101A' }}>
+                The <span className="text-strategy-blue">Velricon</span> Difference
               </h2>
             </div>
 
@@ -134,5 +183,6 @@ export default function RotatingGradientRight() {
         </div>
       </Container>
     </section>
+    </>
   );
 }

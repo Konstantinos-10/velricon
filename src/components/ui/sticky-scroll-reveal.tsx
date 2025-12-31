@@ -93,9 +93,9 @@ export const StickyScroll = ({
   return (
     <div className="relative w-full py-10 md:py-12">
       <div ref={containerRef} className={cn('relative', 'bg-transparent')}>
-        <div className="grid items-start gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-          {/* Left: stages */}
-          <div className="relative">
+        <div className="flex flex-col lg:flex-row lg:gap-10">
+          {/* Left: stages - this controls the scroll height */}
+          <div className="relative lg:w-[55%]">
             {/* Progress rail */}
             <div className="pointer-events-none absolute left-0 top-0 hidden h-full w-px bg-[#1E293B] lg:block" />
             <motion.div
@@ -114,7 +114,7 @@ export const StickyScroll = ({
                     ref={(el) => {
                       cardRefs.current[index] = el;
                     }}
-                    className="py-10 md:py-14 min-h-[200px] flex flex-col justify-center"
+                    className="py-16 md:py-24 min-h-[300px] flex flex-col justify-center"
                   >
                     <motion.h2
                       initial={false}
@@ -140,10 +140,43 @@ export const StickyScroll = ({
           </div>
 
           {/* Right: sticky reveal panel */}
-          <div className="lg:sticky lg:top-24 lg:self-start">
+          <div className="hidden lg:block lg:w-[45%]">
+            <div 
+              className="sticky top-24"
+              style={{ height: 'fit-content' }}
+            >
+              <motion.div
+                className={cn(
+                  'overflow-hidden rounded-2xl border border-[#1E293B] h-[400px]',
+                  contentClassName,
+                )}
+                animate={{
+                  backgroundColor: content[activeCard]?.backgroundColor || '#1A1F2E',
+                }}
+                transition={{ duration: 0.5, ease: 'easeInOut' }}
+              >
+                <motion.div
+                  key={activeCard}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="h-full w-full"
+                >
+                  {content[activeCard]?.content ?? null}
+                </motion.div>
+              </motion.div>
+
+              <div className="mt-4 text-sm text-[#94A3B8]">
+                Scroll to progress through stages.
+              </div>
+            </div>
+          </div>
+          
+          {/* Mobile: show current card content */}
+          <div className="lg:hidden mt-8">
             <motion.div
               className={cn(
-                'overflow-hidden rounded-2xl border border-[#1E293B] h-[400px]',
+                'overflow-hidden rounded-2xl border border-[#1E293B] h-[300px]',
                 contentClassName,
               )}
               animate={{
@@ -161,10 +194,6 @@ export const StickyScroll = ({
                 {content[activeCard]?.content ?? null}
               </motion.div>
             </motion.div>
-
-            <div className="mt-4 text-sm text-[#94A3B8]">
-              Scroll to progress through stages.
-            </div>
           </div>
         </div>
       </div>

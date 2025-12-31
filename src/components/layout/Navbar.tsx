@@ -46,7 +46,12 @@ const navItems: NavItem[] = [
 ]
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.scrollY > 20
+    }
+    return false
+  })
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -54,7 +59,9 @@ export function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
-    window.addEventListener('scroll', handleScroll)
+    // Check initial scroll position immediately
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -78,9 +85,23 @@ export function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-elevation-layer shadow-lg' : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50"
+      style={{
+        ...(isScrolled 
+          ? {
+              backgroundColor: 'rgba(26, 31, 46, 0.95)',
+              backdropFilter: 'blur(10px)',
+              boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.3)',
+            }
+          : {
+              backgroundColor: 'transparent',
+              background: 'transparent',
+              backdropFilter: 'none',
+              boxShadow: 'none',
+            }
+        ),
+        transition: 'background-color 0.3s ease, background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease',
+      }}
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="flex items-center justify-between h-20">

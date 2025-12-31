@@ -58,7 +58,7 @@ export const ImageZoomComponent = ({
           className="h-[300px] object-cover md:h-[404px]"
         />
         <div className="relative -mt-14 bg-gradient-to-b from-black/0 to-black text-white md:-mt-24">
-          <h1 className="z-20 items-center text-center text-[24px] font-heading font-light tracking-tighter md:text-[36px]">{name}</h1>
+          <h1 className="z-20 items-center text-center text-[24px] font-accent font-light tracking-tighter md:text-[36px]">{name}</h1>
         </div>
       </ImageZoom>
     </div>
