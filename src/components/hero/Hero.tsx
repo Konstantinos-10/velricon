@@ -17,7 +17,7 @@ const clientQuestions = [
     context: 'Get investor-ready financials that pass due diligence.',
     serviceLabel: 'Investor Ready Packages',
     href: '/services/investor-ready',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop',
+    image: '/assets/images/hero/sophisticated_boardroom.png',
   },
   {
     id: 'cfo',
@@ -25,7 +25,7 @@ const clientQuestions = [
     context: 'Strategic CFO expertise without the full-time commitment.',
     serviceLabel: 'Fractional CFO',
     href: '/services/fractional-cfo',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop',
+    image: '/assets/images/hero/path_through_maze.png',
   },
   {
     id: 'bank',
@@ -33,7 +33,7 @@ const clientQuestions = [
     context: 'We know what Cyprus banks require. Let us guide you.',
     serviceLabel: 'Bank Ready Packages',
     href: '/services/bank-ready',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop',
+    image: '/assets/images/hero/modern_cityscape.png',
   },
 ]
 
@@ -297,14 +297,6 @@ export function Hero() {
             </motion.div>
           ))}
           </div>
-
-        {/* Left edge blend */}
-        <div 
-          className="absolute left-0 top-0 bottom-0 w-20 z-10"
-          style={{
-            background: 'linear-gradient(90deg, #0E101A 0%, transparent 100%)',
-          }}
-        />
 
         {/* ─────────────────────────────────────────────────────────────────
             FLOATING CARD - Glassmorphism

@@ -50,15 +50,17 @@ export const ImageZoomComponent = ({
         className="text-strategy-blue absolute -bottom-4 -right-4 h-8 w-8"
       />
       <ImageZoom>
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          height={700}
-          width={700}
-          className="h-[300px] object-cover md:h-[404px]"
-        />
-        <div className="relative -mt-14 bg-gradient-to-b from-black/0 to-black text-white md:-mt-24">
-          <h1 className="z-20 items-center text-center text-[24px] font-accent font-light tracking-tighter md:text-[36px]">{name}</h1>
+        <div className="relative">
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            height={700}
+            width={700}
+            className="h-[300px] object-cover md:h-[404px]"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-black/80 text-white pt-8 pb-3 px-2">
+            <h1 className="z-20 items-center text-center text-[24px] font-accent font-light tracking-tighter md:text-[36px]">{name}</h1>
+          </div>
         </div>
       </ImageZoom>
     </div>

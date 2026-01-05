@@ -7,7 +7,7 @@ import { StickyScroll } from '@/components/ui/sticky-scroll-reveal';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { HighlighterItem, HighlightGroup, Particles } from '@/components/ui/highlighter';
-import { Sprout, TrendingUp, Building2, LineChart } from 'lucide-react';
+import Image from 'next/image';
 
 const stickyScrollStyles = `
   @keyframes grid-draw { 
@@ -37,34 +37,67 @@ const stickyScrollStyles = `
 const content = [
   {
     title: 'Start-ups',
-    description:
-      'Set up financial infrastructure from scratch • Monthly reporting & cash tracking • Build your first budgets & forecasts • Prepare for investor conversations • Guide founder on financial decision-making',
+    description: [
+      'Set up financial infrastructure from scratch',
+      'Monthly reporting & cash tracking',
+      'Build your first budgets & forecasts',
+      'Prepare for investor conversations',
+      'Guide founder on financial decision-making',
+    ],
     backgroundColor: '#0F172A', // Slate-900 - darker blue-gray for startups
     content: (
-      <div className="flex h-full w-full items-center justify-center text-white p-8">
-        <Sprout className="h-24 w-24 text-[#74B3FF]" />
+      <div className="relative h-full w-full overflow-hidden">
+        <Image
+          src="/assets/images/sticky-scroll/vault_with_organized_interior.png"
+          alt="Vault with organized interior representing startup financial infrastructure"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
       </div>
     ),
   },
   {
     title: 'Scale-ups',
-    description:
-      'Advanced reporting & KPI dashboards • Rolling 18-month forecasts & scenario planning • Working capital optimization • Strategic decision support for growth • Build and oversee your finance team',
+    description: [
+      'Advanced reporting & KPI dashboards',
+      'Rolling 18-month forecasts & scenario planning',
+      'Working capital optimization',
+      'Strategic decision support for growth',
+      'Build and oversee your finance team',
+    ],
     backgroundColor: '#1E293B', // Slate-800 - medium blue-gray for scale-ups
     content: (
-      <div className="flex h-full w-full items-center justify-center text-white p-8">
-        <TrendingUp className="h-24 w-24 text-[#74B3FF]" />
+      <div className="relative h-full w-full overflow-hidden">
+        <Image
+          src="/assets/images/sticky-scroll/modular_architecture.png"
+          alt="Modular architecture representing scalable financial systems"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
       </div>
     ),
   },
   {
     title: 'Established SMEs',
-    description:
-      'Complete CFO function (reporting, planning, strategy) • Board-level financial leadership • Exit preparation & value maximization • M&A support and due diligence • Sophisticated risk management & controls',
+    description: [
+      'Complete CFO function (reporting, planning, strategy)',
+      'Board-level financial leadership',
+      'Exit preparation & value maximization',
+      'M&A support and due diligence',
+      'Sophisticated risk management & controls',
+    ],
     backgroundColor: '#0E101A', // Deep void - darkest for established businesses
     content: (
-      <div className="flex h-full w-full items-center justify-center text-white p-8">
-        <Building2 className="h-24 w-24 text-[#74B3FF]" />
+      <div className="relative h-full w-full overflow-hidden">
+        <Image
+          src="/assets/images/sticky-scroll/modern_office_with_city_view.png"
+          alt="Modern office with city view representing established business leadership"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
       </div>
     ),
   },
@@ -220,43 +253,52 @@ export function StickyScrollReveal() {
                     color={"#74B3FF"}
                     vy={-0.2}
                   />
-                  <div className="flex justify-center">
-                    <div className="flex h-full flex-col justify-center gap-10 p-4 md:h-[300px] md:flex-row">
+                  <div className="flex justify-center w-full">
+                    <div className="flex h-full flex-col justify-center gap-10 w-full md:h-[300px] md:flex-row md:gap-0 md:p-0">
                       <div
-                        className="relative mx-auto h-[270px] w-[300px] md:h-[270px] md:w-[300px]"
+                        className="relative h-[270px] w-full mb-8 md:mb-0 md:h-full md:w-1/2 overflow-hidden rounded-xl md:rounded-l-xl md:rounded-r-none"
                         ref={scope}
                       >
-                        <LineChart className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 text-strategy-blue" />
+                        {/* Background Image - covers entire left container, no blue background visible */}
+                        <div className="absolute inset-0 z-0">
+                          <Image
+                            src="/assets/images/sticky-scroll/cozy_meeting_space.png"
+                            alt="Cozy meeting space"
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 300px, 300px"
+                          />
+                        </div>
 
                         <div
                           id="financial-clarity"
-                          className="absolute bottom-12 left-14 rounded-3xl border border-surface-border bg-elevation-layer px-2 py-1.5 text-xs opacity-50"
+                          className="absolute bottom-12 left-14 z-10 rounded-3xl border border-surface-border bg-elevation-layer px-2 py-1.5 text-xs opacity-50"
                         >
                           Financial Clarity
                         </div>
 
                         <div
                           id="cash-management"
-                          className="absolute left-2 top-20 rounded-3xl border border-surface-border bg-elevation-layer px-2 py-1.5 text-xs opacity-50"
+                          className="absolute left-2 top-20 z-10 rounded-3xl border border-surface-border bg-elevation-layer px-2 py-1.5 text-xs opacity-50"
                         >
                           Cash Management
                         </div>
 
                         <div
                           id="strategic-planning"
-                          className="absolute bottom-20 right-1 rounded-3xl border border-surface-border bg-elevation-layer px-2 py-1.5 text-xs opacity-50"
+                          className="absolute bottom-20 right-1 z-10 rounded-3xl border border-surface-border bg-elevation-layer px-2 py-1.5 text-xs opacity-50"
                         >
                           Strategic Planning
                         </div>
 
                         <div
                           id="decision-support"
-                          className="absolute right-12 top-10 rounded-3xl border border-surface-border bg-elevation-layer px-2 py-1.5 text-xs opacity-50"
+                          className="absolute right-12 top-10 z-10 rounded-3xl border border-surface-border bg-elevation-layer px-2 py-1.5 text-xs opacity-50"
                         >
                           Decision Support
                         </div>
 
-                        <div id="pointer" className="absolute">
+                        <div id="pointer" className="absolute z-20">
                           <svg
                             width="16.8"
                             height="18.2"
@@ -278,20 +320,20 @@ export function StickyScrollReveal() {
                         </div>
                       </div>
 
-                      <div className="-mt-20 flex h-full flex-col justify-center p-2 md:-mt-4 md:ml-10 md:w-[400px]">
-                        <div className="flex flex-col items-center">
+                      <div className="-mt-20 flex h-full flex-col justify-center p-4 md:-mt-0 md:ml-0 md:w-1/2 md:p-8 md:pb-12">
+                        <div className="flex flex-col items-center md:items-start">
                           <h3 className="mt-6 pb-1 font-accent font-light">
-                            <span className="text-2xl md:text-4xl text-white tracking-tight">
+                            <span className="text-2xl md:text-4xl text-white tracking-tight leading-tight">
                               Ready to <span className="text-strategy-blue">transform your finances</span>?
                             </span>
                           </h3>
                         </div>
-                        <p className="mb-4 text-slate text-center md:text-left">
+                        <p className="mb-6 text-slate text-center md:text-left">
                           Let's discuss how we can help your business grow.
                         </p>
-                        <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+                        <div className="flex flex-wrap gap-2 justify-center md:justify-start pb-8 md:pb-0">
                           <Link href="/contact">
-                            <Button variant="primary" size="lg">
+                            <Button variant="primary" size="default" className="text-sm px-6 py-2.5">
                               Book a Strategy Call
                             </Button>
                           </Link>

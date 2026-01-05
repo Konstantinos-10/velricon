@@ -132,7 +132,7 @@ export function MeetChristos() {
             className="flex justify-center lg:justify-end"
           >
             <ImageZoomComponent
-              imageSrc="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"
+              imageSrc="/assets/images/christos_makrygiannis.jpg"
               imageAlt="Christos Makrygiannis"
               name="Christos Makrygiannis"
             />

@@ -11,7 +11,7 @@ export const StickyScroll = ({
 }: {
   content: {
     title: string;
-    description: string;
+    description: string | string[];
     content?: React.ReactNode;
     backgroundColor?: string;
   }[];
@@ -125,14 +125,30 @@ export const StickyScroll = ({
                       {item.title}
                     </motion.h2>
 
-                    <motion.p
-                      initial={false}
-                      animate={{ opacity: isActive ? 1 : 0.35 }}
-                      transition={{ duration: 0.3, ease: 'easeOut' }}
-                      className="mt-6 max-w-xl text-lg font-light tracking-tight leading-relaxed text-[#E2E8F0]"
-                    >
-                      {item.description}
-                    </motion.p>
+                    {Array.isArray(item.description) ? (
+                      <motion.ul
+                        initial={false}
+                        animate={{ opacity: isActive ? 1 : 0.35 }}
+                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                        className="mt-6 max-w-xl text-lg font-light tracking-tight leading-relaxed text-[#E2E8F0] space-y-2 list-none"
+                      >
+                        {item.description.map((point, idx) => (
+                          <li key={idx} className="flex items-baseline gap-3">
+                            <span className="text-strategy-blue flex-shrink-0 leading-none">•</span>
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </motion.ul>
+                    ) : (
+                      <motion.p
+                        initial={false}
+                        animate={{ opacity: isActive ? 1 : 0.35 }}
+                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                        className="mt-6 max-w-xl text-lg font-light tracking-tight leading-relaxed text-[#E2E8F0]"
+                      >
+                        {item.description}
+                      </motion.p>
+                    )}
                   </div>
                 );
               })}
@@ -165,10 +181,6 @@ export const StickyScroll = ({
                   {content[activeCard]?.content ?? null}
                 </motion.div>
               </motion.div>
-
-              <div className="mt-4 text-sm text-[#94A3B8]">
-                Scroll to progress through stages.
-              </div>
             </div>
           </div>
           

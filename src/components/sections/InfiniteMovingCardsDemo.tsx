@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/ui/Container";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonialStyles = `
   @keyframes grid-draw { 
@@ -76,6 +77,14 @@ export function InfiniteMovingCardsDemo() {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeTestimonial = testimonials[activeIndex];
 
+  const goToPrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
+
+  const goToNext = () => {
+    setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <>
       <style>{testimonialStyles}</style>
@@ -123,8 +132,95 @@ export function InfiniteMovingCardsDemo() {
             </h2>
           </motion.div>
 
-          {/* Testimonial Navigator */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* ═══════════════════════════════════════════════════════════════
+              MOBILE LAYOUT - Compact with navigation below
+              ═══════════════════════════════════════════════════════════════ */}
+          <div className="lg:hidden">
+            {/* Testimonial Content */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTestimonial.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="space-y-6 mb-8"
+              >
+                {/* Quote */}
+                <blockquote className="text-xl font-accent font-light leading-[1.4] text-white/90 tracking-tight">
+                  "{activeTestimonial.quote}"
+                </blockquote>
+                
+                {/* Attribution */}
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-px bg-strategy-blue/40" />
+                  <div>
+                    <p className="font-body text-[14px] font-medium text-white">
+                      {activeTestimonial.name}
+                    </p>
+                    <p className="font-body text-[12px] text-platinum/60">
+                      {activeTestimonial.role}, {activeTestimonial.company}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Outcome tag */}
+                {activeTestimonial.outcome && (
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-strategy-blue/20 bg-strategy-blue/5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-strategy-blue" />
+                    <span className="font-body text-[11px] font-medium text-strategy-blue/90">
+                      {activeTestimonial.outcome}
+                    </span>
+                  </span>
+                )}
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Mobile Navigation */}
+            <div className="flex items-center justify-between pt-6 border-t border-white/[0.06]">
+              {/* Prev Button */}
+              <button
+                onClick={goToPrev}
+                className="p-2 rounded-lg text-platinum/60 hover:text-white hover:bg-white/[0.04] transition-colors"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft size={20} />
+              </button>
+
+              {/* Dots */}
+              <div className="flex items-center gap-2">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveIndex(index)}
+                    className={`
+                      w-2 h-2 rounded-full transition-all duration-200
+                      ${index === activeIndex 
+                        ? 'bg-strategy-blue w-6' 
+                        : 'bg-white/[0.15] hover:bg-white/[0.3]'
+                      }
+                    `}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                    aria-current={index === activeIndex ? 'true' : undefined}
+                  />
+                ))}
+              </div>
+
+              {/* Next Button */}
+              <button
+                onClick={goToNext}
+                className="p-2 rounded-lg text-platinum/60 hover:text-white hover:bg-white/[0.04] transition-colors"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
+
+          {/* ═══════════════════════════════════════════════════════════════
+              DESKTOP LAYOUT - Two columns with client navigator
+              ═══════════════════════════════════════════════════════════════ */}
+          <div className="hidden lg:grid lg:grid-cols-12 gap-16">
             
             {/* Left: Featured Testimonial */}
             <div className="lg:col-span-7 xl:col-span-8">
@@ -144,9 +240,7 @@ export function InfiniteMovingCardsDemo() {
                   
                   {/* Attribution */}
                   <div className="flex items-center gap-6">
-                    {/* Divider line */}
                     <div className="w-12 h-px bg-strategy-blue/40" />
-                    
                     <div>
                       <p className="font-body text-[15px] font-medium text-white mb-1">
                         {activeTestimonial.name}
@@ -174,13 +268,11 @@ export function InfiniteMovingCardsDemo() {
 
             {/* Right: Client Navigator */}
             <div className="lg:col-span-5 xl:col-span-4">
-              <div className="lg:pl-8 lg:border-l border-white/[0.06]">
-                {/* Navigator header */}
+              <div className="pl-8 border-l border-white/[0.06]">
                 <p className="font-body text-[11px] font-medium tracking-[0.15em] text-platinum/40 uppercase mb-6">
                   Select a client
                 </p>
                 
-                {/* Client list */}
                 <nav className="space-y-1" aria-label="Testimonial navigation">
                   {testimonials.map((testimonial, index) => (
                     <button
@@ -196,7 +288,6 @@ export function InfiniteMovingCardsDemo() {
                       aria-current={index === activeIndex ? 'true' : undefined}
                     >
                       <div className="flex items-center gap-4">
-                        {/* Active indicator */}
                         <div 
                           className={`
                             w-1 h-8 rounded-full transition-all duration-200
@@ -206,7 +297,6 @@ export function InfiniteMovingCardsDemo() {
                             }
                           `}
                         />
-                        
                         <div>
                           <p className={`
                             font-body text-[14px] font-medium transition-colors duration-200
@@ -223,7 +313,6 @@ export function InfiniteMovingCardsDemo() {
                   ))}
                 </nav>
 
-                {/* Progress indicator */}
                 <div className="mt-8 pt-6 border-t border-white/[0.06]">
                   <p className="font-body text-[12px] text-platinum/40 tabular-nums">
                     {activeIndex + 1} / {testimonials.length}
