@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/ui/Container";
-import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
-const infiniteCardsStyles = `
+const testimonialStyles = `
   @keyframes grid-draw { 
     0% { stroke-dashoffset: 1000; opacity: 0; } 
     50% { opacity: 0.3; } 
@@ -20,139 +19,221 @@ const infiniteCardsStyles = `
     animation: grid-draw 2s ease-out forwards; 
   }
   .detail-dot-dark { 
-    fill: #94A3B8; 
+    fill: #74B3FF; 
     opacity: 0; 
     animation: pulse-glow-dark 3s ease-in-out infinite; 
   }
   @keyframes pulse-glow-dark { 
     0%, 100% { opacity: 0.1; transform: scale(1); } 
-    50% { opacity: 0.3; transform: scale(1.1); } 
+    50% { opacity: 0.25; transform: scale(1.1); } 
   }
 `;
 
 const testimonials = [
   {
-    quote:
-      "Velricon transformed our financial operations. Their strategic guidance helped us secure Series A funding and scale with confidence. The fractional CFO model gave us enterprise-level expertise without the full-time cost.",
+    id: 1,
+    quote: "Velricon transformed our financial operations. Their strategic guidance helped us secure Series A funding and scale with confidence.",
     name: "Sarah Chen",
-    title: "CEO, TechScale Cyprus",
+    role: "CEO",
+    company: "TechScale Cyprus",
+    outcome: "Secured Series A funding",
   },
   {
-    quote:
-      "Working with Velricon was a game-changer. They set up our financial infrastructure from scratch, prepared investor-ready reports, and guided us through our seed round. Their deep understanding of the Cyprus ecosystem was invaluable.",
+    id: 2,
+    quote: "They set up our financial infrastructure from scratch, prepared investor-ready reports, and guided us through our seed round. Invaluable.",
     name: "Michael Petrou",
-    title: "Founder, StartupCyprus",
+    role: "Founder",
+    company: "StartupCyprus",
+    outcome: "Successful seed round",
   },
   {
-    quote:
-      "The team at Velricon doesn't just report numbers—they guide strategic decisions. Their Big-4 trained expertise combined with local market knowledge helped us optimize cash flow and prepare for our bank financing.",
+    id: 3,
+    quote: "The team doesn't just report numbers—they guide strategic decisions. Their Big-4 expertise helped us optimize cash flow.",
     name: "Elena Demetriou",
-    title: "CFO, GrowthSME Ltd",
+    role: "CFO",
+    company: "GrowthSME Ltd",
+    outcome: "Optimized cash flow",
   },
   {
-    quote:
-      "Velricon's investor-ready packages are exceptional. Our financial models passed due diligence seamlessly, and their strategic support throughout the fundraising process was instrumental in our success.",
+    id: 4,
+    quote: "Our financial models passed due diligence seamlessly. Their support throughout fundraising was instrumental in our success.",
     name: "Andreas Ioannou",
-    title: "Co-founder, ScaleUp Ventures",
+    role: "Co-founder",
+    company: "ScaleUp Ventures",
+    outcome: "Passed due diligence",
   },
   {
-    quote:
-      "As a scale-up, we needed sophisticated financial planning without the overhead. Velricon delivered rolling forecasts, KPI dashboards, and strategic decision support that helped us navigate rapid growth.",
+    id: 5,
+    quote: "Rolling forecasts, KPI dashboards, and strategic decision support that helped us navigate rapid growth. Exactly what we needed.",
     name: "Maria Constantinou",
-    title: "Operations Director, FastTrack Cyprus",
+    role: "Operations Director",
+    company: "FastTrack Cyprus",
+    outcome: "Navigated rapid growth",
   },
 ];
 
 export function InfiniteMovingCardsDemo() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeTestimonial = testimonials[activeIndex];
+
   return (
     <>
-      <style>{infiniteCardsStyles}</style>
-      <section className="relative py-12 lg:py-16 overflow-hidden">
-        {/* Deep void background with gradient */}
+      <style>{testimonialStyles}</style>
+      <section className="relative py-20 lg:py-28 overflow-hidden">
+        {/* Background */}
         <div 
           className="absolute inset-0"
           style={{
-            backgroundColor: '#0E101A',
-            backgroundImage: 'linear-gradient(to bottom right, rgb(15, 23, 42), rgb(14, 16, 26), rgb(30, 41, 59))',
+            background: 'linear-gradient(180deg, #0E101A 0%, #0a0c12 100%)',
           }}
         />
         
         {/* Animated Grid Background */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
-            <pattern id="gridInfiniteCards" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(100, 116, 139, 0.1)" strokeWidth="0.5"/>
+            <pattern id="gridTestimonials" width="60" height="60" patternUnits="userSpaceOnUse">
+              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(100, 116, 139, 0.08)" strokeWidth="0.5"/>
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#gridInfiniteCards)" />
+          <rect width="100%" height="100%" fill="url(#gridTestimonials)" />
           <line x1="0" y1="20%" x2="100%" y2="20%" className="grid-line-dark" style={{ animationDelay: '0.1s' }} />
           <line x1="0" y1="80%" x2="100%" y2="80%" className="grid-line-dark" style={{ animationDelay: '0.2s' }} />
           <line x1="20%" y1="0" x2="20%" y2="100%" className="grid-line-dark" style={{ animationDelay: '0.3s' }} />
           <line x1="80%" y1="0" x2="80%" y2="100%" className="grid-line-dark" style={{ animationDelay: '0.4s' }} />
-          <line x1="50%" y1="0" x2="50%" y2="100%" className="grid-line-dark" style={{ animationDelay: '0.5s', opacity: '0.05' }} />
-          <line x1="0" y1="50%" x2="100%" y2="50%" className="grid-line-dark" style={{ animationDelay: '0.6s', opacity: '0.05' }} />
           <circle cx="20%" cy="20%" r="2" className="detail-dot-dark" style={{ animationDelay: '0.7s' }} />
           <circle cx="80%" cy="20%" r="2" className="detail-dot-dark" style={{ animationDelay: '0.8s' }} />
           <circle cx="20%" cy="80%" r="2" className="detail-dot-dark" style={{ animationDelay: '0.9s' }} />
           <circle cx="80%" cy="80%" r="2" className="detail-dot-dark" style={{ animationDelay: '1s' }} />
-          <circle cx="50%" cy="50%" r="1.5" className="detail-dot-dark" style={{ animationDelay: '1.1s' }} />
         </svg>
       
-      <Container size="xl" className="relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-8 lg:mb-10"
-        >
-          <motion.p
+        <Container size="xl" className="relative z-10">
+          {/* Header */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-accent text-sm tracking-widest text-strategy-blue uppercase mb-4"
+            transition={{ duration: 0.6 }}
+            className="mb-16 lg:mb-20"
           >
-            Client Success
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight leading-[1.05] text-white mb-4"
-          >
-            Trusted by <span className="text-strategy-blue">Growing Businesses</span> in Cyprus
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-base md:text-lg font-body font-light tracking-tight text-slate max-w-3xl mx-auto"
-          >
-            See how we've helped startups, scale-ups, and established businesses achieve their financial goals.
-          </motion.p>
-        </motion.div>
+            <p className="font-body text-[11px] font-medium tracking-[0.2em] text-strategy-blue/90 uppercase mb-4">
+              Client Experiences
+            </p>
+            <h2 className="text-[clamp(1.75rem,4vw,2.75rem)] font-accent font-light tracking-tight leading-[1.1] text-white max-w-lg">
+              Trusted by growing businesses in Cyprus
+            </h2>
+          </motion.div>
 
-        {/* Infinite Moving Cards */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="h-[28rem] lg:h-[32rem] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden"
-        >
-          <InfiniteMovingCards
-            items={testimonials}
-            direction="right"
-            speed="slow"
-          />
-        </motion.div>
-      </Container>
-    </section>
+          {/* Testimonial Navigator */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            
+            {/* Left: Featured Testimonial */}
+            <div className="lg:col-span-7 xl:col-span-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTestimonial.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  className="space-y-8"
+                >
+                  {/* Quote */}
+                  <blockquote className="text-[clamp(1.25rem,2.5vw,1.75rem)] font-accent font-light leading-[1.4] text-white/90 tracking-tight">
+                    "{activeTestimonial.quote}"
+                  </blockquote>
+                  
+                  {/* Attribution */}
+                  <div className="flex items-center gap-6">
+                    {/* Divider line */}
+                    <div className="w-12 h-px bg-strategy-blue/40" />
+                    
+                    <div>
+                      <p className="font-body text-[15px] font-medium text-white mb-1">
+                        {activeTestimonial.name}
+                      </p>
+                      <p className="font-body text-[13px] text-platinum/60">
+                        {activeTestimonial.role}, {activeTestimonial.company}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Outcome tag */}
+                  {activeTestimonial.outcome && (
+                    <div className="pt-4">
+                      <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-strategy-blue/20 bg-strategy-blue/5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-strategy-blue" />
+                        <span className="font-body text-[12px] font-medium text-strategy-blue/90 tracking-wide">
+                          {activeTestimonial.outcome}
+                        </span>
+                      </span>
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Right: Client Navigator */}
+            <div className="lg:col-span-5 xl:col-span-4">
+              <div className="lg:pl-8 lg:border-l border-white/[0.06]">
+                {/* Navigator header */}
+                <p className="font-body text-[11px] font-medium tracking-[0.15em] text-platinum/40 uppercase mb-6">
+                  Select a client
+                </p>
+                
+                {/* Client list */}
+                <nav className="space-y-1" aria-label="Testimonial navigation">
+                  {testimonials.map((testimonial, index) => (
+                    <button
+                      key={testimonial.id}
+                      onClick={() => setActiveIndex(index)}
+                      className={`
+                        w-full text-left px-4 py-3.5 rounded-lg transition-all duration-200
+                        ${index === activeIndex 
+                          ? 'bg-white/[0.04]' 
+                          : 'hover:bg-white/[0.02]'
+                        }
+                      `}
+                      aria-current={index === activeIndex ? 'true' : undefined}
+                    >
+                      <div className="flex items-center gap-4">
+                        {/* Active indicator */}
+                        <div 
+                          className={`
+                            w-1 h-8 rounded-full transition-all duration-200
+                            ${index === activeIndex 
+                              ? 'bg-strategy-blue' 
+                              : 'bg-white/[0.08]'
+                            }
+                          `}
+                        />
+                        
+                        <div>
+                          <p className={`
+                            font-body text-[14px] font-medium transition-colors duration-200
+                            ${index === activeIndex ? 'text-white' : 'text-platinum/60'}
+                          `}>
+                            {testimonial.name}
+                          </p>
+                          <p className="font-body text-[12px] text-platinum/40">
+                            {testimonial.company}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </nav>
+
+                {/* Progress indicator */}
+                <div className="mt-8 pt-6 border-t border-white/[0.06]">
+                  <p className="font-body text-[12px] text-platinum/40 tabular-nums">
+                    {activeIndex + 1} / {testimonials.length}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
     </>
   );
 }
-

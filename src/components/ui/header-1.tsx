@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { Button, buttonVariants } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
@@ -17,6 +17,12 @@ export function Header() {
 	const [openDropdown, setOpenDropdown] = React.useState(false);
 	const scrolled = useScroll(10);
 	const router = useRouter();
+	const pathname = usePathname();
+
+	// Hide global header on homepage - hero has its own navigation
+	if (pathname === '/') {
+		return null;
+	}
 
 	const handleStrategyCallClick = () => {
 		trackEvent('strategy_call_click', { location: 'navbar' });
