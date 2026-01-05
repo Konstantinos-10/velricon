@@ -1,14 +1,14 @@
 'use client'
 
 import { useState, useCallback, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { NeonButton } from '@/components/ui/neon-button'
 import { trackEvent } from '@/lib/analytics'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ChevronDown } from 'lucide-react'
 
 // Client questions that map to services with background images
 const clientQuestions = [
@@ -36,15 +36,13 @@ const clientQuestions = [
 ]
 
 // Timing constants
-const QUESTION_DURATION = 4000 // 4 seconds per question (increased from 3)
+const QUESTION_DURATION = 3000 // 3 seconds per question
 
 export function Hero() {
   const router = useRouter()
   const [isLoaded, setIsLoaded] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
-
-  const currentQuestion = clientQuestions[currentIndex]
 
   // Initial load
   useEffect(() => {
@@ -75,11 +73,6 @@ export function Hero() {
     trackEvent('explore_solutions_click', { location: 'hero' })
     router.push('/services')
   }, [router])
-
-  const handleServiceClick = useCallback(() => {
-    trackEvent('hero_question_service_click', { service: currentQuestion.id })
-    router.push(currentQuestion.href)
-  }, [router, currentQuestion])
 
   const handleDotClick = useCallback((index: number) => {
     setCurrentIndex(index)
@@ -202,17 +195,17 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Column - Client Questions (5 columns, supportive) */}
+          {/* Right Column - Questions Accordion (5 columns, supportive) */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: isLoaded ? 1 : 0, x: isLoaded ? 0 : 20 }}
             transition={{ duration: 0.8, delay: 0.7, ease: [0.4, 0, 0.2, 1] }}
             className="lg:col-span-5 relative hidden lg:flex items-center justify-center"
           >
-            {/* Glassy Container */}
+            {/* Accordion Container */}
             <div className="relative w-full max-w-md">
               
-              {/* Ambient glow behind the card */}
+              {/* Ambient glow behind the accordion */}
               <div 
                 className="absolute -inset-6 rounded-3xl opacity-30 blur-2xl"
                 style={{
@@ -220,8 +213,8 @@ export function Hero() {
                 }}
               />
               
-              {/* Glass card with image background */}
-              <div className="relative rounded-2xl border border-white/[0.08] overflow-hidden">
+              {/* Glass accordion wrapper */}
+              <div className="relative rounded-2xl border border-white/[0.08] overflow-hidden shadow-2xl shadow-black/40">
                 
                 {/* Background Image Carousel */}
                 <div className="absolute inset-0">
@@ -246,13 +239,13 @@ export function Hero() {
                     </motion.div>
                   ))}
                   
-                  {/* Dark overlay for glass effect */}
+                  {/* Dark overlay for glass effect - reduced opacity for more visible images */}
                   <div 
                     className="absolute inset-0 z-10"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(14, 16, 26, 0.85) 0%, rgba(14, 16, 26, 0.75) 100%)',
-                      backdropFilter: 'blur(8px)',
-                      WebkitBackdropFilter: 'blur(8px)',
+                      background: 'linear-gradient(135deg, rgba(14, 16, 26, 0.65) 0%, rgba(14, 16, 26, 0.55) 100%)',
+                      backdropFilter: 'blur(4px)',
+                      WebkitBackdropFilter: 'blur(4px)',
                     }}
                   />
                 </div>
@@ -261,15 +254,7 @@ export function Hero() {
                 <div 
                   className="absolute inset-0 z-20 pointer-events-none"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%)',
-                  }}
-                />
-                
-                {/* Inner highlight */}
-                <div 
-                  className="absolute inset-0 z-20 pointer-events-none"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, transparent 40%)',
+                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%)',
                   }}
                 />
                 
@@ -281,150 +266,207 @@ export function Hero() {
                   }}
                 />
 
-                {/* Question content */}
-                <div className="relative z-30 text-center py-12 px-8">
-                  
-                  {/* Small label */}
-                  <div className="mb-6">
-                    <span className="font-body text-xs font-medium tracking-widest text-slate uppercase">
-                      Are you asking yourself
-                    </span>
-                  </div>
-                  
-                  {/* The Question - larger, more prominent */}
-                  <div className="min-h-[80px] flex items-center justify-center mb-6">
-                    <AnimatePresence mode="wait">
-                      <motion.p
-                        key={currentQuestion.id}
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                        className="text-[clamp(1.25rem,2.5vw,1.5rem)] font-accent font-light tracking-tight leading-relaxed text-white"
-                      >
-                        {currentQuestion.question}
-                      </motion.p>
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Service Link - always visible, more prominent */}
-                  <AnimatePresence mode="wait">
-                    <motion.button
-                      key={`service-${currentQuestion.id}`}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.3, ease: 'easeOut' }}
-                      onClick={handleServiceClick}
-                      className="group relative inline-flex items-center gap-3 px-6 py-3.5 rounded-xl 
-                               border border-strategy-blue/40 bg-strategy-blue/15
-                               hover:bg-strategy-blue/25 hover:border-strategy-blue/60
-                               transition-all duration-300"
-                    >
-                      {/* Button glow on hover */}
+                {/* Accordion Items */}
+                <div className="relative z-30">
+                  {clientQuestions.map((q, idx) => {
+                    const isExpanded = currentIndex === idx
+                    
+                    return (
                       <div 
-                        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-lg"
-                        style={{ backgroundColor: 'rgba(116, 179, 255, 0.15)' }}
-                      />
-                      
-                      <span className="relative font-body text-sm font-semibold tracking-tight text-white">
-                        {currentQuestion.serviceLabel}
-                      </span>
-                      <ArrowRight 
-                        size={16} 
-                        className="relative text-strategy-blue group-hover:text-white transition-all duration-300 group-hover:translate-x-0.5" 
-                      />
-                    </motion.button>
-                  </AnimatePresence>
-
-                  {/* Progress Indicators */}
-                  <div className="flex items-center justify-center gap-2 mt-8">
-                    {clientQuestions.map((_, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => handleDotClick(idx)}
-                        className="group relative p-1.5"
-                        aria-label={`Go to question ${idx + 1}`}
+                        key={q.id}
+                        className={`
+                          border-b border-white/[0.06] last:border-b-0
+                          transition-colors duration-300
+                          ${isExpanded ? 'bg-white/[0.03]' : 'hover:bg-white/[0.02]'}
+                        `}
                       >
-                        {/* Progress bar style indicator */}
-                        <div 
-                          className={`
-                            relative w-10 h-1 rounded-full overflow-hidden transition-all duration-300
-                            ${idx === currentIndex 
-                              ? 'bg-white/15' 
-                              : 'bg-white/5 group-hover:bg-white/10'
-                            }
-                          `}
+                        {/* Accordion Header */}
+                        <button
+                          onClick={() => handleDotClick(idx)}
+                          className="w-full flex items-center justify-between p-5 text-left transition-colors duration-200"
                         >
-                          {/* Fill animation for active */}
-                          {idx === currentIndex && (
+                          <span 
+                            className={`
+                              font-accent text-base tracking-tight transition-colors duration-300
+                              ${isExpanded ? 'text-white' : 'text-white/60'}
+                            `}
+                          >
+                            {q.question}
+                          </span>
+                          <ChevronDown 
+                            size={18} 
+                            className={`
+                              flex-shrink-0 ml-3 transition-all duration-300
+                              ${isExpanded ? 'text-strategy-blue rotate-180' : 'text-white/40'}
+                            `}
+                          />
+                        </button>
+                        
+                        {/* Accordion Content */}
+                        <motion.div
+                          initial={false}
+                          animate={{
+                            height: isExpanded ? 'auto' : 0,
+                            opacity: isExpanded ? 1 : 0,
+                          }}
+                          transition={{ 
+                            height: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
+                            opacity: { duration: 0.2, ease: 'easeOut' }
+                          }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-5 pb-5">
+                            {/* Service Link Button */}
+                            <button
+                              onClick={() => {
+                                trackEvent('hero_question_service_click', { service: q.id })
+                                router.push(q.href)
+                              }}
+                              className="group relative inline-flex items-center gap-2.5 px-5 py-3 rounded-xl 
+                                       border border-strategy-blue/40 bg-strategy-blue/15
+                                       hover:bg-strategy-blue/25 hover:border-strategy-blue/60
+                                       transition-all duration-300"
+                            >
+                              {/* Button glow on hover */}
+                              <div 
+                                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-lg"
+                                style={{ backgroundColor: 'rgba(116, 179, 255, 0.15)' }}
+                              />
+                              
+                              <span className="relative font-body text-sm font-semibold tracking-tight text-white">
+                                {q.serviceLabel}
+                              </span>
+                              <ArrowRight 
+                                size={15} 
+                                className="relative text-strategy-blue group-hover:text-white transition-all duration-300 group-hover:translate-x-0.5" 
+                              />
+                            </button>
+                            
+                            {/* Progress bar for active item */}
+                            <div className="mt-4">
+                              <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden">
+                                <motion.div
+                                  className="h-full bg-strategy-blue rounded-full"
+                                  initial={{ width: '0%' }}
+                                  animate={{ width: '100%' }}
+                                  transition={{ 
+                                    duration: QUESTION_DURATION / 1000,
+                                    ease: 'linear'
+                                  }}
+                                  key={`progress-${currentIndex}`}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Mobile Questions - Accordion */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="lg:hidden"
+          >
+            <div 
+              className="rounded-xl border border-white/[0.08] overflow-hidden backdrop-blur-md"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)',
+              }}
+            >
+              {clientQuestions.map((q, idx) => {
+                const isExpanded = currentIndex === idx
+                
+                return (
+                  <div 
+                    key={q.id}
+                    className={`
+                      border-b border-white/[0.06] last:border-b-0
+                      transition-colors duration-300
+                      ${isExpanded ? 'bg-white/[0.03]' : ''}
+                    `}
+                  >
+                    {/* Accordion Header */}
+                    <button
+                      onClick={() => handleDotClick(idx)}
+                      className="w-full flex items-center justify-between p-4 text-left"
+                    >
+                      <span 
+                        className={`
+                          font-accent text-sm tracking-tight transition-colors duration-300
+                          ${isExpanded ? 'text-white' : 'text-white/60'}
+                        `}
+                      >
+                        {q.question}
+                      </span>
+                      <ChevronDown 
+                        size={16} 
+                        className={`
+                          flex-shrink-0 ml-2 transition-all duration-300
+                          ${isExpanded ? 'text-strategy-blue rotate-180' : 'text-white/40'}
+                        `}
+                      />
+                    </button>
+                    
+                    {/* Accordion Content */}
+                    <motion.div
+                      initial={false}
+                      animate={{
+                        height: isExpanded ? 'auto' : 0,
+                        opacity: isExpanded ? 1 : 0,
+                      }}
+                      transition={{ 
+                        height: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
+                        opacity: { duration: 0.2, ease: 'easeOut' }
+                      }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-4 pb-4">
+                        <button
+                          onClick={() => {
+                            trackEvent('hero_question_service_click', { service: q.id })
+                            router.push(q.href)
+                          }}
+                          className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-lg 
+                                   border border-strategy-blue/30 bg-strategy-blue/10
+                                   active:bg-strategy-blue/20 transition-all duration-200"
+                        >
+                          <span className="font-body text-sm font-semibold tracking-tight text-white">
+                            {q.serviceLabel}
+                          </span>
+                          <ArrowRight 
+                            size={14} 
+                            className="text-strategy-blue" 
+                          />
+                        </button>
+                        
+                        {/* Progress bar */}
+                        <div className="mt-3">
+                          <div className="w-full h-0.5 rounded-full bg-white/10 overflow-hidden">
                             <motion.div
-                              className="absolute inset-y-0 left-0 bg-strategy-blue rounded-full"
+                              className="h-full bg-strategy-blue rounded-full"
                               initial={{ width: '0%' }}
                               animate={{ width: '100%' }}
                               transition={{ 
                                 duration: QUESTION_DURATION / 1000,
                                 ease: 'linear'
                               }}
+                              key={`mobile-progress-${currentIndex}`}
                             />
-                          )}
-                          
-                          {/* Hover fill for inactive */}
-                          {idx !== currentIndex && (
-                            <div 
-                              className="absolute inset-0 rounded-full transition-colors duration-300 bg-transparent group-hover:bg-strategy-blue/40"
-                            />
-                          )}
+                          </div>
                         </div>
-                      </button>
-                    ))}
+                      </div>
+                    </motion.div>
                   </div>
-                </div>
-              </div>
+                )
+              })}
             </div>
-          </motion.div>
-
-          {/* Mobile Questions - Glassy Cards */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="lg:hidden space-y-3"
-          >
-            <p className="font-body text-xs font-medium tracking-widest text-slate uppercase mb-4">
-              Are you asking yourself
-            </p>
-            {clientQuestions.map((q, idx) => (
-              <motion.button
-                key={q.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: isLoaded ? 1 : 0, x: isLoaded ? 0 : -20 }}
-                transition={{ duration: 0.5, delay: 0.7 + idx * 0.1 }}
-                onClick={() => {
-                  trackEvent('hero_question_service_click', { service: q.id })
-                  router.push(q.href)
-                }}
-                className="group w-full text-left p-5 rounded-xl border border-white/[0.08]
-                         backdrop-blur-md transition-all duration-300
-                         hover:border-strategy-blue/30 hover:bg-white/[0.03]"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)',
-                }}
-              >
-                <p className="font-accent text-base text-white/90 group-hover:text-white transition-colors mb-3">
-                  {q.question}
-                </p>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-strategy-blue/30 bg-strategy-blue/10">
-                  <span className="font-body text-sm font-semibold tracking-tight text-white">
-                    {q.serviceLabel}
-                  </span>
-                  <ArrowRight 
-                    size={14} 
-                    className="text-strategy-blue transition-transform duration-300 group-hover:translate-x-0.5" 
-                  />
-                </div>
-              </motion.button>
-            ))}
           </motion.div>
         </div>
       </Container>
