@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-  /* Typography: Karla for body, Alegreya for headings */
+  /* Typography: Karla for body, Montserrat for headings */
   body {
     @apply font-body text-dark-ink bg-soft-white antialiased;
   }
   
-  /* Headings use Alegreya with light weight and tight tracking */
+  /* Headings use Montserrat with light weight and tight tracking */
   h1, h2, h3, h4, h5, h6 {
     @apply font-accent font-light tracking-tight;
   }

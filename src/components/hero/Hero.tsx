@@ -100,27 +100,22 @@ export function Hero() {
   return (
     <section className="relative h-screen flex overflow-hidden">
       
-      {/* ═══════════════════════════════════════════════════════════════════
-          LEFT COLUMN - 2/3 WIDTH - SELF-CONTAINED CONTENT ZONE
-          ═══════════════════════════════════════════════════════════════════ */}
-      <div className="relative w-full lg:w-2/3 h-full flex flex-col">
-        
-        {/* Background with gradient */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(180deg, #0a0c12 0%, #0E101A 100%)',
-          }}
-        />
-        
-        {/* Animated Grid Background */}
-        <style>{`
-          @keyframes hero-grid-draw { 
+      {/* Background with gradient - Applied to entire section */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(180deg, #0a0c12 0%, #0E101A 100%)',
+        }}
+      />
+      
+      {/* Animated Grid Background - Applied to entire section */}
+      <style>{`
+        @keyframes hero-grid-draw { 
       0% { stroke-dashoffset: 1000; opacity: 0; } 
       50% { opacity: 0.3; } 
       100% { stroke-dashoffset: 0; opacity: 0.15; } 
     }
-          .hero-grid-line { 
+        .hero-grid-line { 
       stroke: #64748B; 
       stroke-width: 0.5; 
       opacity: 0; 
@@ -128,73 +123,81 @@ export function Hero() {
       stroke-dashoffset: 1000; 
             animation: hero-grid-draw 2s ease-out forwards; 
     }
-          .hero-detail-dot { 
-            fill: #74B3FF; 
+        .hero-detail-dot { 
+          fill: #74B3FF; 
       opacity: 0; 
-            animation: hero-pulse-dot 3s ease-in-out infinite; 
-          }
-          @keyframes hero-pulse-dot { 
-            0%, 100% { opacity: 0.1; transform: scale(1); } 
-            50% { opacity: 0.25; transform: scale(1.1); } 
-          }
-        `}</style>
-        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <pattern id="heroGridPattern" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(100, 116, 139, 0.1)" strokeWidth="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#heroGridPattern)" />
-          <line x1="0" y1="20%" x2="100%" y2="20%" className="hero-grid-line" style={{ animationDelay: '0.1s' }} />
-          <line x1="0" y1="80%" x2="100%" y2="80%" className="hero-grid-line" style={{ animationDelay: '0.2s' }} />
-          <line x1="20%" y1="0" x2="20%" y2="100%" className="hero-grid-line" style={{ animationDelay: '0.3s' }} />
-          <line x1="80%" y1="0" x2="80%" y2="100%" className="hero-grid-line" style={{ animationDelay: '0.4s' }} />
-          <line x1="50%" y1="0" x2="50%" y2="100%" className="hero-grid-line" style={{ animationDelay: '0.5s', opacity: '0.05' }} />
-          <line x1="0" y1="50%" x2="100%" y2="50%" className="hero-grid-line" style={{ animationDelay: '0.6s', opacity: '0.05' }} />
-          <circle cx="20%" cy="20%" r="2" className="hero-detail-dot" style={{ animationDelay: '0.7s' }} />
-          <circle cx="80%" cy="20%" r="2" className="hero-detail-dot" style={{ animationDelay: '0.8s' }} />
-          <circle cx="20%" cy="80%" r="2" className="hero-detail-dot" style={{ animationDelay: '0.9s' }} />
-          <circle cx="80%" cy="80%" r="2" className="hero-detail-dot" style={{ animationDelay: '1s' }} />
-          <circle cx="50%" cy="50%" r="1.5" className="hero-detail-dot" style={{ animationDelay: '1.1s' }} />
-        </svg>
+          animation: hero-pulse-dot 3s ease-in-out infinite; 
+        }
+        @keyframes hero-pulse-dot { 
+          0%, 100% { opacity: 0.1; transform: scale(1); } 
+          50% { opacity: 0.25; transform: scale(1.1); } 
+        }
+      `}</style>
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <pattern id="heroGridPattern" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(100, 116, 139, 0.1)" strokeWidth="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#heroGridPattern)" />
+        <line x1="0" y1="20%" x2="100%" y2="20%" className="hero-grid-line" style={{ animationDelay: '0.1s' }} />
+        <line x1="0" y1="80%" x2="100%" y2="80%" className="hero-grid-line" style={{ animationDelay: '0.2s' }} />
+        <line x1="20%" y1="0" x2="20%" y2="100%" className="hero-grid-line" style={{ animationDelay: '0.3s' }} />
+        <line x1="80%" y1="0" x2="80%" y2="100%" className="hero-grid-line" style={{ animationDelay: '0.4s' }} />
+        <line x1="50%" y1="0" x2="50%" y2="100%" className="hero-grid-line" style={{ animationDelay: '0.5s', opacity: '0.05' }} />
+        <line x1="0" y1="50%" x2="100%" y2="50%" className="hero-grid-line" style={{ animationDelay: '0.6s', opacity: '0.05' }} />
+        <circle cx="20%" cy="20%" r="2" className="hero-detail-dot" style={{ animationDelay: '0.7s' }} />
+        <circle cx="80%" cy="20%" r="2" className="hero-detail-dot" style={{ animationDelay: '0.8s' }} />
+        <circle cx="20%" cy="80%" r="2" className="hero-detail-dot" style={{ animationDelay: '0.9s' }} />
+        <circle cx="80%" cy="80%" r="2" className="hero-detail-dot" style={{ animationDelay: '1s' }} />
+        <circle cx="50%" cy="50%" r="1.5" className="hero-detail-dot" style={{ animationDelay: '1.1s' }} />
+      </svg>
+      
+      {/* ═══════════════════════════════════════════════════════════════════
+          NAVIGATION BAR - Full width, separate component
+          ═══════════════════════════════════════════════════════════════════ */}
+      <motion.header 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoaded ? 1 : 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-10 lg:px-16 xl:px-20 py-8"
+      >
+        {/* Logo */}
+        <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
+          <img
+            src="/assets/images/logo.png"
+            alt="Velricon"
+            className="h-9 w-auto object-contain"
+          />
+        </Link>
 
+        {/* Navigation */}
+        <nav className="hidden md:flex items-center gap-10">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="font-body text-[13px] text-platinum/60 hover:text-white transition-colors duration-200 tracking-wide"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+      </motion.header>
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          LEFT COLUMN - FULL WIDTH - SELF-CONTAINED CONTENT ZONE
+          ═══════════════════════════════════════════════════════════════════ */}
+      <div className="relative w-full h-full flex flex-col">
+        
         {/* ─────────────────────────────────────────────────────────────────
-            NAVIGATION - Anchored at top of left column
+            LEFT COLUMN - Content container
             ───────────────────────────────────────────────────────────────── */}
-        <motion.header 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isLoaded ? 1 : 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative z-10 flex items-center justify-between px-10 lg:px-16 xl:px-20 py-8"
-        >
-          {/* Logo */}
-          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
-            <img
-              src="/assets/images/logo.png"
-              alt="Velricon"
-              className="h-9 w-auto object-contain"
-            />
-          </Link>
-
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="font-body text-[13px] text-platinum/60 hover:text-white transition-colors duration-200 tracking-wide"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </motion.header>
-
-        {/* ─────────────────────────────────────────────────────────────────
-            MAIN CONTENT - Generous whitespace
-            ───────────────────────────────────────────────────────────────── */}
-        <div className="relative z-10 flex-1 flex items-center px-10 lg:px-16 xl:px-20">
-          <div className="max-w-xl space-y-10">
+        <div className="relative z-10 flex-1 flex flex-col px-10 lg:px-16 xl:px-20 pt-24 lg:pt-28">
+          <div className="max-w-4xl w-full">
+            {/* Main Content */}
+            <div className="flex-1 flex items-center">
+              <div className="space-y-10 w-full">
             
             {/* Mini title - eyebrow */}
             <motion.p 
@@ -256,20 +259,28 @@ export function Hero() {
                 <ArrowRight size={14} className="opacity-60" />
               </button>
             </motion.div>
-                  </div>
-                  </div>
-
-        {/* Bottom breathing space */}
-        <div className="h-20 lg:h-28" />
               </div>
+            </div>
+          </div>
+
+          {/* Bottom breathing space */}
+          <div className="h-20 lg:h-28" />
+          </div>
+        </div>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          RIGHT COLUMN - 1/3 WIDTH - VISUAL STORYTELLING
+          IMAGE CAROUSEL - Absolute positioned on right side
           ═══════════════════════════════════════════════════════════════════ */}
-      <div className="hidden lg:block relative w-1/3 h-full">
+      <div 
+        className="hidden lg:block absolute right-0 w-1/2 pointer-events-none relative"
+        style={{
+          top: 'calc(50% + 7rem)', // Aligned with mini title height
+          transform: 'translateY(-50%)',
+        }}
+      >
         
-        {/* Full-height Image Carousel - FADE ONLY, no scale */}
-        <div className="absolute inset-0">
+        {/* Image Carousel - FADE ONLY, no scale */}
+        <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden pointer-events-auto">
           {clientQuestions.map((slide, idx) => (
             <motion.div
               key={slide.id}
@@ -284,7 +295,7 @@ export function Hero() {
                 alt=""
                 fill
                 className="object-cover"
-                sizes="33vw"
+                sizes="50vw"
                 priority={idx === 0}
               />
               {/* Subtle color grade */}
@@ -296,10 +307,10 @@ export function Hero() {
               />
             </motion.div>
           ))}
-          </div>
+        </div>
 
         {/* ─────────────────────────────────────────────────────────────────
-            FLOATING CARD - Glassmorphism
+            FLOATING CARD - Glassmorphism (positioned outside image carousel)
             ───────────────────────────────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -313,19 +324,19 @@ export function Hero() {
           }}
           onMouseEnter={() => handleCardHover(true)}
           onMouseLeave={() => handleCardHover(false)}
-          className="absolute z-20"
+          className="absolute z-20 pointer-events-auto"
           style={{
-            top: '50%',
-            left: '10%',
-            transform: 'translateY(-50%)',
-            width: 'calc(100% - 56px)',
+            top: '40%',
+            left: '0%',
+            transform: 'translate(-50%, -50%)',
+            width: '340px',
             maxWidth: '340px',
           }}
         >
           {/* Soft glow behind card */}
           <div 
             className="absolute -inset-4 rounded-2xl opacity-40 blur-2xl"
-            style={{
+          style={{
               background: 'radial-gradient(ellipse at center, rgba(116, 179, 255, 0.15) 0%, transparent 70%)',
             }}
           />
@@ -419,17 +430,9 @@ export function Hero() {
                   ))}
                 </div>
               </div>
+            </div>
           </div>
-        </div>
-        </motion.div>
-
-        {/* Bottom fade */}
-        <div 
-          className="absolute bottom-0 left-0 right-0 h-24 z-10"
-          style={{
-            background: 'linear-gradient(to top, #0E101A 0%, transparent 100%)',
-          }}
-        />
+          </motion.div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════

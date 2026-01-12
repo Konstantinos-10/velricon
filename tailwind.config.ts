@@ -76,8 +76,8 @@ const config: Config = {
   			heading: ['var(--font-montserrat)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
   			// Body: Karla (regular, 400)
   			body: ['var(--font-karla)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-  			// Accent: Alegreya (used sparingly for emphasis)
-  			accent: ['var(--font-alegreya)', 'Georgia', 'serif'],
+			// Accent: Montserrat (used for section headlines)
+			accent: ['var(--font-montserrat)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
   			// Default sans fallback
   			sans: ['var(--font-karla)', 'ui-sans-serif', 'system-ui', 'sans-serif']
   		}
