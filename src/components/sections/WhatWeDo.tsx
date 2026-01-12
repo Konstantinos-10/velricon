@@ -64,8 +64,6 @@ export function WhatWeDo() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
-  const touchStartX = useRef<number | null>(null);
-  const touchEndX = useRef<number | null>(null);
 
   const currentService = services[currentIndex];
 
@@ -76,36 +74,6 @@ export function WhatWeDo() {
   const handlePrevious = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + services.length) % services.length);
   }, []);
-
-  // Swipe handlers
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  }, []);
-
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX;
-  }, []);
-
-  const handleTouchEnd = useCallback(() => {
-    if (!touchStartX.current || touchEndX.current === null) return;
-    
-    const distance = touchStartX.current - touchEndX.current;
-    const minSwipeDistance = 50; // Minimum distance for a swipe
-
-    if (Math.abs(distance) > minSwipeDistance) {
-      if (distance > 0) {
-        // Swiped left - go to next
-        handleNext();
-      } else {
-        // Swiped right - go to previous
-        handlePrevious();
-      }
-    }
-
-    // Reset
-    touchStartX.current = null;
-    touchEndX.current = null;
-  }, [handleNext, handlePrevious]);
 
   return (
     <>
@@ -179,12 +147,7 @@ export function WhatWeDo() {
         </motion.div>
 
         {/* Services Showcase - One at a time */}
-        <div 
-          className="relative"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
+        <div className="relative">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentService.id}
@@ -192,7 +155,7 @@ export function WhatWeDo() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.5, ease: 'easeInOut' }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center touch-none"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
             >
               {/* Left: Text Content */}
               <div className="order-2 lg:order-1">
