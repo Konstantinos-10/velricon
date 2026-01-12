@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { trackEvent } from '@/lib/analytics'
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react'
 
 // Client questions that map to services with background images
 const clientQuestions = [
@@ -61,6 +61,7 @@ export function Hero() {
   const [isPaused, setIsPaused] = useState(false)
   const [isCardHovered, setIsCardHovered] = useState(false)
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const servicesDropdownRef = useRef<HTMLDivElement>(null)
 
@@ -196,7 +197,20 @@ export function Hero() {
           />
         </Link>
 
-        {/* Navigation */}
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-platinum/60 hover:text-white hover:bg-white/5 transition-all duration-200"
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? (
+            <X size={24} className="text-white" />
+          ) : (
+            <Menu size={24} />
+          )}
+        </button>
+
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-8 xl:gap-10">
           {/* Services Dropdown */}
           <div 
@@ -296,11 +310,11 @@ export function Hero() {
         {/* ─────────────────────────────────────────────────────────────────
             LEFT COLUMN - Content container
             ───────────────────────────────────────────────────────────────── */}
-        <div className="relative z-10 flex-1 flex flex-col px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-20 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36">
-          <div className="max-w-4xl w-full">
+        <div className="relative z-10 flex-1 flex flex-col px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-20 pt-28 sm:pt-32 md:pt-36 lg:pt-40 xl:pt-44 2xl:pt-48">
+          <div className="max-w-4xl w-full md:w-auto flex-1 flex flex-col">
             {/* Main Content */}
-            <div className="flex-1 flex items-center">
-              <div className="space-y-6 sm:space-y-8 md:space-y-9 lg:space-y-10 w-full">
+            <div className="flex-1 flex items-center justify-center md:justify-start">
+              <div className="space-y-6 sm:space-y-8 md:space-y-9 lg:space-y-10 w-full text-center md:text-left">
             
             {/* Mini title - eyebrow */}
             <motion.p 
@@ -332,7 +346,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 16 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-sm sm:text-[15px] md:text-base lg:text-lg font-body font-light text-slate/80 leading-[1.7] max-w-md sm:max-w-lg md:max-w-xl"
+              className="text-sm sm:text-[15px] md:text-base lg:text-lg font-body font-light text-slate/80 leading-[1.7] max-w-md sm:max-w-lg md:max-w-xl mx-auto md:mx-0"
             >
               Big-4 trained expertise. Deep Cyprus market knowledge. 
               Trusted by startups and SMEs to navigate funding, banking, 
@@ -344,7 +358,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 16 }}
               transition={{ duration: 0.5, delay: 0.55 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 md:pt-10 lg:pt-12 justify-center md:justify-start"
             >
               <Button
                 onClick={handleStrategyCallClick}
@@ -365,11 +379,8 @@ export function Hero() {
               </div>
             </div>
           </div>
-
-          {/* Bottom breathing space */}
-          <div className="h-12 sm:h-16 md:h-20 lg:h-24 xl:h-28" />
-          </div>
         </div>
+      </div>
 
       {/* ═══════════════════════════════════════════════════════════════════
           IMAGE CAROUSEL - Absolute positioned on right side
@@ -547,9 +558,117 @@ export function Hero() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          MOBILE - Simplified single-column
+          MOBILE MENU - Slide in overlay
           ═══════════════════════════════════════════════════════════════════ */}
-      <div className="lg:hidden absolute inset-0 pointer-events-none" />
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+            />
+            
+            {/* Menu Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm z-50 md:hidden overflow-y-auto"
+              style={{
+                background: 'linear-gradient(180deg, rgba(14, 16, 26, 0.98) 0%, rgba(10, 12, 18, 0.98) 100%)',
+                backdropFilter: 'blur(24px)',
+                WebkitBackdropFilter: 'blur(24px)',
+                boxShadow: '-4px 0 24px rgba(0, 0, 0, 0.5)',
+              }}
+            >
+              {/* Menu Header */}
+              <div className="flex items-center justify-between p-6 border-b border-white/10">
+                <Link 
+                  href="/" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center"
+                >
+                  <img
+                    src="/assets/images/logo.png"
+                    alt="Velricon"
+                    className="h-8 w-auto object-contain"
+                  />
+                </Link>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-10 h-10 flex items-center justify-center rounded-lg text-platinum/60 hover:text-white hover:bg-white/5 transition-all"
+                  aria-label="Close menu"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              {/* Menu Content */}
+              <div className="p-6 space-y-1">
+                {/* Services Section */}
+                <div className="mb-6">
+                  <p className="text-xs font-medium tracking-wider text-strategy-blue/80 uppercase mb-4 px-3">
+                    Services
+                  </p>
+                  <div className="space-y-1">
+                    {servicesItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => {
+                          setIsMobileMenuOpen(false)
+                          trackEvent('nav_service_click', { service: item.label })
+                        }}
+                        className="block px-4 py-3 rounded-lg text-base font-body text-platinum/70 hover:text-white hover:bg-white/5 transition-all duration-200"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="h-px bg-white/10 my-6" />
+
+                {/* Other Links */}
+                <div className="space-y-1">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block px-4 py-3 rounded-lg text-base font-body text-platinum/70 hover:text-white hover:bg-white/5 transition-all duration-200"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* CTA Button */}
+                <div className="pt-6 mt-6 border-t border-white/10">
+    <Button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false)
+                      handleStrategyCallClick()
+                    }}
+      variant="primary"
+                    size="default"
+                    className="w-full text-sm px-6 py-3 h-auto font-medium"
+    >
+      Book a Strategy Call
+    </Button>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

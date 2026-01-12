@@ -184,8 +184,8 @@ export const StickyScroll = ({
             </div>
           </div>
           
-          {/* Mobile: show current card content */}
-          <div className="lg:hidden mt-8">
+          {/* Mobile: show current card content - HIDDEN on mobile */}
+          <div className="hidden">
             <motion.div
               className={cn(
                 'overflow-hidden rounded-2xl border border-[#1E293B] h-[300px]',
