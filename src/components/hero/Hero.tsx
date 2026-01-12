@@ -124,7 +124,7 @@ export function Hero() {
   }, [isServicesDropdownOpen])
 
   return (
-    <section className="relative h-screen flex overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden">
       
       {/* Background with gradient - Applied to entire section */}
       <div 
@@ -303,25 +303,22 @@ export function Hero() {
       </motion.header>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          LEFT COLUMN - FULL WIDTH - SELF-CONTAINED CONTENT ZONE
+          MAIN CONTENT GRID - Two column layout
           ═══════════════════════════════════════════════════════════════════ */}
-      <div className="relative w-full h-full flex flex-col">
+      <div className="relative z-10 min-h-screen grid grid-cols-1 lg:grid-cols-[1fr,45%] xl:grid-cols-[1fr,42%] gap-8 lg:gap-12 xl:gap-16">
         
         {/* ─────────────────────────────────────────────────────────────────
-            LEFT COLUMN - Content container
+            LEFT COLUMN - Content
             ───────────────────────────────────────────────────────────────── */}
-        <div className="relative z-10 flex-1 flex flex-col px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-20 pt-28 sm:pt-32 md:pt-36 lg:pt-40 xl:pt-44 2xl:pt-48">
-          <div className="max-w-4xl w-full md:w-auto flex-1 flex flex-col">
-            {/* Main Content */}
-            <div className="flex-1 flex items-center justify-center md:justify-start">
-              <div className="space-y-6 sm:space-y-8 md:space-y-9 lg:space-y-10 w-full text-center md:text-left">
+        <div className="flex flex-col justify-center px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24 pt-32 pb-16 lg:pt-0 lg:pb-0">
+          <div className="max-w-xl xl:max-w-2xl">
             
             {/* Mini title - eyebrow */}
             <motion.p 
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 12 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="font-body text-[10px] sm:text-[11px] md:text-xs font-medium tracking-[0.2em] text-strategy-blue/90 uppercase"
+              className="font-body text-[10px] sm:text-[11px] md:text-xs font-medium tracking-[0.2em] text-strategy-blue/90 uppercase mb-5 md:mb-6"
             >
               Virtual CFO for Cyprus Businesses
             </motion.p>
@@ -331,12 +328,12 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="text-[clamp(1.5rem,3.5vw,2.5rem)] sm:text-[clamp(1.75rem,4vw,3rem)] md:text-[clamp(2rem,4.5vw,3.5rem)] font-accent leading-[1.15] tracking-[-0.01em]"
+              className="text-[clamp(2rem,5vw,3.25rem)] font-accent leading-[1.1] tracking-[-0.02em] mb-6 md:mb-8"
             >
               <span className="block text-white font-light">
                 CFO-level financial leadership
               </span>
-              <span className="block text-platinum/60 font-light mt-1 sm:mt-1.5">
+              <span className="block text-platinum/50 font-light mt-2">
                 without the full-time cost
               </span>
             </motion.h1>
@@ -346,7 +343,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 16 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-sm sm:text-[15px] md:text-base lg:text-lg font-body font-light text-slate/80 leading-[1.7] max-w-md sm:max-w-lg md:max-w-xl mx-auto md:mx-0"
+              className="text-base md:text-lg font-body font-light text-slate/70 leading-relaxed max-w-lg mb-10 md:mb-12"
             >
               Big-4 trained expertise. Deep Cyprus market knowledge. 
               Trusted by startups and SMEs to navigate funding, banking, 
@@ -358,113 +355,101 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 16 }}
               transition={{ duration: 0.5, delay: 0.55 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 md:pt-10 lg:pt-12 justify-center md:justify-start"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
             >
               <Button
                 onClick={handleStrategyCallClick}
                 variant="primary"
                 size="default"
-                className="text-xs sm:text-sm px-5 sm:px-6 py-2 sm:py-2.5 h-auto font-medium tracking-wide"
+                className="text-sm px-6 py-3 h-auto font-medium tracking-wide"
               >
                 Book a Strategy Call
               </Button>
               <button
                 onClick={handleExploreSolutionsClick}
-                className="inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-body text-platinum/70 hover:text-white transition-colors duration-200 tracking-wide"
+                className="inline-flex items-center gap-2 text-sm font-body text-platinum/60 hover:text-white transition-colors duration-200 tracking-wide group"
               >
                 Explore Solutions
-                <ArrowRight size={12} className="sm:w-[14px] sm:h-[14px] opacity-60" />
+                <ArrowRight size={14} className="opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
               </button>
             </motion.div>
-              </div>
-            </div>
           </div>
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════════════════
-          IMAGE CAROUSEL - Absolute positioned on right side
-          ═══════════════════════════════════════════════════════════════════ */}
-      <div 
-        className="hidden md:block absolute right-0 w-[45%] md:w-[48%] lg:w-1/2 pointer-events-none relative"
-        style={{
-          top: 'calc(50% + clamp(4rem, 8vw, 7rem))', // Responsive alignment with mini title
-          transform: 'translateY(-50%)',
-        }}
-      >
-        
-        {/* Image Carousel - FADE ONLY, no scale */}
-        <div className="relative w-full aspect-[3/4] rounded-xl md:rounded-2xl overflow-hidden pointer-events-auto">
-          {clientQuestions.map((slide, idx) => (
-            <motion.div
-              key={slide.id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: currentIndex === idx ? 1 : 0 }}
-              transition={{ duration: 1, ease: 'easeInOut' }}
-              className="absolute inset-0"
-              style={{ zIndex: currentIndex === idx ? 1 : 0 }}
-            >
-              <Image
-                src={slide.image}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 0vw, (max-width: 1024px) 45vw, 50vw"
-                priority={idx === 0}
-              />
-              {/* Subtle color grade */}
-              <div 
-                className="absolute inset-0"
-                style={{
-                  background: 'linear-gradient(180deg, rgba(14, 16, 26, 0.25) 0%, rgba(14, 16, 26, 0.15) 50%, rgba(14, 16, 26, 0.4) 100%)',
-                }}
-              />
-            </motion.div>
-          ))}
         </div>
 
         {/* ─────────────────────────────────────────────────────────────────
-            FLOATING CARD - Glassmorphism (positioned inside carousel, higher up)
+            RIGHT COLUMN - Image Carousel
             ───────────────────────────────────────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ 
-            opacity: isLoaded ? 1 : 0, 
-            y: isLoaded ? (isCardHovered ? -4 : 0) : 24,
-          }}
-          transition={{ 
-            opacity: { duration: 0.7, delay: 0.4 },
-            y: { duration: 0.3, ease: 'easeOut' },
-          }}
-          onMouseEnter={() => handleCardHover(true)}
-          onMouseLeave={() => handleCardHover(false)}
-          className="absolute z-20 pointer-events-auto"
-          style={{
-            top: '32%', // Positioned higher than center
-            left: '0%',
-            transform: 'translate(-50%, -50%)', // Center on the left edge of carousel
-            width: 'clamp(280px, 22vw, 340px)',
-            maxWidth: '340px',
-          }}
-        >
+        <div className="hidden lg:flex items-center justify-center relative pr-0 pt-24 xl:pt-28 pb-8">
+          
+          {/* Image Carousel Container */}
+          <div className="relative w-full h-[75vh] max-h-[720px]">
+            
+            {/* Image Carousel - FADE ONLY, no scale */}
+            <div className="relative w-full h-full rounded-l-2xl xl:rounded-l-3xl overflow-hidden">
+              {clientQuestions.map((slide, idx) => (
+                <motion.div
+                  key={slide.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: currentIndex === idx ? 1 : 0 }}
+                  transition={{ duration: 1, ease: 'easeInOut' }}
+                  className="absolute inset-0"
+                  style={{ zIndex: currentIndex === idx ? 1 : 0 }}
+                >
+                  <Image
+                    src={slide.image}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 0vw, 45vw"
+                    priority={idx === 0}
+                  />
+                  {/* Subtle color grade */}
+                  <div 
+                    className="absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(180deg, rgba(14, 16, 26, 0.3) 0%, rgba(14, 16, 26, 0.1) 40%, rgba(14, 16, 26, 0.4) 100%)',
+                    }}
+                  />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* ─────────────────────────────────────────────────────────────────
+                FLOATING CARD - Glassmorphism
+                ───────────────────────────────────────────────────────────────── */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ 
+                opacity: isLoaded ? 1 : 0, 
+                y: isLoaded ? (isCardHovered ? -4 : 0) : 24,
+              }}
+              transition={{ 
+                opacity: { duration: 0.7, delay: 0.4 },
+                y: { duration: 0.3, ease: 'easeOut' },
+              }}
+              onMouseEnter={() => handleCardHover(true)}
+              onMouseLeave={() => handleCardHover(false)}
+              className="absolute z-20 left-[25%] top-[35%] -translate-x-1/2 -translate-y-1/2 w-[320px] xl:w-[360px]"
+            >
           {/* Soft glow behind card */}
           <div 
-            className="absolute -inset-3 md:-inset-4 rounded-xl md:rounded-2xl opacity-40 blur-2xl"
-          style={{
-              background: 'radial-gradient(ellipse at center, rgba(116, 179, 255, 0.15) 0%, transparent 70%)',
+            className="absolute -inset-4 rounded-2xl opacity-50 blur-3xl"
+            style={{
+              background: 'radial-gradient(ellipse at center, rgba(116, 179, 255, 0.12) 0%, transparent 70%)',
             }}
           />
           
           {/* Glassmorphism Card */}
           <div 
-            className="relative rounded-xl md:rounded-2xl overflow-hidden border border-white/[0.15]"
+            className="relative rounded-2xl overflow-hidden border border-white/[0.12]"
             style={{
-              background: 'linear-gradient(135deg, rgba(14, 16, 26, 0.85) 0%, rgba(10, 12, 18, 0.9) 100%)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
+              background: 'linear-gradient(135deg, rgba(14, 16, 26, 0.88) 0%, rgba(10, 12, 18, 0.92) 100%)',
+              backdropFilter: 'blur(32px)',
+              WebkitBackdropFilter: 'blur(32px)',
               boxShadow: `
-                0 8px 32px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1)
+                0 12px 40px rgba(0, 0, 0, 0.5),
+                0 4px 16px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08)
               `,
             }}
           >
@@ -485,7 +470,7 @@ export function Hero() {
             />
 
             {/* Card content */}
-            <div className="relative p-4 md:p-5 lg:p-6 z-10">
+            <div className="relative p-5 xl:p-6 z-10">
               
               {/* Question */}
               <AnimatePresence mode="wait">
@@ -496,11 +481,11 @@ export function Hero() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <p className="font-accent text-base md:text-lg text-white leading-snug tracking-tight mb-2 md:mb-2.5">
+                  <p className="font-accent text-lg xl:text-xl text-white leading-snug tracking-tight mb-3">
                     {currentSlide.question}
                   </p>
                   
-                  <p className="font-body text-xs md:text-[13px] text-white/50 leading-relaxed mb-4 md:mb-5">
+                  <p className="font-body text-sm text-white/45 leading-relaxed mb-5">
                     {currentSlide.context}
                   </p>
                 </motion.div>
@@ -511,18 +496,18 @@ export function Hero() {
                 onClick={handleServiceClick}
                 className="group inline-flex items-center gap-2 text-left"
               >
-                <span className="font-body text-xs md:text-[13px] font-medium text-strategy-blue group-hover:text-white transition-colors duration-200">
+                <span className="font-body text-sm font-medium text-strategy-blue group-hover:text-white transition-colors duration-200">
                   {currentSlide.serviceLabel}
                 </span>
                 <ArrowRight 
-                  size={12}
-                  className="md:w-[14px] md:h-[14px] text-strategy-blue group-hover:text-white group-hover:translate-x-0.5 transition-all duration-200" 
+                  size={14}
+                  className="text-strategy-blue group-hover:text-white group-hover:translate-x-0.5 transition-all duration-200" 
                 />
               </button>
 
               {/* Progress & indicators */}
-              <div className="mt-4 md:mt-5 lg:mt-6">
-                <div className="h-[2px] bg-white/[0.1] rounded-full overflow-hidden">
+              <div className="mt-5 xl:mt-6">
+                <div className="h-[2px] bg-white/[0.08] rounded-full overflow-hidden">
                   <motion.div
                     className="h-full bg-strategy-blue rounded-full"
                     initial={{ width: '0%' }}
@@ -535,16 +520,16 @@ export function Hero() {
                   />
                 </div>
                 
-                <div className="flex gap-1.5 md:gap-2 mt-3 md:mt-4">
+                <div className="flex gap-2 mt-4">
                   {clientQuestions.map((_, idx) => (
                     <button
                       key={idx}
                       onClick={() => setCurrentIndex(idx)}
                       className={`
-                        w-5 md:w-6 h-1 rounded-full transition-all duration-300
+                        w-6 h-1 rounded-full transition-all duration-300
                         ${idx === currentIndex 
                           ? 'bg-strategy-blue' 
-                          : 'bg-white/[0.15] hover:bg-white/[0.3]'
+                          : 'bg-white/[0.12] hover:bg-white/[0.25]'
                         }
                       `}
                       aria-label={`Go to slide ${idx + 1}`}
@@ -555,6 +540,8 @@ export function Hero() {
             </div>
           </div>
         </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════
