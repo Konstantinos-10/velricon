@@ -161,3 +161,18 @@
   color: #E2E8F0 !important; /* platinum */
 }
 
+/* Mobile button sizing override for all ShinyButton components */
+@media (max-width: 639px) {
+  .shiny-cta {
+    padding: 0.75rem 1.75rem !important;
+    font-size: 0.875rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Custom Link button in services-demo */
+  .cta-link-button {
+    padding: 0.75rem 1.75rem !important;
+    font-size: 0.875rem !important;
+  }
+}
+

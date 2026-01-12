@@ -464,7 +464,7 @@ function CloseSection() {
         >
           <Link 
             href="/contact"
-            className="inline-flex items-center gap-4 bg-[#0E101A] text-white px-10 py-5 rounded-full text-lg font-light tracking-tight hover:bg-[#1A1F2E] transition-colors group"
+            className="cta-link-button inline-flex items-center gap-4 bg-[#0E101A] text-white px-10 py-5 rounded-full text-lg font-light tracking-tight hover:bg-[#1A1F2E] transition-colors group"
           >
             Book a Strategy Call
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
