@@ -158,6 +158,15 @@ export function Hero() {
           0%, 100% { opacity: 0.1; transform: scale(1); } 
           50% { opacity: 0.25; transform: scale(1.1); } 
         }
+        
+        /* Mobile button override */
+        @media (max-width: 639px) {
+          .hero-cta-button.shiny-cta {
+            padding: 0.75rem 1.75rem !important;
+            font-size: 0.875rem !important;
+            line-height: 1.2 !important;
+          }
+        }
       `}</style>
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
@@ -361,16 +370,16 @@ export function Hero() {
                 onClick={handleStrategyCallClick}
                 variant="primary"
                 size="default"
-                className="text-sm px-6 py-3 h-auto font-medium tracking-wide"
+                className="hero-cta-button font-medium tracking-wide"
               >
                 Book a Strategy Call
               </Button>
               <button
                 onClick={handleExploreSolutionsClick}
-                className="inline-flex items-center gap-2 text-sm font-body text-platinum/60 hover:text-white transition-colors duration-200 tracking-wide group"
+                className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-body text-platinum/60 hover:text-white transition-colors duration-200 tracking-wide group"
               >
                 Explore Solutions
-                <ArrowRight size={14} className="opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                <ArrowRight size={12} className="sm:w-[14px] sm:h-[14px] opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
               </button>
             </motion.div>
           </div>
