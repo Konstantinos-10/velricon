@@ -1,8 +1,12 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef, useState, useCallback } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
+import { Button } from '@/components/ui/Button';
+import Image from 'next/image';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
 const whatWeDoGridStyles = `
   @keyframes grid-draw-light { 
@@ -31,31 +35,45 @@ const whatWeDoGridStyles = `
 
 const services = [
   {
-    number: '01',
-    verb: 'See',
-    noun: 'Clarity',
-    line: 'Know exactly where you stand.',
-    detail: 'Monthly reporting • KPIs • Dashboards',
+    id: 'fractional-cfo',
+    title: 'Fractional CFO',
+    description: 'Strategic CFO expertise without the full-time commitment. Get the financial leadership you need, when you need it.',
+    details: 'Monthly reporting • Financial strategy • Cash flow management • Growth planning',
+    href: '/services/fractional-cfo',
+    image: '/assets/images/hero/path_through_maze.png',
   },
   {
-    number: '02',
-    verb: 'Plan',
-    noun: 'Confidence',
-    line: "Know exactly where you're going.",
-    detail: 'Forecasts • Budgets • Scenarios',
+    id: 'bank-ready',
+    title: 'Bank-Ready Packages',
+    description: 'We know what Cyprus banks require. Let us prepare your financial documentation to meet their exacting standards.',
+    details: 'Financial statements • Business plans • Cash flow forecasts • Compliance documentation',
+    href: '/services/bank-ready',
+    image: '/assets/images/hero/modern_cityscape.png',
   },
   {
-    number: '03',
-    verb: 'Decide',
-    noun: 'Certainty',
-    line: 'Know exactly what to do next.',
-    detail: 'Strategy • Growth • Fundraising',
+    id: 'investor-ready',
+    title: 'Investor-Ready Packages',
+    description: 'Get investor-ready financials that pass due diligence. Present your business with confidence and clarity.',
+    details: 'Due diligence prep • Financial models • Valuation support • Investor presentations',
+    href: '/services/investor-ready',
+    image: '/assets/images/hero/sophisticated_boardroom.png',
   },
 ];
 
 export function WhatWeDo() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const currentService = services[currentIndex];
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % services.length);
+  }, []);
+
+  const handlePrevious = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + services.length) % services.length);
+  }, []);
 
   return (
     <>
@@ -96,7 +114,7 @@ export function WhatWeDo() {
         </svg>
 
       <Container size="xl" className="relative z-10">
-        {/* Opening Statement */}
+        {/* Opening Statement - KEPT UNCHANGED */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
@@ -128,130 +146,131 @@ export function WhatWeDo() {
           </div>
         </motion.div>
 
-        {/* The System - Three Pillars */}
+        {/* Services Showcase - One at a time */}
         <div className="relative">
-          {/* Connecting Line - Desktop */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 1.5, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:block absolute top-[60px] left-[16.67%] right-[16.67%] h-px bg-gradient-to-r from-transparent via-[#74B3FF]/30 to-transparent origin-left"
-          />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentService.id}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+            >
+              {/* Left: Text Content */}
+              <div className="order-2 lg:order-1">
+                <motion.h3
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="font-accent text-4xl lg:text-5xl xl:text-6xl tracking-tight mb-6"
+                  style={{ color: '#0E101A' }}
+                >
+                  {currentService.title}
+                </motion.h3>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-8">
-            {services.map((service, index) => (
-              <ServicePillar
-                key={service.number}
-                service={service}
-                index={index}
-                isInView={isInView}
-              />
-            ))}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="text-[#475569] text-lg lg:text-xl font-light tracking-tight mb-6 leading-relaxed"
+                >
+                  {currentService.description}
+                </motion.p>
+
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="text-[#94A3B8] text-sm lg:text-base tracking-wide mb-8"
+                >
+                  {currentService.details}
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                >
+                  <Link href={currentService.href}>
+                    <Button
+                      variant="primary"
+                      size="lg"
+                      className="text-base px-8 py-3"
+                    >
+                      Learn More
+                    </Button>
+                  </Link>
+                </motion.div>
+              </div>
+
+              {/* Right: Image */}
+              <div className="order-1 lg:order-2 relative aspect-[4/3] rounded-2xl overflow-hidden">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                  className="relative w-full h-full"
+                >
+                  <Image
+                    src={currentService.image}
+                    alt={currentService.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority={currentIndex === 0}
+                  />
+                  {/* Subtle overlay for depth */}
+                  <div 
+                    className="absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, rgba(250, 250, 250, 0.1) 100%)',
+                    }}
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Arrows */}
+          <div className="flex items-center justify-center gap-4 mt-12 lg:mt-16">
+            <button
+              onClick={handlePrevious}
+              aria-label="Previous service"
+              className="flex items-center justify-center w-12 h-12 rounded-full border border-[#74B3FF]/30 bg-white/50 hover:bg-white hover:border-[#74B3FF]/50 transition-all duration-200 group"
+              style={{ color: '#74B3FF' }}
+            >
+              <ChevronLeft size={20} className="group-hover:translate-x-[-2px] transition-transform" />
+            </button>
+
+            {/* Service Indicators */}
+            <div className="flex items-center gap-2">
+              {services.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  aria-label={`Go to ${services[idx].title}`}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    idx === currentIndex
+                      ? 'w-8 bg-strategy-blue'
+                      : 'bg-[#74B3FF]/30 hover:bg-[#74B3FF]/50'
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={handleNext}
+              aria-label="Next service"
+              className="flex items-center justify-center w-12 h-12 rounded-full border border-[#74B3FF]/30 bg-white/50 hover:bg-white hover:border-[#74B3FF]/50 transition-all duration-200 group"
+              style={{ color: '#74B3FF' }}
+            >
+              <ChevronRight size={20} className="group-hover:translate-x-[2px] transition-transform" />
+            </button>
           </div>
         </div>
-
-        {/* Closing Micro-statement */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1.8 }}
-          className="mt-24 lg:mt-32 text-center"
-        >
-          <p className="text-[#64748B] text-lg font-light tracking-tight">
-            Not a service list. <span className="text-[#0E101A]">A system for growth.</span>
-          </p>
-        </motion.div>
       </Container>
     </section>
     </>
-  );
-}
-
-function ServicePillar({ 
-  service, 
-  index, 
-  isInView 
-}: { 
-  service: typeof services[0];
-  index: number;
-  isInView: boolean;
-}) {
-  const delay = 0.6 + index * 0.2;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-      className="relative text-center lg:text-left"
-    >
-      {/* Node indicator */}
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={isInView ? { scale: 1 } : {}}
-        transition={{ duration: 0.4, delay: delay + 0.3 }}
-        className="hidden lg:flex absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[#FAFAFA] border-2 border-[#74B3FF]/30 items-center justify-center"
-      >
-        <div className="w-2 h-2 rounded-full bg-strategy-blue" />
-      </motion.div>
-
-      {/* Number */}
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.6, delay: delay + 0.1 }}
-        className="block font-accent text-[10rem] lg:text-[8rem] xl:text-[10rem] leading-none tracking-tighter lg:text-center"
-        style={{ 
-          color: 'transparent',
-          WebkitTextStroke: '1px rgba(116, 179, 255, 0.2)',
-        }}
-      >
-        {service.number}
-      </motion.span>
-
-      {/* Content container - overlapping the number */}
-      <div className="-mt-16 lg:-mt-20 relative z-10 lg:text-center">
-        {/* Verb */}
-        <motion.h3
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: delay + 0.2 }}
-          className="font-accent text-4xl lg:text-5xl tracking-tight mb-1"
-          style={{ color: '#0E101A' }}
-        >
-          {service.verb}
-        </motion.h3>
-
-        {/* Noun */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: delay + 0.3 }}
-          className="font-accent text-2xl lg:text-3xl tracking-tight text-strategy-blue mb-6"
-        >
-          {service.noun}
-        </motion.p>
-
-        {/* Line */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: delay + 0.4 }}
-          className="text-[#475569] text-lg font-light tracking-tight mb-4"
-        >
-          {service.line}
-        </motion.p>
-
-        {/* Detail */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: delay + 0.5 }}
-          className="text-[#94A3B8] text-sm tracking-wide"
-        >
-          {service.detail}
-        </motion.p>
-      </div>
-    </motion.div>
   );
 }
