@@ -1,0 +1,250 @@
+'use client'
+
+import { motion, useInView } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
+
+interface ServicePath {
+  id: string
+  slug: string
+  title: string
+  positioningLine: string
+  description: string[]
+  image: string
+  imageAlt: string
+}
+
+const servicePaths: ServicePath[] = [
+  {
+    id: 'fractional-cfo',
+    slug: 'fractional-cfo',
+    title: 'Fractional CFO',
+    positioningLine: 'Ongoing CFO-level financial leadership',
+    description: [
+      'Senior financial oversight without the cost or rigidity of a full-time hire.',
+      'Designed for companies that need clarity, structure, and confident decision-making.',
+    ],
+    image: '/assets/images/hero/sophisticated_boardroom.png',
+    imageAlt: 'Sophisticated boardroom setting representing financial leadership',
+  },
+  {
+    id: 'bank-ready',
+    slug: 'bank-ready',
+    title: 'Bank-Ready Packages',
+    positioningLine: 'Structured credibility for bank financing',
+    description: [
+      'Financial preparation aligned with how banks actually assess risk and viability.',
+      'Built to support serious financing conversations.',
+    ],
+    image: '/assets/images/hero/path_through_maze.png',
+    imageAlt: 'Structured path representing organized financial preparation',
+  },
+  {
+    id: 'investor-ready',
+    slug: 'investor-ready',
+    title: 'Investor-Ready Packages',
+    positioningLine: 'Preparation for investor scrutiny',
+    description: [
+      'Clear financial narratives, defensible models, and readiness for due diligence.',
+      'Designed for founders entering real investor discussions.',
+    ],
+    image: '/assets/images/hero/modern_cityscape.png',
+    imageAlt: 'Modern cityscape representing strategic vision and scale',
+  },
+]
+
+export function OurServicePaths() {
+  const prefersReducedMotion = useReducedMotion()
+  const [isLoaded, setIsLoaded] = useState(false)
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100)
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <section ref={sectionRef} className="bg-deep-void py-20 lg:py-32">
+      <div className="mx-auto px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-20 max-w-7xl">
+        
+        {/* Section Header */}
+        <div className="mb-16 lg:mb-24">
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 8 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="font-body text-xs font-medium tracking-[0.2em] text-platinum/60 uppercase mb-6"
+          >
+            Our Service Paths
+          </motion.p>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 12 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-[clamp(2rem,5vw,3.5rem)] font-accent font-light leading-[1.1] tracking-[-0.02em] text-white mb-4"
+          >
+            Three focused ways we support your business
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 8 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-base md:text-lg font-body font-light text-slate/70 leading-relaxed max-w-2xl"
+          >
+            Each path is designed for a different financial moment.
+          </motion.p>
+        </div>
+
+        {/* Service Path Bands - Alternating Layout */}
+        <div className="space-y-16 lg:space-y-24">
+          {servicePaths.map((path, idx) => {
+            const isEven = idx % 2 === 0
+            const isImageLeft = isEven // Row 1 & 3: Image left, Row 2: Image right
+
+            return (
+              <motion.div
+                key={path.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ 
+                  duration: prefersReducedMotion ? 0.6 : 0.8,
+                  delay: prefersReducedMotion ? 0 : idx * 0.15,
+                  ease: 'easeOut'
+                }}
+                className="group"
+              >
+                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center`}>
+                  
+                  {/* Image Block */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                    transition={{ 
+                      duration: prefersReducedMotion ? 0.6 : 0.8,
+                      delay: prefersReducedMotion ? 0 : (idx * 0.15) + 0.1,
+                    }}
+                    className={`relative aspect-[4/3] overflow-hidden rounded-lg ${
+                      isImageLeft ? 'lg:order-1' : 'lg:order-2'
+                    }`}
+                  >
+                    <Image
+                      src={path.image}
+                      alt={path.imageAlt}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority={idx === 0}
+                    />
+                    
+                    {/* Deep navy overlay gradient for text harmony */}
+                    <div 
+                      className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-90"
+                      style={{
+                        background: 'linear-gradient(180deg, rgba(0, 40, 87, 0.6) 0%, rgba(14, 16, 26, 0.75) 50%, rgba(0, 40, 87, 0.7) 100%)',
+                      }}
+                    />
+
+                    {/* Subtle film grain for editorial feel */}
+                    <div 
+                      className="absolute inset-0 opacity-[0.02] pointer-events-none"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                        mixBlendMode: 'overlay',
+                      }}
+                    />
+                  </motion.div>
+
+                  {/* Text Block */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ 
+                      duration: prefersReducedMotion ? 0.6 : 0.8,
+                      delay: prefersReducedMotion ? 0 : idx * 0.15,
+                      ease: 'easeOut'
+                    }}
+                    className={`relative flex flex-col justify-center ${
+                      isImageLeft ? 'lg:order-2' : 'lg:order-1'
+                    }`}
+                  >
+                    {/* Thin strategy-blue accent line - left edge on desktop, top edge on mobile */}
+                    <div className="absolute -left-4 lg:-left-6 top-0 bottom-0 w-px hidden lg:block">
+                      <div 
+                        className="w-full h-full transition-opacity duration-300 group-hover:opacity-100"
+                        style={{
+                          background: 'linear-gradient(180deg, transparent 0%, rgba(116, 179, 255, 0.4) 20%, rgba(116, 179, 255, 0.4) 80%, transparent 100%)',
+                          opacity: 0.6,
+                        }}
+                      />
+                    </div>
+                    <div className="absolute -top-4 left-0 right-0 h-px lg:hidden">
+                      <div 
+                        className="w-full h-full"
+                        style={{
+                          background: 'linear-gradient(90deg, rgba(116, 179, 255, 0.4) 0%, transparent 100%)',
+                        }}
+                      />
+                    </div>
+
+                    <div className="pl-6 lg:pl-0">
+                      {/* Service Title */}
+                      <h3 className="text-2xl lg:text-3xl xl:text-4xl font-accent font-light leading-[1.1] tracking-tight text-white mb-4">
+                        {path.title}
+                      </h3>
+
+                      {/* Positioning Line */}
+                      <p className="text-base md:text-lg font-body font-medium text-strategy-blue/90 leading-snug mb-6">
+                        {path.positioningLine}
+                      </p>
+
+                      {/* Description */}
+                      <div className="space-y-4 mb-8">
+                        {path.description.map((paragraph, pIdx) => (
+                          <p
+                            key={pIdx}
+                            className="text-base md:text-lg font-body font-light text-slate/80 leading-relaxed"
+                          >
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
+
+                      {/* Directional CTA */}
+                      <Link
+                        href={`/services/${path.slug}`}
+                        className="group/cta inline-flex items-center gap-2 text-sm md:text-base font-body text-strategy-blue hover:text-white transition-colors duration-200 tracking-wide"
+                      >
+                        <span>View {path.title}</span>
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="opacity-70 group-hover/cta:opacity-100 group-hover/cta:translate-x-1 transition-all duration-200"
+                        >
+                          <path
+                            d="M5 2L11 7L5 12"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </Link>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}

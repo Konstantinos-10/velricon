@@ -5,12 +5,12 @@ import { Icon } from '@/components/ui/Icon'
 import { getServiceBySlug } from '@/config/services'
 
 export const metadata: Metadata = {
-  title: 'Bank-Ready Packages',
-  description: 'Prepare your business for bank financing and credit facilities with professional financial documentation.',
+  title: 'Fractional CFO',
+  description: 'Strategic CFO expertise without the full-time commitment. Get the financial leadership you need, when you need it.',
 }
 
-export default function BankReadyPage() {
-  const service = getServiceBySlug('bank-ready')
+export default function FractionalCFOPage() {
+  const service = getServiceBySlug('fractional-cfo')
 
   if (!service) {
     return null
@@ -43,4 +43,3 @@ export default function BankReadyPage() {
     </Section>
   )
 }
-
