@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { trackEvent } from '@/lib/analytics'
 import { ChevronDown, Menu, X } from 'lucide-react'
+import { Button } from '@/components/ui/Button'
 
 // Navigation links matching Figma design
 const navLinks = [
@@ -236,11 +237,12 @@ export function Hero() {
             <div 
               ref={servicesDropdownRef}
               className="relative"
-              onMouseEnter={() => setIsServicesDropdownOpen(true)}
-              onMouseLeave={() => setIsServicesDropdownOpen(false)}
+              onPointerEnter={() => setIsServicesDropdownOpen(true)}
+              onPointerLeave={() => setIsServicesDropdownOpen(false)}
             >
-              <button
-                onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
+              <Link
+                href="/services"
+                onClick={() => setIsServicesDropdownOpen(false)}
                 className="font-body text-base xl:text-lg text-white/90 hover:text-white transition-colors duration-200 flex items-center gap-1.5"
               >
                 Services
@@ -248,7 +250,7 @@ export function Hero() {
                   size={16}
                   className={`transition-transform duration-200 ${isServicesDropdownOpen ? 'rotate-180' : ''}`}
                 />
-              </button>
+              </Link>
 
               {/* Dropdown Menu */}
               <AnimatePresence>
@@ -257,12 +259,12 @@ export function Hero() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.12, ease: 'easeOut' }}
                     className="absolute top-full left-0 mt-2 min-w-[220px] z-30"
                   >
                     <div 
                       className="rounded-xl overflow-hidden border border-white/[0.15]"
-        style={{
+                      style={{
                         background: 'rgba(14, 16, 26, 0.95)',
                         backdropFilter: 'blur(24px)',
                         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
@@ -282,12 +284,12 @@ export function Hero() {
                             {item.label}
                           </Link>
                         ))}
-        </div>
-        </div>
+                      </div>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-        </div>
+            </div>
 
             {/* Other Nav Links */}
             {navLinks.slice(1).map((link) => (
@@ -318,6 +320,8 @@ export function Hero() {
             Consultation Call
           </button>
         </motion.header>
+
+        
 
         {/* ─────────────────────────────────────────────────────────────────
             MAIN HERO CONTENT
@@ -357,12 +361,14 @@ export function Hero() {
               animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <button
+              <Button
                 onClick={handleConsultationClick}
-                className="group inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-3.5 border-2 border-white/90 text-white font-body text-sm lg:text-base font-normal rounded-full hover:bg-white hover:text-black transition-all duration-300"
+                variant="primary"
+                size="default"
+                className="text-sm px-6 py-2.5"
               >
                 Consultation Call
-              </button>
+              </Button>
             </motion.div>
                   </div>
                   </div>
@@ -544,8 +550,8 @@ export function Hero() {
                         {item.label}
                       </Link>
                     ))}
-          </div>
-        </div>
+                  </div>
+                </div>
 
                 {/* Divider */}
                 <div className="h-px bg-white/10 my-6" />
@@ -581,6 +587,8 @@ export function Hero() {
           </>
         )}
       </AnimatePresence>
+
+      
     </section>
     </>
   )

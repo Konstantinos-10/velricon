@@ -19,11 +19,6 @@ export function Header() {
 	const router = useRouter();
 	const pathname = usePathname();
 
-	// Hide global header on homepage - hero has its own navigation
-	if (pathname === '/') {
-		return null;
-	}
-
 	const handleStrategyCallClick = () => {
 		trackEvent('strategy_call_click', { location: 'navbar' });
 		router.push('/contact');
@@ -40,6 +35,10 @@ export function Header() {
 		};
 	}, [open]);
 
+	// Hide global header on homepage - hero has its own navigation
+	if (pathname === '/') {
+		return null;
+	}
 
 	const servicesLinks = {
 		primary: [
@@ -52,7 +51,7 @@ export function Header() {
 	};
 
 	const links = [
-		{ label: 'Who we are', href: '/who-we-are' },
+		{ label: 'About', href: '/who-we-are' },
 		{ label: 'Insights', href: '/insights' },
 		{ label: 'Contact', href: '/contact' },
 	];
@@ -94,14 +93,15 @@ export function Header() {
 							})),
 						]}
 					>
-						<button
+						<Link
+							href="/services"
 							className={cn(
 								buttonVariants({ variant: 'ghost' }),
-								'text-platinum hover:text-white'
+								'font-body text-base text-platinum hover:text-white'
 							)}
 						>
 							Services
-						</button>
+						</Link>
 					</ServicesDropdown>
 
 					{/* Other Links */}
@@ -109,7 +109,10 @@ export function Header() {
 						<Link
 							key={link.label}
 							href={link.href}
-							className={cn(buttonVariants({ variant: 'ghost' }), 'text-platinum hover:text-white')}
+							className={cn(
+								buttonVariants({ variant: 'ghost' }),
+								'font-body text-base text-platinum hover:text-white'
+							)}
 						>
 							{link.label}
 						</Link>
@@ -118,9 +121,9 @@ export function Header() {
 					<Button
 						variant="outline"
 						onClick={handleStrategyCallClick}
-						className="border-surface-border text-white hover:bg-elevation-layer hover:text-white bg-transparent"
+						className="bg-white text-black border-2 border-black rounded-full px-6 text-sm font-body font-medium hover:bg-white/90 hover:text-black"
 					>
-						Strategy Call
+						Consultation Call
 					</Button>
 				</div>
 

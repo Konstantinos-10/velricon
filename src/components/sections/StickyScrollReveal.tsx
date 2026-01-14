@@ -37,13 +37,8 @@ const stickyScrollStyles = `
 const content = [
   {
     title: 'Start-ups',
-    description: [
-      'Set up financial infrastructure from scratch',
-      'Monthly reporting & cash tracking',
-      'Build your first budgets & forecasts',
-      'Prepare for investor conversations',
-      'Guide founder on financial decision-making',
-    ],
+    description:
+      "We build the financial foundation from day one—setting up reporting, cash visibility, and early forecasting so founders can make confident decisions and prepare for investor conversations.",
     backgroundColor: '#0F172A', // Slate-900 - darker blue-gray for startups
     content: (
       <div className="relative h-full w-full overflow-hidden">
@@ -59,13 +54,8 @@ const content = [
   },
   {
     title: 'Scale-ups',
-    description: [
-      'Advanced reporting & KPI dashboards',
-      'Rolling 18-month forecasts & scenario planning',
-      'Working capital optimization',
-      'Strategic decision support for growth',
-      'Build and oversee your finance team',
-    ],
+    description:
+      "We bring structure to growth with KPI dashboards, rolling forecasts, and working capital focus—supporting strategic decisions while building a finance function that scales.",
     backgroundColor: '#1E293B', // Slate-800 - medium blue-gray for scale-ups
     content: (
       <div className="relative h-full w-full overflow-hidden">
@@ -81,13 +71,8 @@ const content = [
   },
   {
     title: 'Established SMEs',
-    description: [
-      'Complete CFO function (reporting, planning, strategy)',
-      'Board-level financial leadership',
-      'Exit preparation & value maximization',
-      'M&A support and due diligence',
-      'Sophisticated risk management & controls',
-    ],
+    description:
+      "We provide senior CFO leadership across reporting, planning, and strategy—supporting board-level decisions, exit readiness, and complex financial governance.",
     backgroundColor: '#0E101A', // Deep void - darkest for established businesses
     content: (
       <div className="relative h-full w-full overflow-hidden">

@@ -3,6 +3,7 @@
 import { Section } from '@/components/ui/Section'
 import { Card } from '@/components/ui/Card'
 import { BookingEmbed } from '@/components/booking/BookingEmbed'
+import { Button } from '@/components/ui/Button'
 import { trackEvent } from '@/lib/analytics'
 import { useEffect } from 'react'
 
@@ -15,10 +16,10 @@ export default function ContactPage() {
     <Section background="deep-void" className="pt-32">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl lg:text-5xl font-header font-bold text-white mb-4">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-accent font-light tracking-tight text-white mb-4">
             Get in Touch
           </h1>
-          <p className="text-xl text-platinum font-body max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl font-body font-light text-platinum/90 max-w-2xl mx-auto">
             Book a strategy call to discuss how we can help your business
           </p>
         </div>
@@ -27,7 +28,7 @@ export default function ContactPage() {
           {/* Booking Embed */}
           <div>
             <Card className="h-full">
-              <h2 className="text-2xl font-header font-semibold text-white mb-6">
+              <h2 className="text-2xl font-accent font-light tracking-tight text-white mb-6">
                 Book a Strategy Call
               </h2>
               <BookingEmbed />
@@ -37,7 +38,7 @@ export default function ContactPage() {
           {/* Contact Form Placeholder */}
           <div>
             <Card className="h-full">
-              <h2 className="text-2xl font-header font-semibold text-white mb-6">
+              <h2 className="text-2xl font-accent font-light tracking-tight text-white mb-6">
                 Send a Message
               </h2>
               <p className="text-platinum font-body mb-6">
@@ -74,12 +75,15 @@ export default function ContactPage() {
                     className="w-full px-4 py-3 rounded-2xl bg-deep-void border border-surface-border text-white font-body focus:outline-none focus:ring-2 focus:ring-strategy-blue resize-none"
                   />
                 </div>
-                <button
+                <Button
                   type="submit"
-                  className="w-full px-6 py-3 bg-electric-blue text-white rounded-2xl font-header font-semibold hover:bg-blue-hover transition-colors"
+                  variant="primary"
+                  size="lg"
+                  shiny={false}
+                  className="w-full rounded-2xl font-body font-medium"
                 >
                   Send Message
-                </button>
+                </Button>
               </form>
             </Card>
           </div>

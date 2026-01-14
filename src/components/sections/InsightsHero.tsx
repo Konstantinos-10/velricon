@@ -6,7 +6,7 @@ import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { useRouter } from 'next/navigation'
 import { trackEvent } from '@/lib/analytics'
 
-const servicesHeroGridStyles = `
+const insightsHeroGridStyles = `
   @keyframes grid-draw { 
     0% { stroke-dashoffset: 1000; opacity: 0; } 
     50% { opacity: 0.3; } 
@@ -31,7 +31,7 @@ const servicesHeroGridStyles = `
   }
 `
 
-export function ServicesHero() {
+export function InsightsHero() {
   const router = useRouter()
   const prefersReducedMotion = useReducedMotion()
   const [isLoaded, setIsLoaded] = useState(false)
@@ -42,13 +42,13 @@ export function ServicesHero() {
   }, [])
 
   const handleStrategyCallClick = () => {
-    trackEvent('strategy_call_click', { location: 'services_hero' })
+    trackEvent('strategy_call_click', { location: 'insights_hero' })
     router.push('/contact')
   }
 
   return (
     <>
-      <style>{servicesHeroGridStyles}</style>
+      <style>{insightsHeroGridStyles}</style>
       <section className="relative min-h-[70svh] overflow-hidden bg-deep-void">
         {/* Background gradient */}
         <div 
@@ -61,11 +61,11 @@ export function ServicesHero() {
         {/* Animated Grid Background */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
-            <pattern id="gridServicesHero" width="60" height="60" patternUnits="userSpaceOnUse">
+            <pattern id="gridInsightsHero" width="60" height="60" patternUnits="userSpaceOnUse">
               <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(100, 116, 139, 0.08)" strokeWidth="0.5"/>
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#gridServicesHero)" />
+          <rect width="100%" height="100%" fill="url(#gridInsightsHero)" />
           <line x1="0" y1="20%" x2="100%" y2="20%" className="grid-line-dark" style={{ animationDelay: '0.1s' }} />
           <line x1="0" y1="80%" x2="100%" y2="80%" className="grid-line-dark" style={{ animationDelay: '0.2s' }} />
           <line x1="20%" y1="0" x2="20%" y2="100%" className="grid-line-dark" style={{ animationDelay: '0.3s' }} />
@@ -118,7 +118,7 @@ export function ServicesHero() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="font-body text-xs font-medium tracking-[0.2em] text-platinum/60 uppercase mb-6 md:mb-8"
               >
-                Services
+                Insights
               </motion.p>
 
               {/* Headline */}
@@ -128,8 +128,8 @@ export function ServicesHero() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-[clamp(2.5rem,6vw,4.5rem)] font-accent font-light leading-[1.1] tracking-[-0.02em] text-white mb-6 md:mb-8"
               >
-                <span className="block">Financial leadership,</span>
-                <span className="block mt-2">delivered when it matters</span>
+                <span className="block">Financial insights,</span>
+                <span className="block mt-2">thought leadership, and strategic guidance</span>
               </motion.h1>
 
               {/* Subline */}
@@ -139,7 +139,7 @@ export function ServicesHero() {
                 transition={{ duration: 0.5, delay: 0.5 }}
                 className="text-base md:text-lg font-body font-light text-slate/80 leading-relaxed max-w-2xl mb-8 md:mb-10"
               >
-                Three focused ways we support Cyprus businesses through growth, financing, and investment.
+                Financial insights and thought leadership to help you make better business decisions.
               </motion.p>
 
               {/* Optional micro-line */}

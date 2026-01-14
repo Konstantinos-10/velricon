@@ -31,26 +31,29 @@ export default function CardFlip({
   imageUrl
 }: CardFlipProps) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const shimmerBars = [62, 84, 70, 56, 92, 66];
+  const shimmerOffsets = [0, 10, 18, 6, 14, 22];
 
   return (
-    <div
-      style={{
-        ['--primary' as any]: color ?? '#74B3FF',
-      }}
-      className="group relative h-[360px] w-full max-w-[300px] [perspective:2000px]"
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
-    >
+    <>
       <div
-        className={cn(
-          'relative h-full w-full',
-          '[transform-style:preserve-3d]',
-          'transition-all duration-500 ease-out',
-          isFlipped
-            ? '[transform:rotateY(180deg)]'
-            : '[transform:rotateY(0deg)]',
-        )}
+        style={{
+          ['--primary' as any]: color ?? '#74B3FF',
+        }}
+        className="group relative h-[360px] w-full max-w-[300px] [perspective:2000px]"
+        onMouseEnter={() => setIsFlipped(true)}
+        onMouseLeave={() => setIsFlipped(false)}
       >
+        <div
+          className={cn(
+            'relative h-full w-full',
+            '[transform-style:preserve-3d]',
+            'transition-all duration-500 ease-out',
+            isFlipped
+              ? '[transform:rotateY(180deg)]'
+              : '[transform:rotateY(0deg)]',
+          )}
+        >
         {/* Front of card */}
         <div
           className={cn(
@@ -90,6 +93,24 @@ export default function CardFlip({
           {/* Icon section */}
           <div className="absolute inset-0 flex items-center justify-center pt-20">
             <div className="relative flex h-[100px] w-[200px] flex-col items-center justify-center gap-2">
+              {/* Animated background bars */}
+              {shimmerBars.map((width, index) => (
+                <div
+                  key={`bar-${width}-${index}`}
+                  className={cn(
+                    'h-2 w-full rounded-sm',
+                    'bg-gradient-to-r from-strategy-blue/20 via-strategy-blue/30 to-strategy-blue/20',
+                    'animate-[flipCardSlide_2.2s_ease-in-out_infinite]',
+                    'opacity-0',
+                  )}
+                  style={{
+                    width: `${width}%`,
+                    marginLeft: `${shimmerOffsets[index]}%`,
+                    animationDelay: `${index * 0.18}s`,
+                  }}
+                />
+              ))}
+
               {/* Central icon */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div
@@ -227,7 +248,24 @@ export default function CardFlip({
           )}
         </div>
       </div>
-    </div>
+      </div>
+      <style jsx>{`
+        @keyframes flipCardSlide {
+          0% {
+            transform: translateX(-80px);
+            opacity: 0;
+          }
+          45% {
+            transform: translateX(0);
+            opacity: 0.7;
+          }
+          100% {
+            transform: translateX(80px);
+            opacity: 0;
+          }
+        }
+      `}</style>
+    </>
   );
 }
 

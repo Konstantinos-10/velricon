@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { ServicesHero } from '@/components/sections/ServicesHero'
 import { OurServicePaths } from '@/components/sections/OurServicePaths'
-import { WhereYouAre } from '@/components/sections/WhereYouAre'
+import { StickyScrollCardsSection } from '@/components/ui/sticky-scroll-cards-section'
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -13,7 +13,7 @@ export default function ServicesPage() {
     <>
       <ServicesHero />
       <OurServicePaths />
-      <WhereYouAre />
+      <StickyScrollCardsSection />
     </>
   )
 }

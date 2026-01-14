@@ -6,6 +6,31 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
+const ourServicePathsGridStyles = `
+  @keyframes grid-draw-light { 
+    0% { stroke-dashoffset: 1000; opacity: 0; } 
+    50% { opacity: 0.5; } 
+    100% { stroke-dashoffset: 0; opacity: 0.4; } 
+  }
+  .grid-line-light { 
+    stroke: rgba(30, 41, 59, 0.4); 
+    stroke-width: 1; 
+    opacity: 0; 
+    stroke-dasharray: 5 5; 
+    stroke-dashoffset: 1000; 
+    animation: grid-draw-light 1.5s ease-out forwards; 
+  }
+  .detail-dot-light { 
+    fill: rgba(30, 41, 59, 0.5); 
+    opacity: 0; 
+    animation: pulse-glow-light 3s ease-in-out infinite; 
+  }
+  @keyframes pulse-glow-light { 
+    0%, 100% { opacity: 0.3; transform: scale(1); } 
+    50% { opacity: 0.6; transform: scale(1.1); } 
+  }
+`
+
 interface ServicePath {
   id: string
   slug: string
@@ -67,8 +92,44 @@ export function OurServicePaths() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-deep-void py-20 lg:py-32">
-      <div className="mx-auto px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-20 max-w-7xl">
+    <>
+      <style>{ourServicePathsGridStyles}</style>
+      <section 
+        ref={sectionRef} 
+        className="relative py-20 lg:py-32 overflow-hidden"
+        style={{ background: '#FAFAFA' }}
+      >
+        {/* Subtle texture */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, #0E101A 1px, transparent 0)`,
+            backgroundSize: '32px 32px',
+          }}
+        />
+        
+        {/* Animated Grid Background */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <pattern id="gridOurServicePaths" width="60" height="60" patternUnits="userSpaceOnUse">
+              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(30, 41, 59, 0.2)" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#gridOurServicePaths)" />
+          <line x1="0" y1="20%" x2="100%" y2="20%" className="grid-line-light" style={{ animationDelay: '0.1s' }} />
+          <line x1="0" y1="80%" x2="100%" y2="80%" className="grid-line-light" style={{ animationDelay: '0.2s' }} />
+          <line x1="20%" y1="0" x2="20%" y2="100%" className="grid-line-light" style={{ animationDelay: '0.3s' }} />
+          <line x1="80%" y1="0" x2="80%" y2="100%" className="grid-line-light" style={{ animationDelay: '0.4s' }} />
+          <line x1="50%" y1="0" x2="50%" y2="100%" className="grid-line-light" style={{ animationDelay: '0.5s' }} />
+          <line x1="0" y1="50%" x2="100%" y2="50%" className="grid-line-light" style={{ animationDelay: '0.6s' }} />
+          <circle cx="20%" cy="20%" r="3" className="detail-dot-light" style={{ animationDelay: '0.8s' }} />
+          <circle cx="80%" cy="20%" r="3" className="detail-dot-light" style={{ animationDelay: '0.9s' }} />
+          <circle cx="20%" cy="80%" r="3" className="detail-dot-light" style={{ animationDelay: '1s' }} />
+          <circle cx="80%" cy="80%" r="3" className="detail-dot-light" style={{ animationDelay: '1.1s' }} />
+          <circle cx="50%" cy="50%" r="2.5" className="detail-dot-light" style={{ animationDelay: '1.2s' }} />
+        </svg>
+
+        <div className="relative z-10 mx-auto px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-20 max-w-7xl">
         
         {/* Section Header */}
         <div className="mb-16 lg:mb-24">
@@ -76,7 +137,7 @@ export function OurServicePaths() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 8 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-body text-xs font-medium tracking-[0.2em] text-platinum/60 uppercase mb-6"
+            className="font-body text-xs font-medium tracking-[0.2em] text-slate/60 uppercase mb-6"
           >
             Our Service Paths
           </motion.p>
@@ -85,7 +146,7 @@ export function OurServicePaths() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 12 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-[clamp(2rem,5vw,3.5rem)] font-accent font-light leading-[1.1] tracking-[-0.02em] text-white mb-4"
+            className="text-[clamp(2rem,5vw,3.5rem)] font-accent font-light leading-[1.1] tracking-[-0.02em] text-dark-ink mb-4"
           >
             Three focused ways we support your business
           </motion.h2>
@@ -94,7 +155,7 @@ export function OurServicePaths() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 8 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-base md:text-lg font-body font-light text-slate/70 leading-relaxed max-w-2xl"
+            className="text-base md:text-lg font-body font-light text-dark-ink leading-relaxed max-w-2xl"
           >
             Each path is designed for a different financial moment.
           </motion.p>
@@ -139,14 +200,6 @@ export function OurServicePaths() {
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       priority={idx === 0}
-                    />
-                    
-                    {/* Deep navy overlay gradient for text harmony */}
-                    <div 
-                      className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-90"
-                      style={{
-                        background: 'linear-gradient(180deg, rgba(0, 40, 87, 0.6) 0%, rgba(14, 16, 26, 0.75) 50%, rgba(0, 40, 87, 0.7) 100%)',
-                      }}
                     />
 
                     {/* Subtle film grain for editorial feel */}
@@ -193,7 +246,7 @@ export function OurServicePaths() {
 
                     <div className="pl-6 lg:pl-0">
                       {/* Service Title */}
-                      <h3 className="text-2xl lg:text-3xl xl:text-4xl font-accent font-light leading-[1.1] tracking-tight text-white mb-4">
+                      <h3 className="text-2xl lg:text-3xl xl:text-4xl font-accent font-light leading-[1.1] tracking-tight text-dark-ink mb-4">
                         {path.title}
                       </h3>
 
@@ -207,7 +260,7 @@ export function OurServicePaths() {
                         {path.description.map((paragraph, pIdx) => (
                           <p
                             key={pIdx}
-                            className="text-base md:text-lg font-body font-light text-slate/80 leading-relaxed"
+                            className="text-base md:text-lg font-body font-light text-dark-ink leading-relaxed"
                           >
                             {paragraph}
                           </p>
@@ -217,7 +270,7 @@ export function OurServicePaths() {
                       {/* Directional CTA */}
                       <Link
                         href={`/services/${path.slug}`}
-                        className="group/cta inline-flex items-center gap-2 text-sm md:text-base font-body text-strategy-blue hover:text-white transition-colors duration-200 tracking-wide"
+                        className="group/cta inline-flex items-center gap-2 text-sm md:text-base font-body text-strategy-blue hover:text-dark-ink transition-colors duration-200 tracking-wide"
                       >
                         <span>View {path.title}</span>
                         <svg
@@ -246,5 +299,6 @@ export function OurServicePaths() {
         </div>
       </div>
     </section>
+    </>
   )
 }

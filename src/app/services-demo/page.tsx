@@ -196,7 +196,7 @@ function TensionSection() {
               <span className="text-[#94A3B8]">They lack meaning.</span>
             </h2>
             
-            <p className="text-[#475569] text-lg lg:text-xl leading-relaxed font-light max-w-lg">
+            <p className="text-[#475569] text-lg lg:text-xl leading-relaxed font-body font-light max-w-lg">
               Spreadsheets multiply. Reports pile up. Decisions get harder, not easier. 
               The problem isn't information—it's interpretation.
             </p>
@@ -279,7 +279,7 @@ function ServiceSection({
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.8, delay: 0.7 }}
-                className="text-[#475569] text-lg lg:text-xl leading-relaxed font-light"
+                className="text-[#475569] text-lg lg:text-xl leading-relaxed font-body font-light"
               >
                 {service.description}
               </motion.p>
@@ -325,7 +325,7 @@ function ResolutionSection() {
               <span className="text-strategy-blue">to strategic clarity.</span>
             </h2>
             
-            <p className="text-platinum text-lg lg:text-xl leading-relaxed font-light max-w-lg mb-8">
+            <p className="text-platinum text-lg lg:text-xl leading-relaxed font-body font-light max-w-lg mb-8">
               We don't just organize your numbers. We translate them into insight, 
               foresight, and the confidence to act.
             </p>
@@ -336,7 +336,7 @@ function ResolutionSection() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="flex items-center gap-3 text-strategy-blue group cursor-pointer"
             >
-              <span className="text-lg font-light tracking-tight">See how we work</span>
+              <span className="text-lg font-body font-light tracking-tight">See how we work</span>
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </motion.div>
           </motion.div>
@@ -464,7 +464,7 @@ function CloseSection() {
         >
           <Link 
             href="/contact"
-            className="cta-link-button inline-flex items-center gap-4 bg-[#0E101A] text-white px-10 py-5 rounded-full text-lg font-light tracking-tight hover:bg-[#1A1F2E] transition-colors group"
+            className="cta-link-button inline-flex items-center gap-4 bg-[#0E101A] text-white px-10 py-5 rounded-full text-lg font-body font-light tracking-tight hover:bg-[#1A1F2E] transition-colors group"
           >
             Book a Strategy Call
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -475,7 +475,7 @@ function CloseSection() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 0.8 }}
-          className="text-[#94A3B8] text-sm mt-8"
+          className="text-[#94A3B8] text-sm font-body mt-8"
         >
           30-minute conversation. No commitment. Just clarity.
         </motion.p>
