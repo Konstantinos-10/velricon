@@ -1,20 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { Button, buttonVariants } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
-import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
+import { ChevronDown, Menu, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useScroll } from '@/components/ui/use-scroll';
-import { createPortal } from 'react-dom';
 import { trackEvent } from '@/lib/analytics';
-import { ServicesDropdown } from '@/components/ui/dropdown';
 
 export function Header() {
 	const [open, setOpen] = React.useState(false);
 	const [openDropdown, setOpenDropdown] = React.useState(false);
+	const [isServicesDropdownOpen, setIsServicesDropdownOpen] = React.useState(false);
+	const servicesDropdownRef = useRef<HTMLDivElement>(null);
 	const scrolled = useScroll(10);
 	const router = useRouter();
 	const pathname = usePathname();
@@ -34,6 +35,22 @@ export function Header() {
 			document.body.style.overflow = '';
 		};
 	}, [open]);
+
+	React.useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (servicesDropdownRef.current && !servicesDropdownRef.current.contains(event.target as Node)) {
+				setIsServicesDropdownOpen(false);
+			}
+		};
+
+		if (isServicesDropdownOpen) {
+			document.addEventListener('mousedown', handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [isServicesDropdownOpen]);
 
 	// Hide global header on homepage - hero has its own navigation
 	if (pathname === '/') {
@@ -73,36 +90,73 @@ export function Header() {
 					<img
 						src="/assets/images/logo.png"
 						alt="Velricon"
-						className="h-10 w-auto object-contain"
+						className="h-8 w-auto object-contain"
 					/>
 				</Link>
 
 				<div className="hidden items-center gap-6 md:flex">
 					{/* Services Dropdown */}
-					<ServicesDropdown
-						items={[
-							...servicesLinks.primary.map((link, index) => ({
-								key: `primary-${index}`,
-								label: link.label,
-								href: link.href,
-							})),
-							...servicesLinks.secondary.map((link, index) => ({
-								key: `secondary-${index}`,
-								label: link.label,
-								href: link.href,
-							})),
-						]}
+					<div
+						ref={servicesDropdownRef}
+						className="relative"
+						onPointerEnter={() => setIsServicesDropdownOpen(true)}
+						onPointerLeave={() => setIsServicesDropdownOpen(false)}
 					>
 						<Link
 							href="/services"
+							onClick={() => setIsServicesDropdownOpen(false)}
 							className={cn(
 								buttonVariants({ variant: 'ghost' }),
-								'font-body text-base text-platinum hover:text-white'
+								'font-body text-base xl:text-lg text-white/90 hover:text-white flex items-center gap-1.5 hover:bg-transparent'
 							)}
 						>
 							Services
+							<ChevronDown
+								size={16}
+								className={cn(
+									'transition-transform duration-200',
+									isServicesDropdownOpen ? 'rotate-180' : ''
+								)}
+							/>
 						</Link>
-					</ServicesDropdown>
+
+						<AnimatePresence>
+							{isServicesDropdownOpen && (
+								<motion.div
+									initial={{ opacity: 0, y: -10 }}
+									animate={{ opacity: 1, y: 0 }}
+									exit={{ opacity: 0, y: -10 }}
+									transition={{ duration: 0.12, ease: 'easeOut' }}
+									className="absolute top-full left-0 mt-2 min-w-[220px] z-30"
+								>
+									<div
+										className="rounded-xl overflow-hidden border border-white/[0.15]"
+										style={{
+											background: 'rgba(14, 16, 26, 0.95)',
+											backdropFilter: 'blur(24px)',
+											boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+										}}
+									>
+										<div className="py-2">
+											{[...servicesLinks.primary, ...servicesLinks.secondary].map((item) => (
+												<Link
+													key={item.href}
+													href={item.href}
+													onClick={() => {
+														setIsServicesDropdownOpen(false);
+														trackEvent('nav_service_click', { service: item.label });
+													}}
+													className="block px-4 py-2.5 text-sm font-body text-white/70 hover:text-white hover:bg-white/[0.05] transition-all duration-200"
+												>
+													{item.label}
+												</Link>
+											))}
+										</div>
+									</div>
+								</motion.div>
+							)}
+						</AnimatePresence>
+					</div>
 
 					{/* Other Links */}
 					{links.map((link) => (
@@ -111,7 +165,7 @@ export function Header() {
 							href={link.href}
 							className={cn(
 								buttonVariants({ variant: 'ghost' }),
-								'font-body text-base text-platinum hover:text-white'
+								'font-body text-base xl:text-lg text-white/90 hover:text-white hover:bg-transparent'
 							)}
 						>
 							{link.label}
@@ -121,7 +175,7 @@ export function Header() {
 					<Button
 						variant="outline"
 						onClick={handleStrategyCallClick}
-						className="bg-white text-black border-2 border-black rounded-full px-6 text-sm font-body font-medium hover:bg-white/90 hover:text-black"
+						className="bg-white text-black border-2 border-black rounded-full px-6 xl:px-8 py-3 xl:py-3.5 text-sm xl:text-base font-body font-medium hover:bg-white/90 hover:text-black"
 					>
 						Consultation Call
 					</Button>
@@ -131,120 +185,127 @@ export function Header() {
 					size="icon"
 					variant="outline"
 					onClick={() => setOpen(!open)}
-					className="md:hidden border-surface-border text-white hover:bg-elevation-layer bg-transparent"
+					className="md:hidden text-white/60 hover:text-white hover:bg-white/5 bg-transparent"
 					aria-expanded={open}
 					aria-controls="mobile-menu"
 					aria-label="Toggle menu"
 				>
-					<MenuToggleIcon open={open} className="size-5" duration={300} />
+					{open ? <X size={24} /> : <Menu size={24} />}
 				</Button>
 			</nav>
 
-			<MobileMenu open={open} className="flex flex-col justify-between gap-2">
-				<div className="grid gap-y-2">
-					{/* Services in Mobile */}
-					<div className="px-4">
-						<button
-							className={cn(
-								buttonVariants({ variant: 'ghost', className: 'justify-start w-full text-platinum' })
-							)}
-							onClick={() => setOpenDropdown(!openDropdown)}
-						>
-							Services
-						</button>
-						{openDropdown && (
-							<div className="pl-4 mt-2 space-y-1">
-								{servicesLinks.primary.map((link) => (
-									<Link
-										key={link.href}
-										href={link.href}
-										onClick={() => {
-											trackEvent('nav_service_click', { service: link.label });
-											setOpenDropdown(false);
-											setOpen(false);
-										}}
-										className="block px-4 py-2 text-platinum rounded-lg font-normal"
-									>
-										{link.label}
-									</Link>
-								))}
-								{servicesLinks.secondary.map((link) => (
-									<Link
-										key={link.href}
-										href={link.href}
-										onClick={() => {
-											trackEvent('nav_service_click', { service: link.label });
-											setOpenDropdown(false);
-											setOpen(false);
-										}}
-										className="block px-4 py-2 text-platinum rounded-lg font-normal"
-									>
-										{link.label}
-									</Link>
-								))}
-							</div>
-						)}
-					</div>
-
-					{/* Other Links */}
-					{links.map((link) => (
-						<Link
-							key={link.label}
-							href={link.href}
-							className={cn(
-								buttonVariants({
-									variant: 'ghost',
-									className: 'justify-start text-platinum',
-								})
-							)}
+			<AnimatePresence>
+				{open && (
+					<>
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.3 }}
 							onClick={() => setOpen(false)}
+							className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+						/>
+
+						<motion.div
+							initial={{ x: '100%' }}
+							animate={{ x: 0 }}
+							exit={{ x: '100%' }}
+							transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+							className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm z-50 md:hidden overflow-y-auto"
+							style={{
+								background: 'linear-gradient(180deg, rgba(14, 16, 26, 0.98) 0%, rgba(10, 12, 18, 0.98) 100%)',
+								backdropFilter: 'blur(24px)',
+								boxShadow: '-4px 0 24px rgba(0, 0, 0, 0.5)',
+							}}
 						>
-							{link.label}
-						</Link>
-					))}
-				</div>
-				<div className="flex flex-col gap-2 px-4 pb-4">
-					<Button
-						variant="outline"
-						className="w-full bg-transparent border-surface-border text-white hover:bg-elevation-layer"
-						onClick={handleStrategyCallClick}
-					>
-						Strategy Call
-					</Button>
-				</div>
-			</MobileMenu>
-		</header>
-	);
-}
+							<div className="flex items-center justify-between p-6 border-b border-white/10">
+								<Link
+									href="/"
+									onClick={() => setOpen(false)}
+									className="flex items-center"
+								>
+									<img
+										src="/assets/images/logo.png"
+										alt="Velricon"
+										className="h-8 w-auto object-contain"
+									/>
+								</Link>
+								<button
+									onClick={() => setOpen(false)}
+									className="w-10 h-10 flex items-center justify-center rounded-lg text-platinum/60 hover:text-white hover:bg-white/5 transition-all"
+									aria-label="Close menu"
+								>
+									<X size={24} />
+								</button>
+							</div>
 
-type MobileMenuProps = React.ComponentProps<'div'> & {
-	open: boolean;
-};
+							<div className="p-6 space-y-1">
+								<div className="mb-6">
+									<p className="text-xs font-medium tracking-wider text-strategy-blue/80 uppercase mb-4 px-3">
+										Services
+									</p>
+									<div className="space-y-1">
+										{servicesLinks.primary.map((link) => (
+											<Link
+												key={link.href}
+												href={link.href}
+												onClick={() => {
+													trackEvent('nav_service_click', { service: link.label });
+													setOpen(false);
+												}}
+												className="block px-4 py-3 rounded-lg text-base font-body text-platinum/70 hover:text-white hover:bg-white/5 transition-all duration-200"
+											>
+												{link.label}
+											</Link>
+										))}
+										{servicesLinks.secondary.map((link) => (
+											<Link
+												key={link.href}
+												href={link.href}
+												onClick={() => {
+													trackEvent('nav_service_click', { service: link.label });
+													setOpen(false);
+												}}
+												className="block px-4 py-3 rounded-lg text-base font-body text-platinum/70 hover:text-white hover:bg-white/5 transition-all duration-200"
+											>
+												{link.label}
+											</Link>
+										))}
+									</div>
+								</div>
 
-function MobileMenu({ open, children, className, ...props }: MobileMenuProps) {
-	if (!open || typeof window === 'undefined') return null;
+								<div className="h-px bg-white/10 my-6" />
 
-	return createPortal(
-		<div
-			id="mobile-menu"
-			className={cn(
-				'bg-elevation-layer/95 supports-[backdrop-filter]:bg-elevation-layer/50 backdrop-blur-lg',
-				'fixed top-20 right-0 bottom-0 left-0 z-40 flex flex-col overflow-hidden border-y md:hidden',
-			)}
-		>
-			<div
-				data-slot={open ? 'open' : 'closed'}
-				className={cn(
-					'data-[slot=open]:animate-in data-[slot=open]:zoom-in-97 ease-out',
-					'size-full p-4',
-					className,
+								<div className="space-y-1">
+									{links.map((link) => (
+										<Link
+											key={link.label}
+											href={link.href}
+											onClick={() => setOpen(false)}
+											className="block px-4 py-3 rounded-lg text-base font-body text-platinum/70 hover:text-white hover:bg-white/5 transition-all duration-200"
+										>
+											{link.label}
+										</Link>
+									))}
+								</div>
+
+								<div className="pt-6 mt-6 border-t border-white/10">
+									<button
+										onClick={() => {
+											setOpen(false);
+											handleStrategyCallClick();
+										}}
+										className="w-full flex items-center justify-center px-6 py-3.5 bg-white text-black font-body text-sm font-medium rounded-full hover:bg-white/90 transition-all duration-300"
+									>
+										Consultation Call
+									</button>
+								</div>
+							</div>
+						</motion.div>
+					</>
 				)}
-				{...props}
-			>
-				{children}
-			</div>
-		</div>,
-		document.body,
+			</AnimatePresence>
+		</header>
 	);
 }
 
