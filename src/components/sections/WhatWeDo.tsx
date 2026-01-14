@@ -84,9 +84,9 @@ export function WhatWeDo() {
         style={{ background: '#FAFAFA' }}
       >
         {/* Subtle texture */}
-        <div 
+      <div 
           className="absolute inset-0 opacity-[0.03]"
-          style={{
+        style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, #0E101A 1px, transparent 0)`,
             backgroundSize: '32px 32px',
           }}
@@ -112,7 +112,7 @@ export function WhatWeDo() {
           <circle cx="80%" cy="80%" r="3" className="detail-dot-light" style={{ animationDelay: '1.1s' }} />
           <circle cx="50%" cy="50%" r="2.5" className="detail-dot-light" style={{ animationDelay: '1.2s' }} />
         </svg>
-
+      
       <Container size="xl" className="relative z-10">
         {/* Opening Statement - KEPT UNCHANGED */}
         <motion.div
@@ -129,7 +129,7 @@ export function WhatWeDo() {
               className="font-accent text-sm tracking-[0.2em] uppercase mb-6"
               style={{ color: '#74B3FF' }}
             >
-              What we do
+            What we do
             </motion.p>
             
             <motion.h2
@@ -202,7 +202,7 @@ export function WhatWeDo() {
                     </Button>
                   </Link>
                 </motion.div>
-              </div>
+        </div>
 
               {/* Right: Image */}
               <div className="order-1 lg:order-2 relative aspect-[4/3] rounded-2xl overflow-hidden">

@@ -5,43 +5,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Button } from '@/components/ui/Button'
 import { trackEvent } from '@/lib/analytics'
-import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react'
+import { ChevronDown, Menu, X } from 'lucide-react'
 
-// Client questions that map to services with background images
-const clientQuestions = [
-  {
-    id: 'investor',
-    question: 'Ready to raise your next round?',
-    context: 'Get investor-ready financials that pass due diligence.',
-    serviceLabel: 'Investor Ready Packages',
-    href: '/services/investor-ready',
-    image: '/assets/images/hero/sophisticated_boardroom.png',
-  },
-  {
-    id: 'cfo',
-    question: 'Need financial clarity on demand?',
-    context: 'Strategic CFO expertise without the full-time commitment.',
-    serviceLabel: 'Fractional CFO',
-    href: '/services/fractional-cfo',
-    image: '/assets/images/hero/path_through_maze.png',
-  },
-  {
-    id: 'bank',
-    question: 'Preparing for bank financing?',
-    context: 'We know what Cyprus banks require. Let us guide you.',
-    serviceLabel: 'Bank Ready Packages',
-    href: '/services/bank-ready',
-    image: '/assets/images/hero/modern_cityscape.png',
-  },
-]
-
-// Navigation links
+// Navigation links matching Figma design
 const navLinks = [
-  { label: 'Who We Are', href: '/who-we-are' },
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/who-we-are' },
   { label: 'Insights', href: '/insights' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Contact Us', href: '/contact' },
 ]
 
 // Services dropdown items
@@ -51,43 +23,36 @@ const servicesItems = [
   { label: 'Investor-Ready Packages', href: '/services/investor-ready' },
 ]
 
-// Timing constants
-const CAROUSEL_DURATION = 3000 // 3 seconds per slide
+// Trusted client avatars
+const trustedClientAvatars = [
+  '/assets/images/hero/avatar_1.png',
+  '/assets/images/hero/avatar_2.png',
+  '/assets/images/hero/avatar_3.png',
+  '/assets/images/hero/avatar_4.png',
+]
+
+// Social links
+const socialLinks = [
+  { icon: '/assets/images/hero/linkedin_icon.svg', href: 'https://linkedin.com', label: 'LinkedIn' },
+  { icon: '/assets/images/hero/facebook_icon.svg', href: 'https://facebook.com', label: 'Facebook' },
+  { icon: '/assets/images/hero/instagram_icon.svg', href: 'https://instagram.com', label: 'Instagram' },
+]
 
 export function Hero() {
   const router = useRouter()
   const [isLoaded, setIsLoaded] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-  const [isCardHovered, setIsCardHovered] = useState(false)
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
   const servicesDropdownRef = useRef<HTMLDivElement>(null)
 
-  const currentSlide = clientQuestions[currentIndex]
-
-  // Initial load
+  // Initial load animation
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
     return () => clearTimeout(timer)
   }, [])
 
-  // Auto-advance carousel
-  useEffect(() => {
-    if (!isLoaded || isPaused) return
-
-    timerRef.current = setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % clientQuestions.length)
-    }, CAROUSEL_DURATION)
-
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current)
-    }
-  }, [currentIndex, isLoaded, isPaused])
-
-  const handleStrategyCallClick = useCallback(() => {
-    trackEvent('strategy_call_click', { location: 'hero' })
+  const handleConsultationClick = useCallback(() => {
+    trackEvent('consultation_call_click', { location: 'hero' })
     router.push('/contact')
   }, [router])
 
@@ -95,16 +60,6 @@ export function Hero() {
     trackEvent('explore_solutions_click', { location: 'hero' })
     router.push('/services')
   }, [router])
-
-  const handleServiceClick = useCallback(() => {
-    trackEvent('hero_service_click', { service: currentSlide.id })
-    router.push(currentSlide.href)
-  }, [router, currentSlide])
-
-  const handleCardHover = useCallback((hovered: boolean) => {
-    setIsCardHovered(hovered)
-    setIsPaused(hovered)
-  }, [])
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -123,426 +78,399 @@ export function Hero() {
     }
   }, [isServicesDropdownOpen])
 
-  return (
-    <section className="relative min-h-screen overflow-hidden">
-      
-      {/* Background with gradient - Applied to entire section */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(180deg, #0a0c12 0%, #0E101A 100%)',
-        }}
-      />
-      
-      {/* Animated Grid Background - Applied to entire section */}
-      <style>{`
-        @keyframes hero-grid-draw { 
+  // Grid styles matching WhatWeDo section
+  const heroGridStyles = `
+    @keyframes grid-draw-hero { 
       0% { stroke-dashoffset: 1000; opacity: 0; } 
-      50% { opacity: 0.3; } 
-      100% { stroke-dashoffset: 0; opacity: 0.15; } 
+      50% { opacity: 0.5; } 
+      100% { stroke-dashoffset: 0; opacity: 0.4; } 
     }
-        .hero-grid-line { 
-      stroke: #64748B; 
-      stroke-width: 0.5; 
+    .grid-line-hero { 
+      stroke: rgba(30, 41, 59, 0.4); 
+      stroke-width: 1; 
       opacity: 0; 
       stroke-dasharray: 5 5; 
       stroke-dashoffset: 1000; 
-            animation: hero-grid-draw 2s ease-out forwards; 
+      animation: grid-draw-hero 1.5s ease-out forwards; 
     }
-        .hero-detail-dot { 
-          fill: #74B3FF; 
+    .detail-dot-hero { 
+      fill: rgba(30, 41, 59, 0.5); 
       opacity: 0; 
-          animation: hero-pulse-dot 3s ease-in-out infinite; 
-        }
-        @keyframes hero-pulse-dot { 
-          0%, 100% { opacity: 0.1; transform: scale(1); } 
-          50% { opacity: 0.25; transform: scale(1.1); } 
-        }
-      `}</style>
-        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      animation: pulse-glow-hero 3s ease-in-out infinite; 
+    }
+    @keyframes pulse-glow-hero { 
+      0%, 100% { opacity: 0.3; transform: scale(1); } 
+      50% { opacity: 0.6; transform: scale(1.1); } 
+    }
+  `
+
+  return (
+    <>
+      <style>{heroGridStyles}</style>
+      <section className="relative min-h-screen bg-white overflow-hidden">
+      {/* ═══════════════════════════════════════════════════════════════════
+          LEFT SIDEBAR - White area with vertical logo and social icons
+          ═══════════════════════════════════════════════════════════════════ */}
+      <div className="hidden lg:flex absolute left-0 top-0 bottom-0 w-[140px] xl:w-[180px] flex-col items-center justify-between py-10 z-20">
+        {/* Logo Area */}
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: isLoaded ? 1 : 0, x: isLoaded ? 0 : -20 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-col items-center"
+        >
+          {/* Rotated Logo */}
+          <Link href="/" className="group">
+            <div className="w-28 h-28 xl:w-32 xl:h-32 relative" style={{ transform: 'rotate(-90deg)' }}>
+              <Image
+                src="/assets/images/black_logo.png"
+                alt="Velricon Logo"
+                fill
+                className="object-contain group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </Link>
+        </motion.div>
+
+        {/* Social Icons */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-col gap-4"
+        >
+          {socialLinks.map((social, idx) => (
+            <a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 xl:w-12 xl:h-12 opacity-60 hover:opacity-100 transition-opacity duration-300"
+              aria-label={social.label}
+            >
+              <img
+                src={social.icon}
+                alt={social.label}
+                className="w-full h-full object-contain"
+              />
+            </a>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          MAIN PHOTO CONTAINER - Large rounded container with overlay
+          ═══════════════════════════════════════════════════════════════════ */}
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.98 }}
+        transition={{ duration: 0.8, delay: 0.1 }}
+        className="relative m-4 lg:absolute lg:inset-y-6 lg:left-[140px] xl:left-[180px] lg:right-6 rounded-[40px] lg:rounded-[60px] xl:rounded-[73px] overflow-hidden min-h-[calc(100vh-2rem)] lg:min-h-0"
+      >
+        {/* Background Photo */}
+        <div className="absolute inset-0">
+          <Image
+            src="/assets/images/hero/background_maze.png"
+            alt=""
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        </div>
+
+        {/* Grid Background - Same as WhatWeDo section */}
+        <div className="absolute inset-0 z-0">
+          {/* Subtle texture */}
+          <div 
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: `radial-gradient(circle at 1px 1px, #0E101A 1px, transparent 0)`,
+              backgroundSize: '32px 32px',
+            }}
+          />
+          
+        {/* Animated Grid Background */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
-          <pattern id="heroGridPattern" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(100, 116, 139, 0.1)" strokeWidth="0.5"/>
+              <pattern id="gridHero" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(30, 41, 59, 0.2)" strokeWidth="0.5"/>
             </pattern>
           </defs>
-        <rect width="100%" height="100%" fill="url(#heroGridPattern)" />
-        <line x1="0" y1="20%" x2="100%" y2="20%" className="hero-grid-line" style={{ animationDelay: '0.1s' }} />
-        <line x1="0" y1="80%" x2="100%" y2="80%" className="hero-grid-line" style={{ animationDelay: '0.2s' }} />
-        <line x1="20%" y1="0" x2="20%" y2="100%" className="hero-grid-line" style={{ animationDelay: '0.3s' }} />
-        <line x1="80%" y1="0" x2="80%" y2="100%" className="hero-grid-line" style={{ animationDelay: '0.4s' }} />
-        <line x1="50%" y1="0" x2="50%" y2="100%" className="hero-grid-line" style={{ animationDelay: '0.5s', opacity: '0.05' }} />
-        <line x1="0" y1="50%" x2="100%" y2="50%" className="hero-grid-line" style={{ animationDelay: '0.6s', opacity: '0.05' }} />
-        <circle cx="20%" cy="20%" r="2" className="hero-detail-dot" style={{ animationDelay: '0.7s' }} />
-        <circle cx="80%" cy="20%" r="2" className="hero-detail-dot" style={{ animationDelay: '0.8s' }} />
-        <circle cx="20%" cy="80%" r="2" className="hero-detail-dot" style={{ animationDelay: '0.9s' }} />
-        <circle cx="80%" cy="80%" r="2" className="hero-detail-dot" style={{ animationDelay: '1s' }} />
-        <circle cx="50%" cy="50%" r="1.5" className="hero-detail-dot" style={{ animationDelay: '1.1s' }} />
+            <rect width="100%" height="100%" fill="url(#gridHero)" />
+            <line x1="0" y1="20%" x2="100%" y2="20%" className="grid-line-hero" style={{ animationDelay: '0.1s' }} />
+            <line x1="0" y1="80%" x2="100%" y2="80%" className="grid-line-hero" style={{ animationDelay: '0.2s' }} />
+            <line x1="20%" y1="0" x2="20%" y2="100%" className="grid-line-hero" style={{ animationDelay: '0.3s' }} />
+            <line x1="80%" y1="0" x2="80%" y2="100%" className="grid-line-hero" style={{ animationDelay: '0.4s' }} />
+            <line x1="50%" y1="0" x2="50%" y2="100%" className="grid-line-hero" style={{ animationDelay: '0.5s' }} />
+            <line x1="0" y1="50%" x2="100%" y2="50%" className="grid-line-hero" style={{ animationDelay: '0.6s' }} />
+            <circle cx="20%" cy="20%" r="3" className="detail-dot-hero" style={{ animationDelay: '0.8s' }} />
+            <circle cx="80%" cy="20%" r="3" className="detail-dot-hero" style={{ animationDelay: '0.9s' }} />
+            <circle cx="20%" cy="80%" r="3" className="detail-dot-hero" style={{ animationDelay: '1s' }} />
+            <circle cx="80%" cy="80%" r="3" className="detail-dot-hero" style={{ animationDelay: '1.1s' }} />
+            <circle cx="50%" cy="50%" r="2.5" className="detail-dot-hero" style={{ animationDelay: '1.2s' }} />
         </svg>
+        </div>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          NAVIGATION BAR - Full width, separate component
-          ═══════════════════════════════════════════════════════════════════ */}
-      <motion.header 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-20 py-6 md:py-7 lg:py-8"
-      >
-        {/* Logo */}
-        <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
-          <img
-            src="/assets/images/logo.png"
-            alt="Velricon"
-            className="h-7 sm:h-8 md:h-9 lg:h-10 w-auto object-contain"
-          />
-        </Link>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-platinum/60 hover:text-white hover:bg-white/5 transition-all duration-200"
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? (
-            <X size={24} className="text-white" />
-          ) : (
-            <Menu size={24} />
-          )}
-        </button>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8 xl:gap-10">
-          {/* Services Dropdown */}
-          <div 
-            ref={servicesDropdownRef}
-            className="relative"
-            onMouseEnter={() => setIsServicesDropdownOpen(true)}
-            onMouseLeave={() => setIsServicesDropdownOpen(false)}
-          >
-            <button
-              onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
-              className="font-body text-xs md:text-[13px] text-platinum/60 hover:text-white transition-colors duration-200 tracking-wide flex items-center gap-1 md:gap-1.5"
-            >
-              Services
-              <ChevronDown 
-                size={12}
-                className={`md:w-[14px] md:h-[14px] transition-transform duration-200 ${isServicesDropdownOpen ? 'rotate-180' : ''}`}
-              />
-            </button>
-
-            {/* Dropdown Menu */}
-            <AnimatePresence>
-              {isServicesDropdownOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute top-full left-0 mt-2 min-w-[200px] md:min-w-[220px] z-30"
-                >
-                  <div 
-                    className="rounded-xl overflow-hidden border border-white/[0.15]"
-                    style={{
-                      background: 'linear-gradient(135deg, rgba(14, 16, 26, 0.95) 0%, rgba(10, 12, 18, 0.98) 100%)',
-                      backdropFilter: 'blur(24px)',
-                      WebkitBackdropFilter: 'blur(24px)',
-                      boxShadow: `
-                        0 8px 32px rgba(0, 0, 0, 0.4),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1)
-                      `,
-                    }}
-                  >
-                    {/* Subtle glassmorphism overlay */}
-                    <div 
-                      className="absolute inset-0"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
-                      }}
-                    />
-                    
-                    {/* Top highlight line */}
-                    <div 
-                      className="absolute top-0 left-0 right-0 h-px z-10"
-                      style={{
-                        background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2) 50%, transparent)',
-                      }}
-                    />
-
-                    <div className="relative z-10 py-1.5 md:py-2">
-                      {servicesItems.map((item, idx) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          onClick={() => {
-                            setIsServicesDropdownOpen(false)
-                            trackEvent('nav_service_click', { service: item.label })
-                          }}
-                          className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-[13px] font-body text-platinum/70 hover:text-white hover:bg-white/[0.05] transition-all duration-200 tracking-wide"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                  </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-              </div>
-
-          {/* Other Navigation Links */}
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="font-body text-xs md:text-[13px] text-platinum/60 hover:text-white transition-colors duration-200 tracking-wide"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      </motion.header>
-
-      {/* ═══════════════════════════════════════════════════════════════════
-          MAIN CONTENT GRID - Two column layout
-          ═══════════════════════════════════════════════════════════════════ */}
-      <div className="relative z-10 min-h-screen grid grid-cols-1 lg:grid-cols-[1fr,45%] xl:grid-cols-[1fr,42%] gap-8 lg:gap-12 xl:gap-16">
-        
         {/* ─────────────────────────────────────────────────────────────────
-            LEFT COLUMN - Content
+            NAVIGATION BAR - Inside photo container
             ───────────────────────────────────────────────────────────────── */}
-        <div className="flex flex-col justify-center px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24 pt-32 pb-16 lg:pt-0 lg:pb-0">
-          <div className="max-w-xl xl:max-w-2xl">
-            
-            {/* Mini title - eyebrow */}
-            <motion.p 
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 12 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="font-body text-[10px] sm:text-[11px] md:text-xs font-medium tracking-[0.2em] text-strategy-blue/90 uppercase mb-5 md:mb-6"
+        <motion.header 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 sm:px-8 lg:px-12 xl:px-16 py-6 lg:py-8"
+        >
+          {/* Mobile Logo - Only visible on mobile */}
+          <Link href="/" className="lg:hidden flex items-center">
+            <img
+              src="/assets/images/logo.png"
+              alt="Velricon"
+              className="h-8 w-auto object-contain"
+            />
+          </Link>
+
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
+            {/* Services with Dropdown */}
+            <div 
+              ref={servicesDropdownRef}
+              className="relative"
+              onMouseEnter={() => setIsServicesDropdownOpen(true)}
+              onMouseLeave={() => setIsServicesDropdownOpen(false)}
             >
-              Virtual CFO for Cyprus Businesses
-            </motion.p>
-            
-            {/* H1 Headline - Refined, not shouting */}
+              <button
+                onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
+                className="font-body text-base xl:text-lg text-white/90 hover:text-white transition-colors duration-200 flex items-center gap-1.5"
+              >
+                Services
+                <ChevronDown 
+                  size={16}
+                  className={`transition-transform duration-200 ${isServicesDropdownOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              {/* Dropdown Menu */}
+              <AnimatePresence>
+                {isServicesDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-2 min-w-[220px] z-30"
+                  >
+                    <div 
+                      className="rounded-xl overflow-hidden border border-white/[0.15]"
+        style={{
+                        background: 'rgba(14, 16, 26, 0.95)',
+                        backdropFilter: 'blur(24px)',
+                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+                      }}
+                    >
+                      <div className="py-2">
+                        {servicesItems.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => {
+                              setIsServicesDropdownOpen(false)
+                              trackEvent('nav_service_click', { service: item.label })
+                            }}
+                            className="block px-4 py-2.5 text-sm font-body text-white/70 hover:text-white hover:bg-white/[0.05] transition-all duration-200"
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+        </div>
+        </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+        </div>
+
+            {/* Other Nav Links */}
+            {navLinks.slice(1).map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="font-body text-base xl:text-lg text-white/90 hover:text-white transition-colors duration-200"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg text-white/60 hover:text-white hover:bg-white/5 transition-all duration-200"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
+          {/* Desktop CTA Button */}
+          <button
+            onClick={handleConsultationClick}
+            className="hidden lg:flex items-center justify-center px-6 xl:px-8 py-3 xl:py-3.5 bg-white text-black font-body text-sm xl:text-base font-medium rounded-full border-2 border-black hover:bg-white/90 transition-all duration-300"
+          >
+            Consultation Call
+          </button>
+        </motion.header>
+
+        {/* ─────────────────────────────────────────────────────────────────
+            MAIN HERO CONTENT
+            ───────────────────────────────────────────────────────────────── */}
+        <div className="relative z-10 min-h-full flex flex-col justify-start lg:justify-center px-6 sm:px-8 lg:px-12 xl:px-16 pt-20 pb-6 sm:pt-24 sm:pb-8 md:pt-28 md:pb-10 lg:pt-32 lg:pb-40 lg:h-full">
+          <div className="max-w-3xl xl:max-w-4xl mb-8 sm:mb-10 md:mb-12 lg:mb-0">
+            {/* Main Headline */}
             <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="text-[clamp(2rem,5vw,3.25rem)] font-accent leading-[1.1] tracking-[-0.02em] mb-6 md:mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 30 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="text-3xl lg:text-4xl xl:text-5xl font-light tracking-tight leading-[1.05] mb-6"
             >
-              <span className="block text-white font-light">
+              <span className="block font-accent font-bold text-white">
                 CFO-level financial leadership
               </span>
-              <span className="block text-platinum/50 font-light mt-2">
+              <span className="block font-accent font-normal text-[#a8a8a8] mt-2">
                 without the full-time cost
               </span>
             </motion.h1>
 
             {/* Description */}
             <motion.p 
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 16 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-base md:text-lg font-body font-light text-slate/70 leading-relaxed max-w-lg mb-10 md:mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="text-base md:text-lg font-body font-light text-[#a8a8a8] leading-relaxed max-w-2xl mb-8"
             >
               Big-4 trained expertise. Deep Cyprus market knowledge. 
               Trusted by startups and SMEs to navigate funding, banking, 
               and sustainable growth.
             </motion.p>
 
-            {/* CTAs - Refined, smaller */}
+            {/* CTA Button - Outlined */}
             <motion.div 
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 16 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <Button
-                onClick={handleStrategyCallClick}
-                variant="primary"
-                size="default"
-                className="font-medium tracking-wide"
-              >
-                Book a Strategy Call
-              </Button>
               <button
-                onClick={handleExploreSolutionsClick}
-                className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-body text-platinum/60 hover:text-white transition-colors duration-200 tracking-wide group"
+                onClick={handleConsultationClick}
+                className="group inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-3.5 border-2 border-white/90 text-white font-body text-sm lg:text-base font-normal rounded-full hover:bg-white hover:text-black transition-all duration-300"
               >
-                Explore Solutions
-                <ArrowRight size={12} className="sm:w-[14px] sm:h-[14px] opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                Consultation Call
               </button>
             </motion.div>
-          </div>
-        </div>
+                  </div>
+                  </div>
 
         {/* ─────────────────────────────────────────────────────────────────
-            RIGHT COLUMN - Image Carousel
+            BOTTOM SECTION - Trusted Clients & Secondary CTA
             ───────────────────────────────────────────────────────────────── */}
-        <div className="hidden lg:flex items-center justify-center relative pr-0 pt-24 xl:pt-28 pb-8">
-          
-          {/* Image Carousel Container */}
-          <div className="relative w-full h-[75vh] max-h-[720px]">
-            
-            {/* Image Carousel - FADE ONLY, no scale */}
-            <div className="relative w-full h-full rounded-l-2xl xl:rounded-l-3xl overflow-hidden">
-              {clientQuestions.map((slide, idx) => (
-                <motion.div
-                  key={slide.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: currentIndex === idx ? 1 : 0 }}
-                  transition={{ duration: 1, ease: 'easeInOut' }}
-                  className="absolute inset-0"
-                  style={{ zIndex: currentIndex === idx ? 1 : 0 }}
+        
+        {/* Desktop: Absolute positioned elements */}
+        {/* Trusted Clients - Bottom Left */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="hidden lg:block absolute bottom-8 left-12 xl:left-16 z-10"
+        >
+          <div className="flex items-center gap-3 px-6 lg:px-8 py-3 lg:py-3.5 bg-[#e1e1e1] rounded-full">
+            {/* Stacked Avatars */}
+            <div className="flex -space-x-2">
+              {trustedClientAvatars.map((avatar, idx) => (
+                <div 
+                  key={idx} 
+                  className="w-8 lg:w-9 h-8 lg:h-9 rounded-full border-2 border-[#e1e1e1] overflow-hidden relative"
+                  style={{ zIndex: trustedClientAvatars.length - idx }}
                 >
                   <Image
-                    src={slide.image}
-                    alt=""
+                    src={avatar}
+                    alt={`Trusted client ${idx + 1}`}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 0vw, 45vw"
-                    priority={idx === 0}
                   />
-                  {/* Subtle color grade */}
-                  <div 
-                    className="absolute inset-0"
-                    style={{
-                      background: 'linear-gradient(180deg, rgba(14, 16, 26, 0.3) 0%, rgba(14, 16, 26, 0.1) 40%, rgba(14, 16, 26, 0.4) 100%)',
-                    }}
-                  />
-                </motion.div>
+                </div>
               ))}
-            </div>
-
-            {/* ─────────────────────────────────────────────────────────────────
-                FLOATING CARD - Glassmorphism
-                ───────────────────────────────────────────────────────────────── */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ 
-                opacity: isLoaded ? 1 : 0, 
-                y: isLoaded ? (isCardHovered ? -4 : 0) : 24,
-              }}
-              transition={{ 
-                opacity: { duration: 0.7, delay: 0.4 },
-                y: { duration: 0.3, ease: 'easeOut' },
-              }}
-              onMouseEnter={() => handleCardHover(true)}
-              onMouseLeave={() => handleCardHover(false)}
-              className="absolute z-20 left-[25%] top-[35%] -translate-x-1/2 -translate-y-1/2 w-[320px] xl:w-[360px]"
-            >
-          {/* Soft glow behind card */}
-          <div 
-            className="absolute -inset-4 rounded-2xl opacity-50 blur-3xl"
-            style={{
-              background: 'radial-gradient(ellipse at center, rgba(116, 179, 255, 0.12) 0%, transparent 70%)',
-            }}
-          />
-          
-          {/* Glassmorphism Card */}
-          <div 
-            className="relative rounded-2xl overflow-hidden border border-white/[0.12]"
-            style={{
-              background: 'linear-gradient(135deg, rgba(14, 16, 26, 0.88) 0%, rgba(10, 12, 18, 0.92) 100%)',
-              backdropFilter: 'blur(32px)',
-              WebkitBackdropFilter: 'blur(32px)',
-              boxShadow: `
-                0 12px 40px rgba(0, 0, 0, 0.5),
-                0 4px 16px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08)
-              `,
-            }}
-          >
-            {/* Subtle glassmorphism overlay for depth */}
-            <div 
-              className="absolute inset-0"
-              style={{
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
-              }}
-            />
-            
-            {/* Top highlight line */}
-            <div 
-              className="absolute top-0 left-0 right-0 h-px z-10"
-              style={{
-                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2) 50%, transparent)',
-              }}
-            />
-
-            {/* Card content */}
-            <div className="relative p-5 xl:p-6 z-10">
-              
-              {/* Question */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentSlide.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <p className="font-accent text-lg xl:text-xl text-white leading-snug tracking-tight mb-3">
-                    {currentSlide.question}
-                  </p>
-                  
-                  <p className="font-body text-sm text-white/45 leading-relaxed mb-5">
-                    {currentSlide.context}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Service link */}
-              <button
-                onClick={handleServiceClick}
-                className="group inline-flex items-center gap-2 text-left"
-              >
-                <span className="font-body text-sm font-medium text-strategy-blue group-hover:text-white transition-colors duration-200">
-                  {currentSlide.serviceLabel}
-                </span>
-                <ArrowRight 
-                  size={14}
-                  className="text-strategy-blue group-hover:text-white group-hover:translate-x-0.5 transition-all duration-200" 
-                />
-              </button>
-
-              {/* Progress & indicators */}
-              <div className="mt-5 xl:mt-6">
-                <div className="h-[2px] bg-white/[0.08] rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-strategy-blue rounded-full"
-                    initial={{ width: '0%' }}
-                    animate={{ width: isPaused ? undefined : '100%' }}
-                    transition={{ 
-                      duration: CAROUSEL_DURATION / 1000,
-                      ease: 'linear'
-                    }}
-                    key={`progress-${currentIndex}`}
-                  />
-                </div>
-                
-                <div className="flex gap-2 mt-4">
-                  {clientQuestions.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentIndex(idx)}
-                      className={`
-                        w-6 h-1 rounded-full transition-all duration-300
-                        ${idx === currentIndex 
-                          ? 'bg-strategy-blue' 
-                          : 'bg-white/[0.12] hover:bg-white/[0.25]'
-                        }
-                      `}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
-                </div>
               </div>
+
+            {/* Count & Label */}
+            <div className="flex flex-col">
+              <span className="font-accent text-sm lg:text-base font-normal text-black">50+</span>
+              <span className="font-accent text-[10px] lg:text-xs font-normal text-black tracking-wide">TRUSTED CLIENTS</span>
             </div>
           </div>
         </motion.div>
+
+        {/* Secondary CTA - Bottom Right - Desktop */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="hidden lg:block absolute bottom-8 right-12 xl:right-16 z-10 text-right"
+        >
+          <p className="font-accent text-base lg:text-lg font-normal text-white leading-tight mb-2">
+            EXPLORE FINANCIAL<br />
+            MANAGEMENT SOLUTIONS
+          </p>
+          <button
+            onClick={handleExploreSolutionsClick}
+            className="font-accent text-sm lg:text-base font-normal text-[#a8a8a8] hover:text-white transition-colors duration-300"
+          >
+            See Solutions
+          </button>
+        </motion.div>
+
+        {/* Mobile: Stacked at the bottom - Relative positioning to flow after content */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="lg:hidden relative z-10 flex flex-col items-center gap-4 px-6 sm:px-8 pb-6 pt-4"
+        >
+          {/* Trusted Clients - Mobile */}
+          <div className="flex items-center gap-3 px-6 py-3 bg-[#e1e1e1] rounded-full">
+            <div className="flex -space-x-2">
+              {trustedClientAvatars.map((avatar, idx) => (
+                <div 
+                  key={idx} 
+                  className="w-8 h-8 rounded-full border-2 border-[#e1e1e1] overflow-hidden relative"
+                  style={{ zIndex: trustedClientAvatars.length - idx }}
+                >
+                  <Image
+                    src={avatar}
+                    alt={`Trusted client ${idx + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-col">
+              <span className="font-accent text-sm font-normal text-black">50+</span>
+              <span className="font-accent text-[10px] font-normal text-black tracking-wide">TRUSTED CLIENTS</span>
+            </div>
           </div>
-        </div>
-      </div>
+
+          {/* Secondary CTA - Mobile */}
+          <div className="text-center">
+            <p className="font-accent text-xs font-normal text-white leading-tight mb-1">
+              EXPLORE FINANCIAL<br />
+              MANAGEMENT SOLUTIONS
+            </p>
+            <button
+              onClick={handleExploreSolutionsClick}
+              className="font-accent text-xs font-normal text-[#a8a8a8] hover:text-white transition-colors duration-300"
+            >
+              See Solutions
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
 
       {/* ═══════════════════════════════════════════════════════════════════
           MOBILE MENU - Slide in overlay
@@ -557,7 +485,7 @@ export function Hero() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
             />
             
             {/* Menu Panel */}
@@ -566,11 +494,10 @@ export function Hero() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm z-50 md:hidden overflow-y-auto"
+              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm z-50 lg:hidden overflow-y-auto"
               style={{
                 background: 'linear-gradient(180deg, rgba(14, 16, 26, 0.98) 0%, rgba(10, 12, 18, 0.98) 100%)',
                 backdropFilter: 'blur(24px)',
-                WebkitBackdropFilter: 'blur(24px)',
                 boxShadow: '-4px 0 24px rgba(0, 0, 0, 0.5)',
               }}
             >
@@ -617,15 +544,15 @@ export function Hero() {
                         {item.label}
                       </Link>
                     ))}
-                  </div>
-                </div>
+          </div>
+        </div>
 
                 {/* Divider */}
                 <div className="h-px bg-white/10 my-6" />
 
                 {/* Other Links */}
                 <div className="space-y-1">
-                  {navLinks.map((link) => (
+                  {navLinks.slice(1).map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
@@ -639,17 +566,15 @@ export function Hero() {
 
                 {/* CTA Button */}
                 <div className="pt-6 mt-6 border-t border-white/10">
-    <Button
+                  <button
                     onClick={() => {
                       setIsMobileMenuOpen(false)
-                      handleStrategyCallClick()
+                      handleConsultationClick()
                     }}
-      variant="primary"
-                    size="default"
-                    className="w-full text-sm px-6 py-3 h-auto font-medium"
-    >
-      Book a Strategy Call
-    </Button>
+                    className="w-full flex items-center justify-center px-6 py-3.5 bg-white text-black font-body text-sm font-medium rounded-full hover:bg-white/90 transition-all duration-300"
+                  >
+                    Consultation Call
+                  </button>
                 </div>
               </div>
             </motion.div>
@@ -657,5 +582,6 @@ export function Hero() {
         )}
       </AnimatePresence>
     </section>
+    </>
   )
 }
