@@ -22,8 +22,8 @@ const stagesData: StageData[] = [
   {
     title: "Start-ups",
     subtitle: "Building your financial foundation",
-    description: "You're in the early stages of building your business, and financial structure is still taking shape. Decisions matter, but the systems to support them often don't exist yet. Cash visibility is more important than perfect reports, and you need someone who can guide you through financial choices without slowing you down.",
-    support: "Velricon helps you set up your financial foundation from the ground up. From tracking cash and producing clear monthly reporting, to building your first budgets and forecasts, we give you clarity early. We also support you as a founder, helping you prepare for investor conversations and make financial decisions with confidence, not guesswork.",
+    description: "Your financial structure is still taking shape, and you need guidance without slowing down.",
+    support: "Velricon sets up your financial foundation from the ground up, providing clear reporting and preparing you for investor conversations.",
     image: "/assets/images/hero/path_through_maze.png",
     imageAlt: "Early stage business building financial foundation",
     bgColor: "#1A1F2E",
@@ -31,8 +31,8 @@ const stagesData: StageData[] = [
   {
     title: "Scale-ups",
     subtitle: "Structuring growth with control",
-    description: "You're growing, and the pace is faster than your financial structure can comfortably handle. Reporting exists, but it's no longer enough. You need forward-looking insight, not just hindsight. Decisions around growth, cash, and operations now carry real weight.",
-    support: "Velricon steps in to bring structure and control to that growth. We introduce advanced reporting and KPI visibility, rolling forecasts that account for different scenarios, and a sharper focus on working capital. At this stage, we don't just support decisions, we help shape them, while also building and overseeing a finance function that can scale with the business.",
+    description: "Growth is outpacing your financial structure, and decisions carry real weight.",
+    support: "Velricon brings structure and control through advanced reporting and KPI visibility while building a finance function that scales.",
     image: "/assets/images/hero/modern_cityscape.png",
     imageAlt: "Growing business scaling financial operations",
     bgColor: "#1E2538",
@@ -40,8 +40,8 @@ const stagesData: StageData[] = [
   {
     title: "Established SMEs",
     subtitle: "Senior financial leadership for complexity",
-    description: "Your business is established, but complexity is increasing. Financial decisions now affect long-term value, governance, and risk. You may be thinking about exits, acquisitions, or strategic restructuring, and you need financial leadership that operates comfortably at board level.",
-    support: "Velricon provides a complete CFO function tailored to this stage. We lead reporting, planning, and financial strategy, support board-level discussions, and prepare the business for value maximization. From exit readiness and M&A support to due diligence and risk management, our role is to bring senior financial judgment where it matters most.",
+    description: "Complexity is increasing, and financial decisions now affect long-term value and governance.",
+    support: "Velricon provides a complete CFO function, leading financial strategy and supporting board-level discussions for value maximization.",
     image: "/assets/images/hero/sophisticated_boardroom.png",
     imageAlt: "Established business with board-level financial strategy",
     bgColor: "#15202B",
@@ -150,28 +150,23 @@ export function StickyScrollCardsSection() {
             {stagesData.map((stage, index) => (
               <div
                 key={`${stage.title}-${index}`}
-                className="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-8 lg:gap-10 p-6 md:p-8 lg:p-10 rounded-3xl mb-12 lg:mb-14 sticky border border-surface-border/50"
+                className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 md:gap-6 p-4 md:p-6 rounded-2xl mb-8 lg:mb-10 sticky border border-surface-border/50"
                 style={{ top: '140px', backgroundColor: stage.bgColor }}
               >
                 <div className="flex flex-col justify-center order-2 md:order-1">
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-accent font-light tracking-tight text-white mb-3">
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-accent font-light tracking-tight text-white mb-2">
                     {stage.title}
                   </h3>
-                  <p className="text-sm md:text-base font-body font-medium text-strategy-blue/90 mb-4 tracking-wide">
+                  <p className="text-xs md:text-sm font-body font-medium text-strategy-blue/90 mb-3 tracking-wide">
                     {stage.subtitle}
                   </p>
-                  <div className="space-y-4">
-                    <p className="text-sm md:text-base font-body font-light text-slate/80 leading-relaxed">
-                      {stage.description}
-                    </p>
-                    <p className="text-sm md:text-base font-body font-light text-platinum/90 leading-relaxed">
-                      {stage.support}
-                    </p>
-                  </div>
+                  <p className="text-xs md:text-sm font-body font-light text-slate/80 leading-relaxed">
+                    {stage.description} {stage.support}
+                  </p>
                 </div>
 
-                <div className="order-1 md:order-2 mt-6 md:mt-0">
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.1]">
+                <div className="order-1 md:order-2 mt-4 md:mt-0">
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/[0.1]">
                     <Image
                       src={stage.image}
                       alt={stage.imageAlt}

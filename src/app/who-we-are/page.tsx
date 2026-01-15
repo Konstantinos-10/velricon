@@ -1,6 +1,9 @@
 import { Metadata } from 'next'
 import { WhoWeAreHero } from '@/components/sections/WhoWeAreHero'
-import { BeliefSystemSection } from '@/components/sections/BeliefSystem'
+import { AboutUsSection } from '@/components/sections/AboutUsSection'
+import { Stats } from '@/components/ui/stats-section-with-text'
+import { Feature } from '@/components/ui/feature-with-advantages'
+import { ServicesCTA } from '@/components/sections/ServicesCTA'
 
 export const metadata: Metadata = {
   title: 'Who We Are',
@@ -11,7 +14,10 @@ export default function WhoWeArePage() {
   return (
     <>
       <WhoWeAreHero />
-      <BeliefSystemSection />
+      <AboutUsSection />
+      <Stats />
+      <Feature />
+      <ServicesCTA />
     </>
   )
 }
