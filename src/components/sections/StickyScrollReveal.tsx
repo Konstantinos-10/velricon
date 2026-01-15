@@ -141,15 +141,12 @@ export function StickyScrollReveal() {
       <motion.section
         className="relative py-24 lg:py-32 overflow-x-clip"
         initial={{
-          backgroundColor: content[0]?.backgroundColor || '#0E101A',
+          backgroundColor: '#0E101A',
         }}
         animate={{
-          backgroundColor: getSectionBackground(),
+          backgroundColor: '#0E101A',
         }}
         transition={{ duration: 0.6, ease: 'easeInOut' }}
-        style={{
-          backgroundImage: 'linear-gradient(to bottom right, rgb(15, 23, 42), rgb(14, 16, 26), rgb(30, 41, 59))',
-        }}
       >
         {/* Animated Grid Background */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
