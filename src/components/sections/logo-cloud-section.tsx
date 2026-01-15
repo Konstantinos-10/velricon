@@ -98,14 +98,11 @@ export function LogoCloudSection() {
       </svg>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-10 md:py-12 lg:px-20">
-        <p className="text-center font-accent text-sm tracking-widest text-strategy-blue uppercase mb-4">
-          Trusted by
-        </p>
         <h2 className="text-center text-3xl lg:text-4xl xl:text-5xl font-light tracking-tight leading-[1.05] text-platinum mb-4">
-          Businesses that trust us
+          <span className="text-electric-blue">Businesses</span> we've supported
         </h2>
         <p className="text-center text-lg md:text-xl font-light tracking-tight text-platinum/70 mb-8">
-          A selection of teams that rely on Velricon for financial leadership.
+          Across different industries, stages, and financial situations.
         </p>
         <LogoCloud logos={logos} />
       </div>

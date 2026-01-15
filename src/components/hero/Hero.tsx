@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { trackEvent } from '@/lib/analytics'
 import { ChevronDown, Menu, X } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
+import { ShinyButton } from '@/components/ui/shiny-button'
 
 // Navigation links matching Figma design
 const navLinks = [
@@ -373,14 +373,12 @@ export function Hero() {
               animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <Button
+              <ShinyButton
                 onClick={handleConsultationClick}
-                variant="primary"
-                size="default"
                 className="text-sm px-6 py-2.5"
               >
                 Prepare for Financing or Funding
-              </Button>
+              </ShinyButton>
             </motion.div>
                   </div>
                   </div>

@@ -33,41 +33,81 @@ const testimonialStyles = `
 const testimonials = [
   {
     id: 1,
-    quote: "Velricon transformed our financial operations. Their strategic guidance helped us secure Series A funding and scale with confidence.",
-    name: "Sarah Chen",
-    role: "CEO",
+    quote: (
+      <>
+        We prepared a{" "}
+        <span className="text-electric-blue">
+          financing package for a 50 million funding request
+        </span>
+        , including detailed financial models, cash-flow analysis, and supporting
+        presentation materials.
+        <span className="block mt-4">
+          The model and analysis were subsequently used by an{" "}
+          <span className="text-electric-blue">
+            independent professional valuation firm
+          </span>{" "}
+          as part of its valuation work, and later by a{" "}
+          <span className="text-electric-blue">Big-4 audit firm</span> to support a
+          broader market analysis and sector report.
+        </span>
+      </>
+    ),
+    name: "Financing Preparation",
+    role: "01",
     company: "TechScale Cyprus",
     outcome: "Secured Series A funding",
   },
   {
     id: 2,
-    quote: "They set up our financial infrastructure from scratch, prepared investor-ready reports, and guided us through our seed round. Invaluable.",
-    name: "Michael Petrou",
-    role: "Founder",
-    company: "StartupCyprus",
-    outcome: "Successful seed round",
-  },
-  {
-    id: 3,
-    quote: "The team doesn't just report numbers—they guide strategic decisions. Their Big-4 expertise helped us optimize cash flow.",
-    name: "Elena Demetriou",
-    role: "CFO",
+    quote: (
+      <>
+        We supported a business through{" "}
+        <span className="text-electric-blue">investor preparation and strategy</span>,
+        developing the full set of financial materials, valuation analysis, and
+        funding narrative.
+        <span className="block mt-4">
+          The work supported progression to the{" "}
+          <span className="text-electric-blue">RIF interview stage.</span> In
+          separate, ongoing engagements, we are supporting{" "}
+          <span className="text-electric-blue">
+            active funding roadshows of 2 million and 1 million
+          </span>
+          , providing financial models, investor materials, and ongoing support
+          during investor meetings.
+        </span>
+      </>
+    ),
+    name: "Investor Preparation",
+    role: "02",
     company: "GrowthSME Ltd",
     outcome: "Optimized cash flow",
   },
   {
-    id: 4,
-    quote: "Our financial models passed due diligence seamlessly. Their support throughout fundraising was instrumental in our success.",
-    name: "Andreas Ioannou",
-    role: "Co-founder",
-    company: "ScaleUp Ventures",
-    outcome: "Passed due diligence",
-  },
-  {
-    id: 5,
-    quote: "Rolling forecasts, KPI dashboards, and strategic decision support that helped us navigate rapid growth. Exactly what we needed.",
-    name: "Maria Constantinou",
-    role: "Operations Director",
+    id: 3,
+    quote: (
+      <>
+        Across different engagements, we have supported businesses in{" "}
+        <span className="text-electric-blue">improving liquidity</span> through more
+        effective working capital management, including reducing days outstanding
+        and strengthening cash discipline.
+        <span className="block mt-4">
+          We have also helped{" "}
+          <span className="text-electric-blue">improve profitability and margins</span>{" "}
+          by analysing product mix and pricing, identifying inefficiencies, and
+          supporting operational improvements.
+        </span>
+        <span className="block mt-4">
+          In parallel, we worked with owners and management teams to{" "}
+          <span className="text-electric-blue">
+            set clear short- and long-term financial goals
+          </span>
+          , align strategy with financial capacity, and bring structure to ongoing
+          decision-making.
+        </span>
+      </>
+    ),
+    name: "Ongoing Financial Leadership",
+    role: "03",
     company: "FastTrack Cyprus",
     outcome: "Navigated rapid growth",
   },
@@ -124,11 +164,9 @@ export function InfiniteMovingCardsDemo() {
             transition={{ duration: 0.6 }}
             className="mb-16 lg:mb-20"
           >
-            <p className="font-body text-[11px] font-medium tracking-[0.2em] text-strategy-blue/90 uppercase mb-4">
-              Client Experiences
-            </p>
-            <h2 className="text-[clamp(1.75rem,4vw,2.75rem)] font-accent font-light tracking-tight leading-[1.1] text-white max-w-lg">
-              Trusted by growing businesses in Cyprus
+            <h2 className="text-[clamp(1.75rem,4vw,2.75rem)] font-accent font-light tracking-tight leading-[1.1] text-white max-w-2xl">
+              Our work is <span className="text-electric-blue">structured</span>, transparent, and focused on supporting{" "}
+              <span className="text-electric-blue">financial decisions</span>
             </h2>
           </motion.div>
 
@@ -147,8 +185,8 @@ export function InfiniteMovingCardsDemo() {
                 className="space-y-6 mb-8"
               >
                 {/* Quote */}
-                <blockquote className="text-xl font-accent font-light leading-[1.4] text-white/90 tracking-tight">
-                  "{activeTestimonial.quote}"
+                <blockquote className="text-lg lg:text-xl font-body font-light leading-[1.4] text-platinum/80 tracking-tight">
+                  {activeTestimonial.quote}
                 </blockquote>
                 
                 {/* Attribution */}
@@ -159,20 +197,11 @@ export function InfiniteMovingCardsDemo() {
                       {activeTestimonial.name}
                     </p>
                     <p className="font-body text-[12px] text-platinum/60">
-                      {activeTestimonial.role}, {activeTestimonial.company}
+                      {activeTestimonial.role}
                     </p>
                   </div>
                 </div>
 
-                {/* Outcome tag */}
-                {activeTestimonial.outcome && (
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-strategy-blue/20 bg-strategy-blue/5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-strategy-blue" />
-                    <span className="font-body text-[11px] font-medium text-strategy-blue/90">
-                      {activeTestimonial.outcome}
-                    </span>
-                  </span>
-                )}
               </motion.div>
             </AnimatePresence>
 
@@ -234,8 +263,8 @@ export function InfiniteMovingCardsDemo() {
                   className="space-y-8"
                 >
                   {/* Quote */}
-                  <blockquote className="text-[clamp(1.25rem,2.5vw,1.75rem)] font-accent font-light leading-[1.4] text-white/90 tracking-tight">
-                    "{activeTestimonial.quote}"
+                  <blockquote className="text-lg lg:text-xl font-body font-light leading-[1.4] text-platinum/80 tracking-tight">
+                    {activeTestimonial.quote}
                   </blockquote>
                   
                   {/* Attribution */}
@@ -246,22 +275,11 @@ export function InfiniteMovingCardsDemo() {
                         {activeTestimonial.name}
                       </p>
                       <p className="font-body text-[13px] text-platinum/60">
-                        {activeTestimonial.role}, {activeTestimonial.company}
+                        {activeTestimonial.role}
                       </p>
                     </div>
                   </div>
 
-                  {/* Outcome tag */}
-                  {activeTestimonial.outcome && (
-                    <div className="pt-4">
-                      <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-strategy-blue/20 bg-strategy-blue/5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-strategy-blue" />
-                        <span className="font-body text-[12px] font-medium text-strategy-blue/90 tracking-wide">
-                          {activeTestimonial.outcome}
-                        </span>
-                      </span>
-                    </div>
-                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -270,7 +288,7 @@ export function InfiniteMovingCardsDemo() {
             <div className="lg:col-span-5 xl:col-span-4">
               <div className="pl-8 border-l border-white/[0.06]">
                 <p className="font-body text-[11px] font-medium tracking-[0.15em] text-platinum/40 uppercase mb-6">
-                  Select a client
+                  Select a client situation
                 </p>
                 
                 <nav className="space-y-1" aria-label="Testimonial navigation">
@@ -292,8 +310,8 @@ export function InfiniteMovingCardsDemo() {
                           className={`
                             w-1 h-8 rounded-full transition-all duration-200
                             ${index === activeIndex 
-                              ? 'bg-strategy-blue' 
-                              : 'bg-white/[0.08]'
+                              ? 'bg-electric-blue' 
+                              : 'bg-electric-blue/30'
                             }
                           `}
                         />
@@ -305,7 +323,7 @@ export function InfiniteMovingCardsDemo() {
                             {testimonial.name}
                           </p>
                           <p className="font-body text-[12px] text-platinum/40">
-                            {testimonial.company}
+                            {testimonial.role}
                           </p>
                         </div>
                       </div>

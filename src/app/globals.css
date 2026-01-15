@@ -16,7 +16,7 @@
   :root {
     --background: 244 246 249; /* soft-white */
     --foreground: 15 23 42; /* dark-ink */
-    --card: 255 255 255; /* white */
+    --card: 248 250 252; /* cool-white */
     --card-foreground: 15 23 42; /* dark-ink */
     --popover: 255 255 255; /* white */
     --popover-foreground: 15 23 42; /* dark-ink */

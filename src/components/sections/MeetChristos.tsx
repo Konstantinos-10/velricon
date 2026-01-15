@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import { ImageZoomComponent } from '@/components/ui/image-zoom';
-import { Button } from '@/components/ui/Button';
+import { ShinyButton } from '@/components/ui/shiny-button';
 import Link from 'next/link';
 
 const meetChristosStyles = `
@@ -83,7 +83,7 @@ export function MeetChristos() {
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <h2 className="text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight leading-[1.05] mb-6" style={{ color: '#0E101A' }}>
-                Meet <span className="text-strategy-blue">Christos Makrygiannis</span>
+                Meet <span className="text-electric-blue">Christos Makrygiannis</span>
               </h2>
             </motion.div>
             <motion.p
@@ -91,20 +91,29 @@ export function MeetChristos() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl font-body font-light tracking-tight leading-relaxed mb-4"
-              style={{ color: '#1E293B' }}
+              className="text-lg md:text-xl font-body font-light tracking-tight leading-relaxed text-[#0E101A]"
             >
-                Big-4 trained financial leader with deep expertise in Cyprus startup and SME ecosystems. Christos brings enterprise-level CFO experience to growing businesses, helping them navigate funding rounds, optimize cash flow, and scale with confidence.
+              Christos Makrygiannis is a senior financial professional with over{" "}
+              <span className="text-electric-blue">25 years of experience</span> in finance, strategic leadership, and management.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-base md:text-lg font-body font-light tracking-tight leading-relaxed"
-              style={{ color: '#475569' }}
+              className="text-lg md:text-xl font-body font-light tracking-tight leading-relaxed text-[#0E101A]"
             >
-                With a proven track record of preparing businesses for investor due diligence and bank financing, Christos combines strategic financial guidance with hands-on execution—delivering the CFO expertise you need, when you need it.
+              He works with business owners and management teams to bring{" "}
+              <span className="text-electric-blue">financial clarity</span>, support better decision-making, and protect margins particularly during periods of growth, financing, or change.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-lg md:text-xl font-body font-light tracking-tight leading-relaxed text-[#0E101A]"
+            >
+              Christos background includes senior roles in multinational environments and board-level involvement, combining strategic perspective with hands-on financial leadership through Velricon.
             </motion.p>
             
             {/* Call to Action */}
@@ -116,9 +125,11 @@ export function MeetChristos() {
               className="pt-4"
             >
               <Link href="/contact">
-                <Button variant="primary" size="lg" className="w-full sm:w-auto">
-                  Book a Strategy Call
-                </Button>
+                <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
+                  <ShinyButton className="text-sm px-6 py-2.5">
+                    Let's Talk
+                  </ShinyButton>
+                </div>
               </Link>
             </motion.div>
           </motion.div>

@@ -34,7 +34,10 @@ export default function InsightsPage() {
           <div className="space-y-6">
             {posts.map((post) => (
               <Link key={post.slug} href={`/insights/${post.slug}`}>
-                <Card hover>
+                <Card
+                  hover
+                  className="border-white/10 bg-elevation-layer/60 backdrop-blur-[16px] shadow-[0_18px_40px_rgba(0,0,0,0.35)]"
+                >
                   <h2 className="text-2xl font-accent font-light tracking-tight text-white mb-3">
                     {post.title}
                   </h2>
@@ -57,4 +60,3 @@ export default function InsightsPage() {
     </>
   )
 }
-

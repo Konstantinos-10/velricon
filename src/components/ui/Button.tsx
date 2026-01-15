@@ -1,10 +1,8 @@
-'use client'
-
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
+
 import { cn } from "@/lib/utils"
-import { ShinyButton } from "./shiny-button"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -12,7 +10,6 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        primary: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -40,27 +37,11 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
-  shiny?: boolean // Control whether to use ShinyButton for primary variant
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size, asChild = false, shiny = true, ...props }, ref) => {
-    // Use ShinyButton for primary variant (unless shiny is false)
-    if (variant === 'primary' && shiny) {
-      return (
-        <ShinyButton
-          ref={ref}
-          className={className}
-          {...props}
-        >
-          {props.children}
-        </ShinyButton>
-      )
-    }
-
-    // Fallback to shadcn button for other variants or primary with shiny=false
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
-    
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
@@ -70,7 +51,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     )
   },
 )
-
 Button.displayName = "Button"
 
 export { Button, buttonVariants }

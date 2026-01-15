@@ -11,7 +11,7 @@ export function Footer() {
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-2xl font-normal tracking-tight text-white mb-4">Velricon</h3>
             <p className="text-slate font-normal tracking-tight leading-relaxed max-w-md">
-              Financial leadership without the cost of a full-time CFO.
+              Financial leadership that helps businesses grow with confidence.
             </p>
           </div>
 
@@ -20,18 +20,18 @@ export function Footer() {
             <h4 className="text-white font-medium tracking-tight mb-4">Services</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/services/startups" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
-                  For Startups
+                <Link href="/services/investor-ready" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
+                  Investor Preparation
                 </Link>
               </li>
               <li>
-                <Link href="/services/scaleups" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
-                  For Scaleups
+                <Link href="/services/bank-ready" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
+                  Bank Financing
                 </Link>
               </li>
               <li>
-                <Link href="/services/smes" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
-                  For SMEs
+                <Link href="/services/fractional-cfo" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
+                  Ongoing Financial Leadership
                 </Link>
               </li>
             </ul>

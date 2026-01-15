@@ -11,6 +11,7 @@ import Image from 'next/image'
 type LifecycleNode = {
   id: number
   title: string
+  panelTitle?: string
   caption: string
   label: string
   detail: string
@@ -23,9 +24,11 @@ const nodes: LifecycleNode[] = [
   {
     id: 1,
     title: 'Early stage',
+    panelTitle: 'When structure matters before growth.',
     caption: 'Foundation',
     label: '01',
-    detail: 'Establish control, reporting rhythm, and early financial visibility.',
+    detail:
+      'Early decisions around pricing, costs, and cash flow shape everything that follows. Financial clarity at this stage prevents avoidable problems later.',
     imageUrl: '/assets/images/sticky-scroll/vault_with_organized_interior.png',
     imageAlt: 'Vault with organized interior',
     services: [{ label: 'View Fractional CFO', href: '/services/fractional-cfo' }],
@@ -33,9 +36,11 @@ const nodes: LifecycleNode[] = [
   {
     id: 2,
     title: 'Growth',
+    panelTitle: 'When complexity increases faster than visibility.',
     caption: 'Scaling',
     label: '02',
-    detail: 'Build planning discipline and decision support as complexity rises.',
+    detail:
+      'As the business grows, reporting, budgeting, and cash flow discipline become essential to support hiring, expansion, and operational decisions.',
     imageUrl: '/assets/images/sticky-scroll/modular_architecture.png',
     imageAlt: 'Modular architecture',
     services: [{ label: 'View Fractional CFO', href: '/services/fractional-cfo' }],
@@ -43,9 +48,11 @@ const nodes: LifecycleNode[] = [
   {
     id: 3,
     title: 'Financing',
+    panelTitle: 'When numbers are tested by third parties.',
     caption: 'Scrutiny',
     label: '03',
-    detail: 'Prepare for diligence with clear models, narratives, and controls.',
+    detail:
+      'Banks and investors require structured projections, clear assumptions, and defensible analysis to support financing or funding decisions.',
     imageUrl: '/assets/images/sticky-scroll/modern_office_with_city_view.png',
     imageAlt: 'Modern office with city view',
     services: [
@@ -55,10 +62,12 @@ const nodes: LifecycleNode[] = [
   },
   {
     id: 4,
-    title: 'Exit / maturity',
-    caption: 'Value',
+    title: 'Maturity',
+    panelTitle: 'When value, risk, and options are reassessed.',
+    caption: 'TRANSITION',
     label: '04',
-    detail: 'Sustain value with investor-grade reporting and governance.',
+    detail:
+      'At this stage, financial leadership supports strategic choices around optimisation, restructuring, or longer-term transition planning.',
     imageUrl: '/assets/images/sticky-scroll/cozy_meeting_space.png',
     imageAlt: 'Cozy meeting space',
     services: [{ label: 'View Investor-Ready Packages', href: '/services/investor-ready' }],
@@ -165,14 +174,11 @@ export function LifecycleInterventionMap() {
           transition={{ duration: 0.6, ease: 'easeInOut' }}
           className="max-w-3xl"
         >
-          <p className="text-xs font-body tracking-[0.3em] uppercase text-strategy-blue">
-            Lifecycle map
-          </p>
           <h2 className="mt-4 text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight text-platinum">
-            Where Velricon typically steps in
+            Where <span className="text-electric-blue">Velricon</span> typically steps in
           </h2>
           <p className="mt-4 text-base md:text-lg font-body text-platinum/70">
-            A map of the moments where financial leadership matters most.
+            A view of the moments where financial leadership brings clarity to decisions.
           </p>
         </motion.div>
 
@@ -315,7 +321,7 @@ export function LifecycleInterventionMap() {
                 </div>
                 <p className="text-xs font-body tracking-[0.3em] uppercase text-slate">{activeNode.label}</p>
                 <h3 className="mt-3 text-2xl font-accent font-light text-platinum">
-                  {activeNode.title}
+                  {activeNode.panelTitle ?? activeNode.title}
                 </h3>
                 <p className="mt-3 text-sm font-body text-platinum/70 leading-relaxed">
                   {activeNode.detail}
@@ -341,10 +347,10 @@ export function LifecycleInterventionMap() {
               >
                 <p className="text-xs font-body tracking-[0.3em] uppercase text-slate">Where we step in</p>
                 <h3 className="mt-3 text-2xl font-accent font-light text-platinum">
-                  Hover a moment to see where Velricon steps in.
+                  Moments where financial leadership makes a difference.
                 </h3>
                 <p className="mt-3 text-sm font-body text-platinum/60 leading-relaxed">
-                  Each node reflects a point in the lifecycle where financial leadership changes the outcome.
+                  Each point reflects a stage in the business lifecycle where structure, clarity, and financial decision-making shape the outcome.
                 </p>
               </motion.div>
             )}

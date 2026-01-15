@@ -2,9 +2,10 @@
 
 import { useMemo, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowRight, HelpCircle, X } from 'lucide-react'
+import { ArrowRight, Clock, HelpCircle, Mail, Phone, X } from 'lucide-react'
 import Link from 'next/link'
 import { AnimatedGridBackground } from '@/components/ui/animated-grid-background'
+import { LocationMap } from '@/components/ui/expand-map'
 import { cn } from '@/lib/utils'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
@@ -40,6 +41,7 @@ export function ContactFaq() {
     stage: '',
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
   const selectedFaq = useMemo(
     () => faqItems.find((faq) => faq.id === selectedFaqId),
@@ -59,12 +61,26 @@ export function ContactFaq() {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target
     setFormValues((prev) => ({ ...prev, [name]: value }))
-    setErrors((prev) => ({ ...prev, [name]: '' }))
+    if (name === 'name') {
+      setErrors((prev) => ({ ...prev, name: value.trim() ? '' : 'Please enter your name.' }))
+    }
+    if (name === 'email') {
+      let nextError = ''
+      if (!value.trim()) {
+        nextError = 'Please enter your email.'
+      } else if (!emailRegex.test(value)) {
+        nextError = 'Please enter a valid email.'
+      }
+      setErrors((prev) => ({ ...prev, email: nextError }))
+    }
   }
 
   const handleMessageChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(event.target.value)
-    setErrors((prev) => ({ ...prev, message: '' }))
+    setErrors((prev) => ({
+      ...prev,
+      message: event.target.value.trim() ? '' : 'Please include a short message.',
+    }))
   }
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -72,7 +88,11 @@ export function ContactFaq() {
     const nextErrors: Record<string, string> = {}
 
     if (!formValues.name.trim()) nextErrors.name = 'Please enter your name.'
-    if (!formValues.email.trim()) nextErrors.email = 'Please enter your email.'
+    if (!formValues.email.trim()) {
+      nextErrors.email = 'Please enter your email.'
+    } else if (!emailRegex.test(formValues.email)) {
+      nextErrors.email = 'Please enter a valid email.'
+    }
     if (!message.trim()) nextErrors.message = 'Please include a short message.'
 
     setErrors(nextErrors)
@@ -93,6 +113,11 @@ export function ContactFaq() {
     message.trim().length > 0,
   ]
   const completedCount = progressSteps.filter(Boolean).length
+  const isFormValid =
+    formValues.name.trim().length > 0 &&
+    formValues.email.trim().length > 0 &&
+    emailRegex.test(formValues.email) &&
+    message.trim().length > 0
 
   return (
     <section
@@ -337,7 +362,13 @@ export function ContactFaq() {
               <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded-full border border-white/60 bg-transparent px-6 py-3 text-sm font-body font-medium text-white shadow-[0_0_24px_rgba(116,179,255,0.2)] transition hover:border-white/80 hover:shadow-[0_0_30px_rgba(116,179,255,0.28)]"
+                  disabled={!isFormValid}
+                  className={cn(
+                    'inline-flex items-center justify-center rounded-full border border-white/60 bg-transparent px-6 py-3 text-sm font-body font-medium text-white shadow-[0_0_24px_rgba(116,179,255,0.2)] transition',
+                    isFormValid
+                      ? 'hover:border-white/80 hover:shadow-[0_0_30px_rgba(116,179,255,0.28)]'
+                      : 'cursor-not-allowed opacity-50'
+                  )}
                 >
                   Send message
                 </button>
@@ -345,12 +376,59 @@ export function ContactFaq() {
                   href="/contact"
                   className="inline-flex items-center gap-2 text-sm font-body text-strategy-blue hover:text-platinum transition"
                 >
-                  Book a strategy call
+                  Let's talk
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </form>
           </motion.div>
+        </div>
+
+        <div className="mt-10 grid gap-10 md:grid-cols-[3fr_1fr] items-stretch">
+          <div className="min-h-[140px] h-full rounded-2xl border border-white/15 bg-[linear-gradient(135deg,rgba(14,16,26,0.75),rgba(10,12,18,0.85))] backdrop-blur-[24px] p-6 md:p-8 shadow-[0_18px_40px_rgba(0,0,0,0.35)] flex items-center">
+            <div className="grid w-full gap-6 md:grid-cols-3 items-center">
+              <div>
+                <p className="text-xs font-body uppercase tracking-[0.2em] text-slate flex items-center gap-2">
+                  <Phone className="h-3.5 w-3.5 text-electric-blue" />
+                  Phone
+                </p>
+                <a
+                  href="tel:+35770087980"
+                  className="mt-2 inline-flex text-sm md:text-base font-body text-platinum/80 hover:text-platinum transition"
+                >
+                  +357 70 087980
+                </a>
+              </div>
+              <div>
+                <p className="text-xs font-body uppercase tracking-[0.2em] text-slate flex items-center gap-2">
+                  <Mail className="h-3.5 w-3.5 text-electric-blue" />
+                  Email
+                </p>
+                <a
+                  href="mailto:christos@velricon.com"
+                  className="mt-2 inline-flex text-sm md:text-base font-body text-platinum/80 hover:text-platinum transition"
+                >
+                  christos@velricon.com
+                </a>
+              </div>
+              <div>
+                <p className="text-xs font-body uppercase tracking-[0.2em] text-slate flex items-center gap-2">
+                  <Clock className="h-3.5 w-3.5 text-electric-blue" />
+                  Business hours
+                </p>
+                <p className="mt-2 text-sm md:text-base font-body text-platinum/80">
+                  Monday to Friday, 9 am to 5 pm
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="flex w-full justify-center md:justify-end">
+            <LocationMap
+              location="Larnaka, Cyprus"
+              coordinates="34.9167 N, 33.6333 E"
+              className="text-platinum w-full"
+            />
+          </div>
         </div>
       </div>
     </section>

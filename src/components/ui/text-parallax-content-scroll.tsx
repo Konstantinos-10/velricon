@@ -29,14 +29,14 @@ export function TextParallaxContent({
         paddingLeft: IMG_PADDING,
         paddingRight: IMG_PADDING,
       }}
-      className="bg-deep-void"
+      className="bg-white"
     >
       <div className="relative h-[150vh]">
         <StickyImage imgUrl={imgUrl} imgAlt={imgAlt} />
         <OverlayCopy subheading={subheading} heading={heading} subline={subline} />
       </div>
       {children && (
-        <div className="bg-deep-void">
+        <div className="bg-white">
           {children}
         </div>
       )}

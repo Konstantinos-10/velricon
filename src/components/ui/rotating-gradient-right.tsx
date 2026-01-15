@@ -61,42 +61,26 @@ export default function RotatingGradientRight() {
           {/* Left: The Statement */}
           <div className="flex-1 flex items-center px-8 lg:px-16 xl:px-24 py-24 lg:py-0">
             <div className="max-w-2xl">
-              {/* Eyebrow */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="mb-12"
-              >
-                <span className="inline-block w-12 h-px bg-[#74B3FF] mr-4 align-middle" />
-                <span className="text-[#74B3FF] font-accent text-xs tracking-[0.3em] uppercase">
-                  The difference
-                </span>
-              </motion.div>
-
               {/* The Main Statement */}
               <motion.h2
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 1, delay: 0.4 }}
                 className="font-accent text-3xl lg:text-4xl xl:text-5xl leading-[0.95] tracking-tight mb-12"
-                style={{ color: '#0E101A' }}
               >
-                Most CFOs
-                <br />
-                <span className="text-[#94A3B8]">report history.</span>
+                <span className="text-electric-blue">The Velricon</span>{" "}
+                <span className="text-[#0E101A]">Difference</span>
               </motion.h2>
 
               <motion.h2
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 1, delay: 0.6 }}
-                className="font-accent text-3xl lg:text-4xl xl:text-5xl leading-[0.95] tracking-tight mb-16"
-                style={{ color: '#0E101A' }}
+                className="font-accent text-xl md:text-2xl leading-[1.2] tracking-tight mb-12 text-[#0E101A] border-l-2 border-electric-blue pl-4"
               >
-                We architect
+                Clarity before action.
                 <br />
-                <span className="text-strategy-blue">possibility.</span>
+                Structure before growth.
               </motion.h2>
 
               {/* The Quiet Detail */}
@@ -106,23 +90,18 @@ export default function RotatingGradientRight() {
                 transition={{ duration: 0.8, delay: 1 }}
                 className="space-y-6"
               >
-                <p className="text-[#475569] text-lg lg:text-xl font-light leading-relaxed max-w-md">
-                  Not outsourced accounting with a fancy title.
-                  <br />
-                  Strategic partnership that shapes your future.
+                <p className="text-[#475569] text-lg lg:text-xl font-light leading-relaxed max-w-2xl">
+                  We don't start with templates or generic advice.
                 </p>
-                
-                {/* Subtle indicator */}
-                <div className="flex items-center gap-4 pt-4">
-                  <div className="flex gap-2">
-                    <span className="w-2 h-2 rounded-full bg-strategy-blue" />
-                    <span className="w-2 h-2 rounded-full bg-strategy-blue/50" />
-                    <span className="w-2 h-2 rounded-full bg-strategy-blue/25" />
-                  </div>
-                  <span className="text-[#94A3B8] text-sm tracking-wide">
-                    Big-4 trained. Startup tested.
-                  </span>
-                </div>
+                <p className="text-[#475569] text-lg lg:text-xl font-light leading-relaxed max-w-2xl">
+                  We take the time to understand how your business actually works its numbers, constraints, and decisions.
+                </p>
+                <p className="text-[#475569] text-lg lg:text-xl font-light leading-relaxed max-w-2xl">
+                  From there, we build financial clarity around what matters most, so decisions are based on structure and insight rather than assumptions.
+                </p>
+                <p className="text-[#475569] text-lg lg:text-xl font-light leading-relaxed max-w-2xl">
+                  The result is financial information you can trust and use when it matters.
+                </p>
               </motion.div>
             </div>
           </div>
@@ -160,20 +139,7 @@ export default function RotatingGradientRight() {
                 <div className="absolute top-0 right-0 w-24 h-24 border-r-2 border-t-2 border-strategy-blue/30" />
               </div>
 
-              {/* Floating Quote */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 1.2 }}
-                className="absolute bottom-8 left-8 lg:bottom-24 lg:-left-8 bg-white/95 backdrop-blur-sm p-6 max-w-[280px] shadow-xl"
-              >
-                <p className="text-[#0E101A] font-accent text-lg leading-snug mb-3">
-                  "The numbers told a story we couldn't see. Now we write our own."
-                </p>
-                <p className="text-[#94A3B8] text-sm">
-                  — Series A Founder, Limassol
-                </p>
-              </motion.div>
+              {/* Floating Quote removed */}
             </div>
           </motion.div>
         </div>

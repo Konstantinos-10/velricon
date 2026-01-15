@@ -33,7 +33,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           transition={{ duration: 0.4 }}
           whileHover={{ y: -4 }}
           className={cn(
-            'rounded-lg border bg-card text-card-foreground shadow-sm',
+            'rounded-lg border bg-card text-card-foreground shadow-sm p-6 md:p-8',
             className,
           )}
           {...(safeProps as any)}
@@ -47,7 +47,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
   <div
     ref={ref}
     className={cn(
-      'rounded-lg border bg-card text-card-foreground shadow-sm',
+      'rounded-lg border bg-card text-card-foreground shadow-sm p-6 md:p-8',
       className,
     )}
     {...props}

@@ -98,12 +98,12 @@ export function HomeAchievements() {
               return (
                 <div
                   key={`${item.label}-${formattedValue}`}
-                  className="group relative px-6 py-6 text-center transition-all duration-500 ease-out sm:px-8 hover:bg-slate/5"
+                  className="group relative px-6 py-6 text-center transition-all duration-500 ease-out sm:px-8 hover:bg-deep-void"
                 >
                   <span className="sr-only">{formattedValue} {item.label}</span>
                   <div
                     aria-hidden="true"
-                    className="text-[clamp(2rem,3.4vw,3.5rem)] font-accent font-light tracking-tight text-dark-ink transition-transform duration-500 ease-out group-hover:-translate-y-1"
+                    className="text-[clamp(2rem,3.4vw,3.5rem)] font-accent font-light tracking-tight text-dark-ink transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:text-platinum"
                   >
                     <CountUpNumber
                       value={item.value}
@@ -114,20 +114,19 @@ export function HomeAchievements() {
                     />
                   </div>
                   <div className="mt-2 flex items-center justify-center">
-                    <span className="h-px w-10 bg-strategy-blue/80 transition-all duration-500 ease-out group-hover:w-16" />
+                    <span className="h-px w-10 bg-strategy-blue/80 transition-all duration-500 ease-out group-hover:w-16 group-hover:bg-electric-blue" />
                   </div>
                   <p
                     aria-hidden="true"
-                    className="mt-3 text-xs font-body uppercase tracking-[0.2em] text-dark-ink/85 transition-colors duration-300 group-hover:text-dark-ink"
+                    className="mt-3 text-xs font-body uppercase tracking-[0.2em] text-dark-ink/85 transition-colors duration-300 group-hover:text-platinum"
                   >
                     {item.label}
                   </p>
                   {item.hoverCaption && (
-                    <p className="mt-2 text-[10px] font-body tracking-wide text-dark-ink/70 opacity-0 transition-all duration-500 ease-out group-hover:opacity-100">
+                    <p className="mt-2 text-[10px] font-body tracking-wide text-dark-ink/70 opacity-0 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:text-platinum/70">
                       {item.hoverCaption}
                     </p>
                   )}
-                  <div className="pointer-events-none absolute inset-2 rounded-xl border border-transparent transition-all duration-500 ease-out group-hover:border-strategy-blue/30 group-hover:shadow-[0_0_35px_rgba(116,179,255,0.28)]" />
                 </div>
               )
             })}
