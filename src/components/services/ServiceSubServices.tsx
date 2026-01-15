@@ -134,7 +134,7 @@ export function ServiceSubServices({ subServices }: ServiceSubServicesProps) {
 
 			<div className="mx-auto w-full max-w-5xl space-y-8 px-4 sm:px-6 lg:px-8">
 				<AnimatedContainer className="mx-auto max-w-3xl text-center">
-					<h2 className="text-3xl font-accent font-light tracking-tight text-balance md:text-4xl lg:text-5xl text-platinum">
+					<h2 className="text-3xl font-accent font-light tracking-tight text-balance lg:text-4xl xl:text-5xl text-platinum">
 						Capabilities
 					</h2>
 					<p className="text-platinum/70 mt-4 text-sm tracking-wide text-balance md:text-base font-body font-light">

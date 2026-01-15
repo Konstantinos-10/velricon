@@ -110,7 +110,7 @@ export function ContactFaq() {
           <p className="text-xs font-body tracking-[0.3em] uppercase text-strategy-blue">
             Start a conversation
           </p>
-          <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-accent font-light tracking-tight text-platinum">
+          <h2 className="mt-4 text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight text-platinum">
             Questions, financing, or next steps
           </h2>
           <p className="mt-4 text-base md:text-lg font-body text-platinum/70">

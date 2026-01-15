@@ -117,7 +117,7 @@ const OverlayCopy = ({ subheading, heading, subline }: OverlayCopyProps) => {
       <p className="mb-2 text-center text-sm md:text-base font-body font-medium tracking-[0.2em] text-platinum/70 uppercase">
         {subheading}
       </p>
-      <p className="text-center text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-accent font-light tracking-tight leading-[1.05]">
+      <p className="text-center text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight leading-[1.05]">
         {heading}
       </p>
       {subline && (

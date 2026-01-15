@@ -10,7 +10,7 @@ function Stats() {
               Achievements
             </p>
             <div className="flex gap-2 flex-col">
-              <h2 className="text-xl md:text-3xl md:text-5xl tracking-tighter lg:max-w-xl font-accent font-light text-white text-left">
+              <h2 className="text-3xl lg:text-4xl xl:text-5xl tracking-tighter lg:max-w-xl font-accent font-light text-white text-left">
                 Trusted by growing businesses
               </h2>
               <p className="text-lg lg:max-w-sm leading-relaxed tracking-tight text-slate text-left">

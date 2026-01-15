@@ -33,52 +33,55 @@ const whatWeDoGridStyles = `
 
 const services = [
   {
-    id: 'fractional-cfo',
-    title: 'Fractional CFO',
-    subtitle: 'Strategic leadership without full-time overhead.',
-    description: 'Get the financial leadership you need, when you need it, with hands-on guidance across performance and growth.',
-    features: [
-      'Monthly reporting',
-      'Financial strategy',
-      'Cash flow management',
-      'Growth planning',
-    ],
-    href: '/services/fractional-cfo',
-    color: '#74B3FF',
-    icon: TrendingUp,
-    backIcon: LineChart,
-  },
-  {
-    id: 'bank-ready',
-    title: 'Bank-Ready Packages',
-    subtitle: 'Documents aligned to Cyprus bank standards.',
-    description: 'Present clean, compliant financials that meet bank requirements and streamline approvals.',
-    features: [
-      'Financial statements',
-      'Business plans',
-      'Cash flow forecasts',
-      'Compliance documentation',
-    ],
-    href: '/services/bank-ready',
-    color: '#74B3FF',
-    icon: Landmark,
-    backIcon: FileText,
-  },
-  {
     id: 'investor-ready',
     title: 'Investor-Ready Packages',
     subtitle: 'Confidence through diligence-ready materials.',
-    description: 'Build investor-grade models and documentation that withstand scrutiny and highlight growth potential.',
+    description: 'Financial models, valuations, and forecasts that stand up to investor scrutiny and support funding discussions.',
     features: [
       'Due diligence prep',
       'Financial models',
       'Valuation support',
       'Investor presentations',
     ],
+    linkLabel: 'Prepare for Funding',
     href: '/services/investor-ready',
     color: '#74B3FF',
     icon: Wallet,
     backIcon: BarChart3,
+  },
+  {
+    id: 'bank-ready',
+    title: 'Bank Financing & Refinancing',
+    subtitle: 'Documents aligned to Cyprus bank standards.',
+    description: 'Bank-ready projections and cash-flow forecasts aligned with lender requirements to support approvals and refinancing.',
+    features: [
+      'Financial statements',
+      'Business plans',
+      'Cash flow forecasts',
+      'Compliance documentation',
+    ],
+    linkLabel: 'Prepare for Bank Financing',
+    href: '/services/bank-ready',
+    color: '#74B3FF',
+    icon: Landmark,
+    backIcon: FileText,
+  },
+  {
+    id: 'fractional-cfo',
+    title: 'Ongoing Financial Leadership',
+    subtitle: 'Strategic leadership without full-time overhead.',
+    description: 'Ongoing support with management reporting, budgeting, cash flow forecasting, and financial planning  helping owners stay in control as the business grows.',
+    features: [
+      'Monthly reporting',
+      'Financial strategy',
+      'Cash flow management',
+      'Growth planning',
+    ],
+    linkLabel: 'Explore Financial Work',
+    href: '/services/fractional-cfo',
+    color: '#74B3FF',
+    icon: TrendingUp,
+    backIcon: LineChart,
   },
 ];
 
@@ -133,27 +136,23 @@ export function WhatWeDo() {
           className="mb-24 lg:mb-32"
         >
           <div className="max-w-4xl">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-accent text-sm tracking-[0.2em] uppercase mb-6"
-              style={{ color: '#74B3FF' }}
-            >
-            What we do
-            </motion.p>
-            
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="font-accent text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1] tracking-tight"
-              style={{ color: '#0E101A' }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="font-accent text-3xl lg:text-4xl xl:text-5xl leading-[1.05] tracking-tight text-dark-ink"
             >
-              We give you the{' '}
-              <span className="text-strategy-blue">financial clarity</span>
-              {' '}to make decisions that matter.
+              How We Help <span className="text-electric-blue">Businesses</span> Grow with{' '}
+              <span className="text-electric-blue">Confidence</span>
             </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="mt-5 text-xl md:text-2xl font-body font-light tracking-tight text-dark-ink/70"
+            >
+              We give you the financial clarity to make decisions that matter.
+            </motion.p>
           </div>
         </motion.div>
 
@@ -178,6 +177,7 @@ export function WhatWeDo() {
                   icon={service.icon}
                   backIcon={service.backIcon}
                   href={service.href}
+                  linkLabel={service.linkLabel}
                 />
               </div>
             </motion.div>

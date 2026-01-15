@@ -83,7 +83,7 @@ const AnimatedHeader = () => {
     <div className="text-center max-w-4xl mx-auto mb-16 lg:mb-24">
       <h2
         ref={headerRef}
-        className={`text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-accent font-light tracking-tight transition-all duration-700 ease-out text-white ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        className={`text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight transition-all duration-700 ease-out text-white ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
       >
         Your Virtual CFO Partner Through{' '}
         <span className="text-strategy-blue">Every Growth Stage</span>

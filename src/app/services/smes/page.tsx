@@ -20,7 +20,7 @@ export default function SMEsPage() {
   return (
     <Section background="deep-void" className="pt-32">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-accent font-light tracking-tight leading-[1.05] text-white mb-6">
+        <h1 className="text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight leading-[1.05] text-white mb-6">
           Financial Leadership for Established SMEs
         </h1>
         <p className="text-base md:text-lg font-body font-light tracking-tight text-platinum/90 mb-12">

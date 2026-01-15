@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/Button'
 // Navigation links matching Figma design
 const navLinks = [
   { label: 'Services', href: '/services' },
-  { label: 'About', href: '/who-we-are' },
+  { label: 'Who We Are', href: '/who-we-are' },
   { label: 'Insights', href: '/insights' },
   { label: 'Contact Us', href: '/contact' },
 ]
@@ -109,29 +109,40 @@ export function Hero() {
     <>
       <style>{heroGridStyles}</style>
       <section className="relative min-h-screen bg-white overflow-hidden">
+      {/* Subtle texture */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, #0E101A 1px, transparent 0)`,
+          backgroundSize: '32px 32px',
+        }}
+      />
+
+      {/* Animated Grid Background */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <pattern id="gridHeroSection" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(30, 41, 59, 0.2)" strokeWidth="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#gridHeroSection)" />
+        <line x1="0" y1="20%" x2="100%" y2="20%" className="grid-line-hero" style={{ animationDelay: '0.1s' }} />
+        <line x1="0" y1="80%" x2="100%" y2="80%" className="grid-line-hero" style={{ animationDelay: '0.2s' }} />
+        <line x1="20%" y1="0" x2="20%" y2="100%" className="grid-line-hero" style={{ animationDelay: '0.3s' }} />
+        <line x1="80%" y1="0" x2="80%" y2="100%" className="grid-line-hero" style={{ animationDelay: '0.4s' }} />
+        <line x1="50%" y1="0" x2="50%" y2="100%" className="grid-line-hero" style={{ animationDelay: '0.5s' }} />
+        <line x1="0" y1="50%" x2="100%" y2="50%" className="grid-line-hero" style={{ animationDelay: '0.6s' }} />
+        <circle cx="20%" cy="20%" r="3" className="detail-dot-hero" style={{ animationDelay: '0.8s' }} />
+        <circle cx="80%" cy="20%" r="3" className="detail-dot-hero" style={{ animationDelay: '0.9s' }} />
+        <circle cx="20%" cy="80%" r="3" className="detail-dot-hero" style={{ animationDelay: '1s' }} />
+        <circle cx="80%" cy="80%" r="3" className="detail-dot-hero" style={{ animationDelay: '1.1s' }} />
+        <circle cx="50%" cy="50%" r="2.5" className="detail-dot-hero" style={{ animationDelay: '1.2s' }} />
+      </svg>
       {/* ═══════════════════════════════════════════════════════════════════
           LEFT SIDEBAR - White area with vertical logo and social icons
           ═══════════════════════════════════════════════════════════════════ */}
       <div className="hidden lg:flex absolute left-0 top-0 bottom-0 w-[140px] xl:w-[180px] flex-col items-center justify-between py-10 z-20">
-        {/* Logo Area */}
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: isLoaded ? 1 : 0, x: isLoaded ? 0 : -20 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col items-center"
-        >
-          {/* Rotated Logo */}
-          <Link href="/" className="group">
-            <div className="w-28 h-28 xl:w-32 xl:h-32 relative" style={{ transform: 'rotate(-90deg)' }}>
-              <Image
-                src="/assets/images/black_logo.png"
-                alt="Velricon Logo"
-                fill
-                className="object-contain group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-          </Link>
-        </motion.div>
+      {/* Logo Area removed */}
 
         {/* Social Icons */}
         <motion.div 
@@ -227,12 +238,21 @@ export function Hero() {
             <img
               src="/assets/images/logo.png"
               alt="Velricon"
+              className="h-10 w-auto object-contain"
+            />
+          </Link>
+
+          {/* Desktop Logo */}
+          <Link href="/" className="hidden lg:flex items-center hover:opacity-80 transition-opacity">
+            <img
+              src="/assets/images/logo.png"
+              alt="Velricon"
               className="h-8 w-auto object-contain"
             />
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
+          <nav className="hidden lg:flex items-center gap-8 xl:gap-10 ml-auto">
             {/* Services with Dropdown */}
             <div 
               ref={servicesDropdownRef}
@@ -312,13 +332,7 @@ export function Hero() {
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
-          {/* Desktop CTA Button */}
-          <button
-            onClick={handleConsultationClick}
-            className="hidden lg:flex items-center justify-center px-6 xl:px-8 py-3 xl:py-3.5 bg-white text-black font-body text-sm xl:text-base font-medium rounded-full border-2 border-black hover:bg-white/90 transition-all duration-300"
-          >
-            Consultation Call
-          </button>
+          
         </motion.header>
 
         
@@ -335,11 +349,11 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.4 }}
               className="text-3xl lg:text-4xl xl:text-5xl font-light tracking-tight leading-[1.05] mb-6"
             >
-              <span className="block font-accent font-bold text-white">
-                CFO-level financial leadership
+              <span className="block font-accent font-light text-white">
+                Financial leadership that helps
               </span>
-              <span className="block font-accent font-normal text-[#a8a8a8] mt-2">
-                without the full-time cost
+              <span className="block font-accent font-light text-[#a8a8a8] mt-2">
+                businesses grow with confidence.
               </span>
             </motion.h1>
 
@@ -349,10 +363,8 @@ export function Hero() {
               animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
               transition={{ duration: 0.6, delay: 0.5 }}
               className="text-base md:text-lg font-body font-light text-[#a8a8a8] leading-relaxed max-w-2xl mb-8"
-            >
-              Big-4 trained expertise. Deep Cyprus market knowledge. 
-              Trusted by startups and SMEs to navigate funding, banking, 
-              and sustainable growth.
+              >
+              We prepare business owners for bank financing, investor funding, and strong financial control through finance transformation.
             </motion.p>
 
             {/* CTA Button - Outlined */}
@@ -367,7 +379,7 @@ export function Hero() {
                 size="default"
                 className="text-sm px-6 py-2.5"
               >
-                Consultation Call
+                Prepare for Financing or Funding
               </Button>
             </motion.div>
                   </div>
@@ -378,39 +390,6 @@ export function Hero() {
             ───────────────────────────────────────────────────────────────── */}
         
         {/* Desktop: Absolute positioned elements */}
-        {/* Trusted Clients - Bottom Left */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="hidden lg:block absolute bottom-8 left-12 xl:left-16 z-10"
-        >
-          <div className="flex items-center gap-3 px-6 lg:px-8 py-3 lg:py-3.5 bg-[#e1e1e1] rounded-full">
-            {/* Stacked Avatars */}
-            <div className="flex -space-x-2">
-              {trustedClientAvatars.map((avatar, idx) => (
-                <div 
-                  key={idx} 
-                  className="w-8 lg:w-9 h-8 lg:h-9 rounded-full border-2 border-[#e1e1e1] overflow-hidden relative"
-                  style={{ zIndex: trustedClientAvatars.length - idx }}
-                >
-                  <Image
-                    src={avatar}
-                    alt={`Trusted client ${idx + 1}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-              </div>
-
-            {/* Count & Label */}
-            <div className="flex flex-col">
-              <span className="font-accent text-sm lg:text-base font-normal text-black">50+</span>
-              <span className="font-accent text-[10px] lg:text-xs font-normal text-black tracking-wide">TRUSTED CLIENTS</span>
-            </div>
-          </div>
-        </motion.div>
 
         {/* Secondary CTA - Bottom Right - Desktop */}
         <motion.div 
@@ -419,9 +398,8 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="hidden lg:block absolute bottom-8 right-12 xl:right-16 z-10 text-right"
         >
-          <p className="font-accent text-base lg:text-lg font-normal text-white leading-tight mb-2">
-            EXPLORE FINANCIAL<br />
-            MANAGEMENT SOLUTIONS
+            <p className="font-accent text-base lg:text-lg font-normal text-white leading-tight mb-2">
+            EXPLORE HOW WE WORK
           </p>
           <button
             onClick={handleExploreSolutionsClick}
@@ -431,42 +409,16 @@ export function Hero() {
           </button>
         </motion.div>
 
-        {/* Mobile: Stacked at the bottom - Relative positioning to flow after content */}
+        {/* Mobile: Secondary CTA only */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
           transition={{ duration: 0.6, delay: 0.7 }}
           className="lg:hidden relative z-10 flex flex-col items-center gap-4 px-6 sm:px-8 pb-6 pt-4"
         >
-          {/* Trusted Clients - Mobile */}
-          <div className="flex items-center gap-3 px-6 py-3 bg-[#e1e1e1] rounded-full">
-            <div className="flex -space-x-2">
-              {trustedClientAvatars.map((avatar, idx) => (
-                <div 
-                  key={idx} 
-                  className="w-8 h-8 rounded-full border-2 border-[#e1e1e1] overflow-hidden relative"
-                  style={{ zIndex: trustedClientAvatars.length - idx }}
-                >
-                  <Image
-                    src={avatar}
-                    alt={`Trusted client ${idx + 1}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col">
-              <span className="font-accent text-sm font-normal text-black">50+</span>
-              <span className="font-accent text-[10px] font-normal text-black tracking-wide">TRUSTED CLIENTS</span>
-            </div>
-          </div>
-
-          {/* Secondary CTA - Mobile */}
           <div className="text-center">
             <p className="font-accent text-xs font-normal text-white leading-tight mb-1">
-              EXPLORE FINANCIAL<br />
-              MANAGEMENT SOLUTIONS
+              EXPLORE HOW WE WORK
             </p>
             <button
               onClick={handleExploreSolutionsClick}

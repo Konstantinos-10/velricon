@@ -79,7 +79,7 @@ export default function RotatingGradientRight() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 1, delay: 0.4 }}
-                className="font-accent text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.95] tracking-tight mb-12"
+                className="font-accent text-3xl lg:text-4xl xl:text-5xl leading-[0.95] tracking-tight mb-12"
                 style={{ color: '#0E101A' }}
               >
                 Most CFOs
@@ -91,7 +91,7 @@ export default function RotatingGradientRight() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 1, delay: 0.6 }}
-                className="font-accent text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.95] tracking-tight mb-16"
+                className="font-accent text-3xl lg:text-4xl xl:text-5xl leading-[0.95] tracking-tight mb-16"
                 style={{ color: '#0E101A' }}
               >
                 We architect

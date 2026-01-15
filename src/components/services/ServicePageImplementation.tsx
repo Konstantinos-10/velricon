@@ -28,7 +28,7 @@ export function ServicePageImplementation({ paragraphs, subtleCTA }: ServicePage
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl md:text-4xl lg:text-5xl font-accent font-light leading-[1.05] tracking-tight text-white mb-12 md:mb-16"
+          className="text-3xl lg:text-4xl xl:text-5xl font-accent font-light leading-[1.05] tracking-tight text-white mb-12 md:mb-16"
         >
           How Velricon applies this role in practice
         </motion.h2>

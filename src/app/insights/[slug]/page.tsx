@@ -43,7 +43,7 @@ export default function InsightPostPage({ params }: { params: { slug: string } }
   return (
     <Section background="deep-void" className="pt-32">
       <article className="max-w-3xl mx-auto">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-accent font-light tracking-tight text-white mb-6">
+        <h1 className="text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight text-white mb-6">
           {post.title}
         </h1>
         <p className="text-slate font-body mb-12">

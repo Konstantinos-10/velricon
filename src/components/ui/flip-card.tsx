@@ -15,6 +15,7 @@ export interface CardFlipProps {
   backIcon?: LucideIcon;
   imageUrl?: string;
   href?: string;
+  linkLabel?: string;
 }
 
 export default function CardFlip({
@@ -32,6 +33,7 @@ export default function CardFlip({
   backIcon: BackIconComponent = FileText,
   imageUrl,
   href,
+  linkLabel = 'Learn More',
 }: CardFlipProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
@@ -259,7 +261,7 @@ export default function CardFlip({
               </p>
             </div>
 
-            {features && features.length > 0 && (
+            {false && features && features.length > 0 && (
               <div className="space-y-2.5">
                 {features.map((feature, index) => {
                   const icons = [TrendingUp, FileText, BarChart3, ArrowRight];
@@ -288,36 +290,34 @@ export default function CardFlip({
             )}
           </div>
 
-          {features && features.length > 0 && (
-            <div className="relative z-10 mt-auto border-t border-surface-border pt-4">
-              <div
-                className={cn(
-                  'group/start relative',
-                  'flex items-center justify-between',
-                  'rounded-lg p-2.5',
-                  'transition-all duration-200',
-                  'bg-elevation-layer',
-                  'hover:bg-strategy-blue/10',
-                  'hover:scale-[1.01] hover:cursor-pointer',
-                  'border border-transparent hover:border-strategy-blue/20',
-                )}
-              >
-                <span className="group-hover/start:text-strategy-blue text-sm font-light text-platinum transition-colors duration-200">
-                  Learn More
-                </span>
-                <div className="group/icon relative">
-                  <div
-                    className={cn(
-                      'absolute inset-[-6px] rounded-lg transition-all duration-200',
-                      'bg-strategy-blue/10',
-                      'scale-90 opacity-0 group-hover/start:scale-100 group-hover/start:opacity-100',
-                    )}
-                  />
-                  <ArrowRight className="text-strategy-blue relative z-10 h-4 w-4 transition-all duration-200 group-hover/start:translate-x-1 group-hover/start:scale-105" />
-                </div>
+          <div className="relative z-10 mt-auto border-t border-surface-border pt-4">
+            <div
+              className={cn(
+                'group/start relative',
+                'flex items-center justify-between',
+                'rounded-lg p-2.5',
+                'transition-all duration-200',
+                'bg-elevation-layer',
+                'hover:bg-strategy-blue/10',
+                'hover:scale-[1.01] hover:cursor-pointer',
+                'border border-transparent hover:border-strategy-blue/20',
+              )}
+            >
+              <span className="group-hover/start:text-strategy-blue text-sm font-light text-platinum transition-colors duration-200">
+                {linkLabel}
+              </span>
+              <div className="group/icon relative">
+                <div
+                  className={cn(
+                    'absolute inset-[-6px] rounded-lg transition-all duration-200',
+                    'bg-strategy-blue/10',
+                    'scale-90 opacity-0 group-hover/start:scale-100 group-hover/start:opacity-100',
+                  )}
+                />
+                <ArrowRight className="text-strategy-blue relative z-10 h-4 w-4 transition-all duration-200 group-hover/start:translate-x-1 group-hover/start:scale-105" />
               </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
       </div>

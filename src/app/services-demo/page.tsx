@@ -84,7 +84,7 @@ function OpeningSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.5 }}
-          className="font-accent text-white text-[clamp(2.5rem,8vw,6rem)] leading-[0.95] tracking-tight"
+          className="font-accent text-white text-3xl lg:text-4xl xl:text-5xl leading-[0.95] tracking-tight"
         >
           We turn financial complexity
         </motion.h1>
@@ -93,7 +93,7 @@ function OpeningSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.7 }}
-          className="font-accent text-strategy-blue text-[clamp(2.5rem,8vw,6rem)] leading-[0.95] tracking-tight mt-2"
+          className="font-accent text-strategy-blue text-3xl lg:text-4xl xl:text-5xl leading-[0.95] tracking-tight mt-2"
         >
           into clarity.
         </motion.h1>
@@ -260,7 +260,7 @@ function ServiceSection({
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               {/* The word */}
-              <h2 className="font-accent text-[#0E101A] text-5xl lg:text-7xl tracking-tight mb-2">
+              <h2 className="font-accent text-[#0E101A] text-3xl lg:text-4xl xl:text-5xl tracking-tight mb-2">
                 {service.word}
               </h2>
               
@@ -450,7 +450,7 @@ function CloseSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.2 }}
-          className="font-accent text-[#0E101A] text-3xl lg:text-5xl xl:text-6xl leading-[1.05] tracking-tight mb-12"
+          className="font-accent text-[#0E101A] text-3xl lg:text-4xl xl:text-5xl leading-[1.05] tracking-tight mb-12"
         >
           Ready to see your business
           <br />

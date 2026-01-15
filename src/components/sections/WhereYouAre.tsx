@@ -133,7 +133,7 @@ export function WhereYouAre() {
                   }`}
                 >
                   {/* Stage Title */}
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-accent font-light tracking-tight text-white mb-4">
+                  <h2 className="text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight text-white mb-4">
                     {stage.title}
                   </h2>
                   

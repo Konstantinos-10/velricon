@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { motion, useAnimate } from 'framer-motion';
-import { StickyScroll } from '@/components/ui/sticky-scroll-reveal';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { HighlighterItem, HighlightGroup, Particles } from '@/components/ui/highlighter';
@@ -34,67 +33,12 @@ const stickyScrollStyles = `
   }
 `;
 
-const content = [
-  {
-    title: 'Start-ups',
-    description:
-      "We build the financial foundation from day one—setting up reporting, cash visibility, and early forecasting so founders can make confident decisions and prepare for investor conversations.",
-    backgroundColor: '#0F172A', // Slate-900 - darker blue-gray for startups
-    content: (
-      <div className="relative h-full w-full overflow-hidden">
-        <Image
-          src="/assets/images/sticky-scroll/vault_with_organized_interior.png"
-          alt="Vault with organized interior representing startup financial infrastructure"
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
-      </div>
-    ),
-  },
-  {
-    title: 'Scale-ups',
-    description:
-      "We bring structure to growth with KPI dashboards, rolling forecasts, and working capital focus—supporting strategic decisions while building a finance function that scales.",
-    backgroundColor: '#1E293B', // Slate-800 - medium blue-gray for scale-ups
-    content: (
-      <div className="relative h-full w-full overflow-hidden">
-        <Image
-          src="/assets/images/sticky-scroll/modular_architecture.png"
-          alt="Modular architecture representing scalable financial systems"
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
-      </div>
-    ),
-  },
-  {
-    title: 'Established SMEs',
-    description:
-      "We provide senior CFO leadership across reporting, planning, and strategy—supporting board-level decisions, exit readiness, and complex financial governance.",
-    backgroundColor: '#0E101A', // Deep void - darkest for established businesses
-    content: (
-      <div className="relative h-full w-full overflow-hidden">
-        <Image
-          src="/assets/images/sticky-scroll/modern_office_with_city_view.png"
-          alt="Modern office with city view representing established business leadership"
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
-      </div>
-    ),
-  },
-];
+
 
 export function StickyScrollReveal() {
-  const [activeCardIndex, setActiveCardIndex] = useState(0);
   const [scope, animate] = useAnimate();
 
-  const getSectionBackground = () => {
-    return content[activeCardIndex]?.backgroundColor || '#0E101A';
-  };
+
 
   React.useEffect(() => {
     animate(
@@ -176,15 +120,6 @@ export function StickyScrollReveal() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-left mb-12 lg:mb-16"
         >
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-accent text-sm tracking-widest text-strategy-blue uppercase mb-4"
-          >
-            Who we serve
-          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -192,17 +127,8 @@ export function StickyScrollReveal() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-3xl lg:text-4xl xl:text-5xl font-light tracking-tight leading-[1.05] text-white mb-6"
           >
-            Your Virtual CFO Partner Through <span className="text-strategy-blue">Every Growth Stage</span>
+            Who We <span className="text-electric-blue">Support</span>
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-lg md:text-xl font-light tracking-tight text-platinum max-w-3xl"
-          >
-            From startup launch to scale-up acceleration to established business optimization—tailored CFO services that grow with you.
-          </motion.p>
         </motion.div>
         <motion.div
           initial={{ opacity: 0 }}
@@ -211,10 +137,37 @@ export function StickyScrollReveal() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="w-full py-4"
         >
-          <StickyScroll 
-            content={content} 
-            onActiveCardChange={setActiveCardIndex}
-          />
+          <div className="grid gap-10 md:grid-cols-2 items-start">
+            <div className="space-y-5">
+              <p className="text-base md:text-lg font-light tracking-tight text-white">
+                We work with business owners and management teams who need financial clarity to make important decisions.
+              </p>
+              <p className="text-base md:text-lg font-light tracking-tight text-white">
+                Our work typically starts when a business is:
+              </p>
+              <ul className="list-disc space-y-3 pl-5 text-base md:text-lg font-light text-slate">
+                <li>Preparing for bank financing or refinancing</li>
+                <li>Getting ready for investor discussions or funding</li>
+                <li>Seeking management reporting, budgeting, and deeper financial analysis</li>
+                <li>Strengthening cash flow forecasting and financial planning</li>
+                <li>Bringing structure and discipline to financial decision-making</li>
+                <li>Needing senior financial insight during periods of growth or change</li>
+              </ul>
+              <p className="text-base md:text-lg font-light text-white">
+                Our focus is on practical financial leadership that helps businesses move forward with confidence.
+              </p>
+            </div>
+            <div className="relative h-[280px] md:h-[420px] w-full overflow-hidden rounded-2xl border border-white/10">
+              <Image
+                src="/assets/images/sticky-scroll/modular_architecture.png"
+                alt="Modular architecture"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-deep-void/40 via-transparent to-elevation-layer/60" />
+            </div>
+          </div>
         </motion.div>
 
         {/* CTA Section */}

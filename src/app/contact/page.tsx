@@ -16,7 +16,7 @@ export default function ContactPage() {
     <Section background="deep-void" className="pt-32">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-accent font-light tracking-tight text-white mb-4">
+          <h1 className="text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight text-white mb-4">
             Get in Touch
           </h1>
           <p className="text-lg md:text-xl font-body font-light text-platinum/90 max-w-2xl mx-auto">

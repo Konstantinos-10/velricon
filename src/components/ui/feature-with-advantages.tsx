@@ -9,7 +9,7 @@ function Feature() {
             Why Choose Velricon
           </p>
           <div className="flex gap-4 md:gap-6 flex-col">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl tracking-tighter lg:max-w-2xl font-accent font-light text-white">
+            <h2 className="text-3xl lg:text-4xl xl:text-5xl tracking-tighter lg:max-w-2xl font-accent font-light text-white">
               Why choose Velricon
             </h2>
             <p className="text-base md:text-lg max-w-2xl leading-relaxed text-slate font-body font-light">

@@ -74,7 +74,7 @@ export function Header() {
 	};
 
 	const links = [
-		{ label: 'About', href: '/who-we-are' },
+		{ label: 'Who We Are', href: '/who-we-are' },
 		{ label: 'Insights', href: '/insights' },
 		{ label: 'Contact', href: '/contact' },
 	];
