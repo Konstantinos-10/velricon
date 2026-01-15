@@ -2,7 +2,8 @@
 
 import { cn } from '@/lib/utils';
 import { ArrowRight, TrendingUp, FileText, BarChart3, LucideIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
 export interface CardFlipProps {
   title?: string;
@@ -13,6 +14,7 @@ export interface CardFlipProps {
   icon?: LucideIcon;
   backIcon?: LucideIcon;
   imageUrl?: string;
+  href?: string;
 }
 
 export default function CardFlip({
@@ -28,21 +30,91 @@ export default function CardFlip({
   color = '#74B3FF', // Strategy Blue
   icon: IconComponent = TrendingUp,
   backIcon: BackIconComponent = FileText,
-  imageUrl
+  imageUrl,
+  href,
 }: CardFlipProps) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   const shimmerBars = [62, 84, 70, 56, 92, 66];
   const shimmerOffsets = [0, 10, 18, 6, 14, 22];
+  const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    const media = window.matchMedia('(hover: none), (pointer: coarse)');
+    const update = () => setIsTouch(media.matches);
+    update();
+    if (media.addEventListener) {
+      media.addEventListener('change', update);
+      return () => media.removeEventListener('change', update);
+    }
+    media.addListener(update);
+    return () => media.removeListener(update);
+  }, []);
+
+  useEffect(() => {
+    if (!isTouch || !isFlipped) {
+      return;
+    }
+    const handleOutside = (event: PointerEvent) => {
+      if (!cardRef.current) {
+        return;
+      }
+      if (!cardRef.current.contains(event.target as Node)) {
+        setIsFlipped(false);
+      }
+    };
+    document.addEventListener('pointerdown', handleOutside);
+    return () => document.removeEventListener('pointerdown', handleOutside);
+  }, [isTouch, isFlipped]);
+
+  const handleActivate = (event?: React.MouseEvent | React.KeyboardEvent) => {
+    if (!href) {
+      return;
+    }
+    if (isTouch && !isFlipped) {
+      event?.preventDefault();
+      event?.stopPropagation();
+      setIsFlipped(true);
+      return;
+    }
+    router.push(href);
+  };
 
   return (
     <>
       <div
+        ref={cardRef}
         style={{
           ['--primary' as any]: color ?? '#74B3FF',
         }}
-        className="group relative h-[360px] w-full max-w-[300px] [perspective:2000px]"
-        onMouseEnter={() => setIsFlipped(true)}
-        onMouseLeave={() => setIsFlipped(false)}
+        className={cn(
+          'group relative h-[360px] w-full max-w-[300px] [perspective:2000px]',
+          href && 'cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-strategy-blue/40 focus-visible:ring-offset-2 focus-visible:ring-offset-soft-white'
+        )}
+        role={href ? 'link' : undefined}
+        tabIndex={href ? 0 : undefined}
+        aria-label={href ? title : undefined}
+        onMouseEnter={() => {
+          if (!isTouch) {
+            setIsFlipped(true);
+          }
+        }}
+        onMouseLeave={() => {
+          if (!isTouch) {
+            setIsFlipped(false);
+          }
+        }}
+        onClick={handleActivate}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            handleActivate(event);
+          }
+        }}
       >
         <div
           className={cn(

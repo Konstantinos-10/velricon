@@ -3,7 +3,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
-import Link from 'next/link';
 import CardFlip from '@/components/ui/flip-card';
 import { BarChart3, FileText, Landmark, LineChart, TrendingUp, Wallet } from 'lucide-react';
 
@@ -169,7 +168,7 @@ export function WhatWeDo() {
               transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
               className="flex justify-center"
             >
-              <Link href={service.href} className="block w-full max-w-[320px]">
+              <div className="block w-full max-w-[320px]">
                 <CardFlip
                   title={service.title}
                   subtitle={service.subtitle}
@@ -178,8 +177,9 @@ export function WhatWeDo() {
                   color={service.color}
                   icon={service.icon}
                   backIcon={service.backIcon}
+                  href={service.href}
                 />
-              </Link>
+              </div>
             </motion.div>
           ))}
         </div>

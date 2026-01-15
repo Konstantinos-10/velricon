@@ -11,6 +11,7 @@ interface TextParallaxContentProps {
   imgAlt?: string
   subheading: string
   heading: string
+  subline?: React.ReactNode
   children?: React.ReactNode
 }
 
@@ -19,6 +20,7 @@ export function TextParallaxContent({
   imgAlt = '',
   subheading, 
   heading, 
+  subline,
   children 
 }: TextParallaxContentProps) {
   return (
@@ -31,7 +33,7 @@ export function TextParallaxContent({
     >
       <div className="relative h-[150vh]">
         <StickyImage imgUrl={imgUrl} imgAlt={imgAlt} />
-        <OverlayCopy subheading={subheading} heading={heading} />
+        <OverlayCopy subheading={subheading} heading={heading} subline={subline} />
       </div>
       {children && (
         <div className="bg-deep-void">
@@ -90,9 +92,10 @@ const StickyImage = ({ imgUrl, imgAlt = '' }: StickyImageProps) => {
 interface OverlayCopyProps {
   subheading: string
   heading: string
+  subline?: React.ReactNode
 }
 
-const OverlayCopy = ({ subheading, heading }: OverlayCopyProps) => {
+const OverlayCopy = ({ subheading, heading, subline }: OverlayCopyProps) => {
   const targetRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -117,6 +120,11 @@ const OverlayCopy = ({ subheading, heading }: OverlayCopyProps) => {
       <p className="text-center text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-accent font-light tracking-tight leading-[1.05]">
         {heading}
       </p>
+      {subline && (
+        <div className="mt-6 max-w-3xl px-4 text-center text-base md:text-lg lg:text-xl font-body font-light text-platinum/80 leading-relaxed">
+          {subline}
+        </div>
+      )}
     </motion.div>
   )
 }

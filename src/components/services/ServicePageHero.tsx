@@ -1,8 +1,7 @@
 'use client'
 
-import React, { useRef, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { TextParallaxContent } from '@/components/ui/text-parallax-content-scroll'
-import { motion, useInView } from 'framer-motion'
 
 interface ServicePageHeroProps {
   serviceName: string
@@ -77,31 +76,17 @@ function highlightText(text: string, phrases: string[]): React.ReactNode[] {
 }
 
 export function ServicePageHero({ serviceName, headline, subline, highlightPhrases = [], imageUrl, imageAlt }: ServicePageHeroProps) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-  
   const highlightedSubline = useMemo(() => highlightText(subline, highlightPhrases || []), [subline, highlightPhrases])
 
   return (
-    <section ref={ref} className="bg-deep-void">
+    <section className="bg-deep-void">
       <TextParallaxContent
         imgUrl={imageUrl}
         imgAlt={imageAlt}
         subheading={serviceName}
         heading={headline}
-      >
-        {/* Subline appears after parallax scroll */}
-        <div className="mx-auto max-w-4xl px-4 pb-16 pt-12 md:pb-24 md:pt-16">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl lg:text-2xl font-body font-light text-platinum/80 leading-relaxed"
-          >
-            {highlightedSubline}
-          </motion.p>
-        </div>
-      </TextParallaxContent>
+        subline={highlightedSubline}
+      />
     </section>
   )
 }
