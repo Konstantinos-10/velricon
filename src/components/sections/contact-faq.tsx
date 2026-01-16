@@ -56,6 +56,11 @@ export function ContactFaq() {
 
   const handleClearFaq = () => {
     setSelectedFaqId(null)
+    setMessage('')
+    setErrors((prev) => ({ ...prev, message: '' }))
+    if (messageRef.current) {
+      messageRef.current.value = ''
+    }
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
