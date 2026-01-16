@@ -168,7 +168,7 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Button onClick={handleStrategyCallClick} variant="primary" size="default" shiny={false}>
+            <Button onClick={handleStrategyCallClick} variant="link" size="default">
               Strategy Call
             </Button>
           </div>

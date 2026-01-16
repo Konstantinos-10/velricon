@@ -77,7 +77,7 @@ export default function ContactPage() {
                 </div>
                 <Button
                   type="submit"
-                  variant="default"
+                  variant="link"
                   size="lg"
                   className="w-full rounded-2xl font-body font-medium"
                 >

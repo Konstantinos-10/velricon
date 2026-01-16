@@ -16,7 +16,7 @@ export default function NotFound() {
           The page you're looking for doesn't exist or has been moved.
         </p>
         <Link href="/">
-          <Button variant="default" size="lg" className="rounded-full font-body font-medium">
+          <Button variant="destructive" size="lg" className="rounded-full font-body font-medium">
             Go Home
           </Button>
         </Link>
