@@ -40,6 +40,14 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: ['fractional CFO', 'financial leadership', 'startup finance', 'scaleup finance'],
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
 }
 
 export default function RootLayout({
