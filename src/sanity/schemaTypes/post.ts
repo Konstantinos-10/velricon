@@ -1,0 +1,65 @@
+import { defineField, defineType } from 'sanity'
+
+export const post = defineType({
+    name: 'post',
+    title: 'Post',
+    type: 'document',
+    fields: [
+        defineField({
+            name: 'title',
+            title: 'Title',
+            type: 'string',
+        }),
+        defineField({
+            name: 'slug',
+            title: 'Slug',
+            type: 'slug',
+            options: {
+                source: 'title',
+                maxLength: 96,
+            },
+        }),
+        defineField({
+            name: 'author',
+            title: 'Author',
+            type: 'string', // Simplified for now, or reference if you have an author type
+        }),
+        defineField({
+            name: 'mainImage',
+            title: 'Main image',
+            type: 'image',
+            options: {
+                hotspot: true,
+            },
+            fields: [
+                {
+                    name: 'alt',
+                    type: 'string',
+                    title: 'Alternative Text',
+                }
+            ]
+        }),
+        defineField({
+            name: 'publishedAt',
+            title: 'Published at',
+            type: 'datetime',
+        }),
+        defineField({
+            name: 'readTime',
+            title: 'Read Time (e.g. "5 min read")',
+            type: 'string',
+        }),
+        defineField({
+            name: 'description',
+            title: 'Short Description',
+            type: 'text',
+            rows: 3
+        }),
+        defineField({
+            name: 'body',
+            title: 'Body',
+            type: 'array',
+            of: [{ type: 'block' }, { type: 'image' }],
+        }),
+    ],
+})

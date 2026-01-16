@@ -4,8 +4,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import 'antd/dist/reset.css'
 import './globals.css'
-import { Header } from '@/components/ui/header-1'
-import { Footer } from '@/components/layout/Footer'
+import ConditionalLayout from '@/components/layout/ConditionalLayout'
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
 import { siteConfig } from '@/config/site'
 
@@ -58,11 +57,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${montserrat.variable} ${karla.variable} ${alegreya.variable}`}>
       <body className="font-body antialiased">
-        <Header />
-        <main className="min-h-screen">
+        <ConditionalLayout>
           {children}
-        </main>
-        <Footer />
+        </ConditionalLayout>
         {process.env.NEXT_PUBLIC_GA_ID ? (
           <GoogleAnalytics />
         ) : (
