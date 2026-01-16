@@ -79,7 +79,6 @@ export default function ContactPage() {
                   type="submit"
                   variant="default"
                   size="lg"
-                  shiny={false}
                   className="w-full rounded-2xl font-body font-medium"
                 >
                   Send Message
