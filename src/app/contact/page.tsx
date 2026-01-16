@@ -77,7 +77,7 @@ export default function ContactPage() {
                 </div>
                 <Button
                   type="submit"
-                  variant="primary"
+                  variant="default"
                   size="lg"
                   shiny={false}
                   className="w-full rounded-2xl font-body font-medium"
