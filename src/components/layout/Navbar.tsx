@@ -235,7 +235,7 @@ export function Navbar() {
                   </div>
                 ))}
                 <div className="px-4 pt-2">
-                  <Button onClick={handleStrategyCallClick} variant="primary" size="default" shiny={false} className="w-full">
+                  <Button onClick={handleStrategyCallClick} variant="link" size="default" className="w-full">
                     Strategy Call
                   </Button>
                 </div>

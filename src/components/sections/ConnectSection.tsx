@@ -152,7 +152,7 @@ export function ConnectSection() {
                       </p>
                       <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                         <Link href="/contact">
-                          <Button variant="primary" size="lg">
+                          <Button variant="link" size="lg">
                             Book a Strategy Call
                           </Button>
                         </Link>

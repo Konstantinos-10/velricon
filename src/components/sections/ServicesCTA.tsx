@@ -148,7 +148,7 @@ export function ServicesCTA() {
                         </p>
                         <div className="flex flex-wrap gap-2 justify-center md:justify-start pb-8 md:pb-0">
                           <Link href="/contact">
-                            <Button variant="primary" size="default" className="text-sm px-6 py-2.5">
+                            <Button variant="link" size="default" className="text-sm px-6 py-2.5">
                               Book a Strategy Call
                             </Button>
                           </Link>
