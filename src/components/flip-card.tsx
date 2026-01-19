@@ -158,7 +158,7 @@ export default function CardFlip({
                   {title}
                 </h3>
               </div>
-              <p className="line-clamp-2 text-sm tracking-tight text-zinc-600 transition-all duration-500 ease-out group-hover:translate-y-[-2px] dark:text-zinc-400">
+              <p className="whitespace-pre-line text-sm tracking-tight text-zinc-600 transition-all duration-500 ease-out group-hover:translate-y-[-2px] dark:text-zinc-400">
                 {description}
               </p>
             </div>

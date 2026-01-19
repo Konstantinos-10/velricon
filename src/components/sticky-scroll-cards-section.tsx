@@ -20,27 +20,27 @@ interface StageData {
 
 const stagesData: StageData[] = [
   {
-    title: "Start-ups",
-    subtitle: "Building your financial foundation",
-    description: "Your financial structure is still taking shape, and you need guidance without slowing down.",
+    title: "Early-stage businesses",
+    subtitle: "Establishing financial structure and discipline",
+    description: "When financial structure is still taking shape, early decisions matter. We help businesses establish clear reporting, cash-flow visibility, and financial discipline, creating a solid base for future growth and financing discussions.",
     support: "Velricon sets up your financial foundation from the ground up, providing clear reporting and preparing you for investor conversations.",
     image: "/assets/images/hero/path_through_maze.png",
     imageAlt: "Early stage business building financial foundation",
     bgColor: "#1A1F2E",
   },
   {
-    title: "Scale-ups",
-    subtitle: "Structuring growth with control",
-    description: "Growth is outpacing your financial structure, and decisions carry real weight.",
+    title: "Growing businesses",
+    subtitle: "Bringing structure and control as complexity increases",
+    description: "As growth accelerates, decisions become more complex and financial visibility becomes critical. We introduce structured reporting, budgeting, and cash-flow planning to support confident decision-making and sustainable growth.",
     support: "Velricon brings structure and control through advanced reporting and KPI visibility while building a finance function that scales.",
     image: "/assets/images/hero/modern_cityscape.png",
     imageAlt: "Growing business scaling financial operations",
     bgColor: "#1E2538",
   },
   {
-    title: "Established SMEs",
-    subtitle: "Senior financial leadership for complexity",
-    description: "Complexity is increasing, and financial decisions now affect long-term value and governance.",
+    title: "Established businesses",
+    subtitle: "Financial leadership for complex decisions",
+    description: "As complexity increases, financial decisions have long-term implications. We provide ongoing financial leadership to support strategic planning, governance, and value-focused decision-making during mature or transitional phases.",
     support: "Velricon provides a complete CFO function, leading financial strategy and supporting board-level discussions for value maximization.",
     image: "/assets/images/hero/sophisticated_boardroom.png",
     imageAlt: "Established business with board-level financial strategy",
@@ -85,14 +85,14 @@ const AnimatedHeader = () => {
         ref={headerRef}
         className={`text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight transition-all duration-700 ease-out text-white ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
       >
-        Your Virtual CFO Partner Through{' '}
-        <span className="text-strategy-blue">Every Growth Stage</span>
+        Financial Leadership{' '}
+        <span className="text-strategy-blue">Across Key Growth Stages</span>
       </h2>
       <p
         ref={pRef}
         className={`text-lg md:text-xl font-body font-light tracking-tight text-platinum/90 mt-6 transition-all duration-700 ease-out delay-200 ${pInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
       >
-        From startup launch to scale-up acceleration to established business optimization - tailored CFO services that grow with you.
+        From early-stage structure to growth and financing moments, we provide ongoing financial leadership that adapts to your business as decisions become more complex.
       </p>
     </div>
   );
@@ -150,23 +150,23 @@ export function StickyScrollCardsSection() {
             {stagesData.map((stage, index) => (
               <div
                 key={`${stage.title}-${index}`}
-                className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 md:gap-6 p-4 md:p-6 rounded-2xl mb-8 lg:mb-10 sticky border border-surface-border/50"
+                className="grid grid-cols-1 lg:grid-cols-2 items-center gap-4 md:gap-6 p-4 md:p-6 rounded-2xl mb-8 lg:mb-10 sticky border border-surface-border/50"
                 style={{ top: '140px', backgroundColor: stage.bgColor }}
               >
                 <div className="flex flex-col justify-center order-2 md:order-1">
                   <h3 className="text-xl md:text-2xl lg:text-3xl font-accent font-light tracking-tight text-white mb-2">
                     {stage.title}
                   </h3>
-                  <p className="text-xs md:text-sm font-body font-medium text-strategy-blue/90 mb-3 tracking-wide">
+                  <p className="text-sm md:text-md lg:text-lg font-body font-medium text-strategy-blue/90 mb-3 tracking-wide">
                     {stage.subtitle}
                   </p>
-                  <p className="text-xs md:text-sm font-body font-light text-slate/80 leading-relaxed">
+                  <p className="text-xs md:text-md lg:text-base font-body font-light text-slate/80 leading-relaxed">
                     {stage.description} {stage.support}
                   </p>
                 </div>
 
                 <div className="order-1 md:order-2 mt-4 md:mt-0">
-                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/[0.1]">
+                  <div className="relative aspect-[21/9] md:aspect-[4/3] rounded-xl overflow-hidden border border-white/[0.1]">
                     <Image
                       src={stage.image}
                       alt={stage.imageAlt}
@@ -275,17 +275,17 @@ export function StickyScrollCardsSection() {
                           <div className="flex flex-col items-center md:items-start">
                             <h3 className="mt-6 pb-1 font-accent font-light">
                               <span className="text-2xl md:text-4xl text-white tracking-tight leading-tight">
-                                Ready to <span className="text-strategy-blue">transform your finances</span>?
+                                Ready to <span className="text-strategy-blue">move forward with clarity?</span>
                               </span>
                             </h3>
                           </div>
                           <p className="mb-6 text-slate text-center md:text-left">
-                            Let's discuss how we can help your business grow.
+                            Lets discuss your situation and see how we can support your next financial decision.
                           </p>
                           <div className="flex flex-wrap gap-2 justify-center md:justify-start pb-8 md:pb-0">
                             <Link href="/contact">
                               <Button variant="link" size="default" className="text-sm px-6 py-2.5">
-                                Book a Strategy Call
+                                Book a Financial Strategy Call
                               </Button>
                             </Link>
                           </div>

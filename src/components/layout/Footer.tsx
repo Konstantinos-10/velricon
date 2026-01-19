@@ -21,12 +21,12 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/services/investor-ready" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
-                  Investor Preparation
+                  Investor-Ready Packages
                 </Link>
               </li>
               <li>
                 <Link href="/services/bank-ready" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
-                  Bank Financing
+                  Bank Financing & Refinancing
                 </Link>
               </li>
               <li>
@@ -43,7 +43,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/who-we-are" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
-                  Who we are
+                  Who We Are
                 </Link>
               </li>
               <li>

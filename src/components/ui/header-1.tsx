@@ -65,11 +65,11 @@ export function Header() {
 
 	const servicesLinks = {
 		primary: [
-			{ label: 'Fractional CFO', href: '/services/fractional-cfo' },
+			{ label: 'Ongoing Financial Leadership', href: '/services/fractional-cfo' },
 		],
 		secondary: [
-			{ label: 'Bank Ready Packages', href: '/services/bank-ready' },
-			{ label: 'Investor ready packages', href: '/services/investor-ready' },
+			{ label: 'Bank Financing & Refinancing', href: '/services/bank-ready' },
+			{ label: 'Investor-Ready Packages', href: '/services/investor-ready' },
 		],
 	};
 
@@ -184,7 +184,7 @@ export function Header() {
 									}}
 									className="w-full flex items-center justify-center px-6 py-3.5 bg-white text-black font-body text-sm font-medium rounded-full hover:bg-white/90 transition-all duration-300"
 								>
-									Consultation Call
+									Financial Strategy Call
 								</button>
 							</div>
 						</div>
@@ -217,104 +217,104 @@ export function Header() {
 					</Link>
 
 					<div className="hidden items-center gap-6 md:flex">
-					{/* Services Dropdown */}
-					<div
-						ref={servicesDropdownRef}
-						className="relative"
-						onPointerEnter={() => setIsServicesDropdownOpen(true)}
-						onPointerLeave={() => setIsServicesDropdownOpen(false)}
-					>
-						<Link
-							href="/services"
-							onClick={() => setIsServicesDropdownOpen(false)}
-							className={cn(
-								buttonVariants({ variant: 'ghost' }),
-								'font-body text-base xl:text-lg text-white/90 hover:text-white flex items-center gap-1.5 hover:bg-transparent'
-							)}
+						{/* Services Dropdown */}
+						<div
+							ref={servicesDropdownRef}
+							className="relative"
+							onPointerEnter={() => setIsServicesDropdownOpen(true)}
+							onPointerLeave={() => setIsServicesDropdownOpen(false)}
 						>
-							Services
-							<ChevronDown
-								size={16}
+							<Link
+								href="/services"
+								onClick={() => setIsServicesDropdownOpen(false)}
 								className={cn(
-									'transition-transform duration-200',
-									isServicesDropdownOpen ? 'rotate-180' : ''
+									buttonVariants({ variant: 'ghost' }),
+									'font-body text-base xl:text-lg text-white/90 hover:text-white flex items-center gap-1.5 hover:bg-transparent'
 								)}
-							/>
-						</Link>
+							>
+								Services
+								<ChevronDown
+									size={16}
+									className={cn(
+										'transition-transform duration-200',
+										isServicesDropdownOpen ? 'rotate-180' : ''
+									)}
+								/>
+							</Link>
 
-						<AnimatePresence>
-							{isServicesDropdownOpen && (
-								<motion.div
-									initial={{ opacity: 0, y: -10 }}
-									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, y: -10 }}
-									transition={{ duration: 0.12, ease: 'easeOut' }}
-									className="absolute top-full left-0 mt-2 min-w-[220px] z-30"
-								>
-									<div
-										className="rounded-xl overflow-hidden border border-white/[0.15]"
-										style={{
-											background: 'rgba(14, 16, 26, 0.95)',
-											backdropFilter: 'blur(24px)',
-											boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
-										}}
+							<AnimatePresence>
+								{isServicesDropdownOpen && (
+									<motion.div
+										initial={{ opacity: 0, y: -10 }}
+										animate={{ opacity: 1, y: 0 }}
+										exit={{ opacity: 0, y: -10 }}
+										transition={{ duration: 0.12, ease: 'easeOut' }}
+										className="absolute top-full left-0 mt-2 min-w-[220px] z-30"
 									>
-										<div className="py-2">
-											{[...servicesLinks.primary, ...servicesLinks.secondary].map((item) => (
-												<Link
-													key={item.href}
-													href={item.href}
-													onClick={() => {
-														setIsServicesDropdownOpen(false);
-														trackEvent('nav_service_click', { service: item.label });
-													}}
-													className="block px-4 py-2.5 text-sm font-body text-white/70 hover:text-white hover:bg-white/[0.05] transition-all duration-200"
-												>
-													{item.label}
-												</Link>
-											))}
+										<div
+											className="rounded-xl overflow-hidden border border-white/[0.15]"
+											style={{
+												background: 'rgba(14, 16, 26, 0.95)',
+												backdropFilter: 'blur(24px)',
+												boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+											}}
+										>
+											<div className="py-2">
+												{[...servicesLinks.primary, ...servicesLinks.secondary].map((item) => (
+													<Link
+														key={item.href}
+														href={item.href}
+														onClick={() => {
+															setIsServicesDropdownOpen(false);
+															trackEvent('nav_service_click', { service: item.label });
+														}}
+														className="block px-4 py-2.5 text-sm font-body text-white/70 hover:text-white hover:bg-white/[0.05] transition-all duration-200"
+													>
+														{item.label}
+													</Link>
+												))}
+											</div>
 										</div>
-									</div>
-								</motion.div>
-							)}
-						</AnimatePresence>
+									</motion.div>
+								)}
+							</AnimatePresence>
+						</div>
+
+						{/* Other Links */}
+						{links.map((link) => (
+							<Link
+								key={link.label}
+								href={link.href}
+								className={cn(
+									buttonVariants({ variant: 'ghost' }),
+									'font-body text-base xl:text-lg text-white/90 hover:text-white hover:bg-transparent'
+								)}
+							>
+								{link.label}
+							</Link>
+						))}
+
+						<Button
+							variant="outline"
+							onClick={handleStrategyCallClick}
+							className="bg-white text-black border-2 border-black rounded-full px-6 xl:px-8 py-3 xl:py-3.5 text-sm xl:text-base font-body font-medium hover:bg-white/90 hover:text-black"
+						>
+							Financial Strategy Call
+						</Button>
 					</div>
 
-					{/* Other Links */}
-					{links.map((link) => (
-						<Link
-							key={link.label}
-							href={link.href}
-							className={cn(
-								buttonVariants({ variant: 'ghost' }),
-								'font-body text-base xl:text-lg text-white/90 hover:text-white hover:bg-transparent'
-							)}
-						>
-							{link.label}
-						</Link>
-					))}
-
 					<Button
+						size="icon"
 						variant="outline"
-						onClick={handleStrategyCallClick}
-						className="bg-white text-black border-2 border-black rounded-full px-6 xl:px-8 py-3 xl:py-3.5 text-sm xl:text-base font-body font-medium hover:bg-white/90 hover:text-black"
+						onClick={() => setOpen(!open)}
+						className="md:hidden text-white/60 hover:text-white hover:bg-white/5 bg-transparent"
+						aria-expanded={open}
+						aria-controls="mobile-menu"
+						aria-label="Toggle menu"
 					>
-						Consultation Call
+						{open ? <X size={24} /> : <Menu size={24} />}
 					</Button>
-				</div>
-
-				<Button
-					size="icon"
-					variant="outline"
-					onClick={() => setOpen(!open)}
-					className="md:hidden text-white/60 hover:text-white hover:bg-white/5 bg-transparent"
-					aria-expanded={open}
-					aria-controls="mobile-menu"
-					aria-label="Toggle menu"
-				>
-					{open ? <X size={24} /> : <Menu size={24} />}
-				</Button>
-			</nav>
+				</nav>
 
 			</header>
 			{isMounted ? createPortal(mobileMenu, document.body) : null}

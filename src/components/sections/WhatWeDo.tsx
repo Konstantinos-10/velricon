@@ -33,26 +33,26 @@ const whatWeDoGridStyles = `
 
 const services = [
   {
-    id: 'investor-ready',
-    title: 'Investor-Ready Packages',
-    subtitle: 'Confidence through diligence-ready materials.',
-    description: 'Financial models, valuations, and forecasts that stand up to investor scrutiny and support funding discussions.',
+    id: 'fractional-cfo',
+    title: 'Ongoing Financial Leadership (Your Virtual CFO Partner)',
+    subtitle: 'Senior financial leadership supporting planning and control.',
+    description: 'Ongoing support with management reporting, budgeting, cash flow forecasting, and financial planning — helping owners stay in control as the business grows.\nThis can include support during special situations such as restructuring, shareholder changes, or transaction preparation.',
     features: [
-      'Due diligence prep',
-      'Financial models',
-      'Valuation support',
-      'Investor presentations',
+      'Monthly reporting',
+      'Financial strategy',
+      'Cash flow management',
+      'Growth planning',
     ],
-    linkLabel: 'Prepare for Funding',
-    href: '/services/investor-ready',
+    linkLabel: 'Explore Financial Support',
+    href: '/services/fractional-cfo',
     color: '#74B3FF',
-    icon: Wallet,
-    backIcon: BarChart3,
+    icon: TrendingUp,
+    backIcon: LineChart,
   },
   {
     id: 'bank-ready',
     title: 'Bank Financing & Refinancing',
-    subtitle: 'Documents aligned to Cyprus bank standards.',
+    subtitle: 'Financial projections and analysis aligned with bank requirements.',
     description: 'Bank-ready projections and cash-flow forecasts aligned with lender requirements to support approvals and refinancing.',
     features: [
       'Financial statements',
@@ -67,21 +67,21 @@ const services = [
     backIcon: FileText,
   },
   {
-    id: 'fractional-cfo',
-    title: 'Ongoing Financial Leadership',
-    subtitle: 'Strategic leadership without full-time overhead.',
-    description: 'Ongoing support with management reporting, budgeting, cash flow forecasting, and financial planning  helping owners stay in control as the business grows.',
+    id: 'investor-ready',
+    title: 'Investor-Ready Packages',
+    subtitle: 'Clear financial models and analysis designed for investor scrutiny.',
+    description: 'Financial models, valuations, and forecasts that stand up to investor scrutiny and support funding discussions.',
     features: [
-      'Monthly reporting',
-      'Financial strategy',
-      'Cash flow management',
-      'Growth planning',
+      'Due diligence prep',
+      'Financial models',
+      'Valuation support',
+      'Investor presentations',
     ],
-    linkLabel: 'Explore Financial Work',
-    href: '/services/fractional-cfo',
+    linkLabel: 'Prepare for Funding',
+    href: '/services/investor-ready',
     color: '#74B3FF',
-    icon: TrendingUp,
-    backIcon: LineChart,
+    icon: Wallet,
+    backIcon: BarChart3,
   },
 ];
 
@@ -92,25 +92,25 @@ export function WhatWeDo() {
   return (
     <>
       <style>{whatWeDoGridStyles}</style>
-      <section 
+      <section
         ref={sectionRef}
         className="relative py-32 lg:py-40 overflow-hidden"
         style={{ background: '#FAFAFA' }}
       >
         {/* Subtle texture */}
-      <div 
+        <div
           className="absolute inset-0 opacity-[0.03]"
-        style={{
+          style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, #0E101A 1px, transparent 0)`,
             backgroundSize: '32px 32px',
           }}
         />
-        
+
         {/* Animated Grid Background */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <pattern id="gridWhatWeDo" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(30, 41, 59, 0.2)" strokeWidth="0.5"/>
+              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(30, 41, 59, 0.2)" strokeWidth="0.5" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#gridWhatWeDo)" />
@@ -126,65 +126,65 @@ export function WhatWeDo() {
           <circle cx="80%" cy="80%" r="3" className="detail-dot-light" style={{ animationDelay: '1.1s' }} />
           <circle cx="50%" cy="50%" r="2.5" className="detail-dot-light" style={{ animationDelay: '1.2s' }} />
         </svg>
-      
-      <Container size="xl" className="relative z-10">
-        {/* Opening Statement - KEPT UNCHANGED */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 1 }}
-          className="mb-24 lg:mb-32"
-        >
-          <div className="max-w-4xl">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="font-accent text-3xl lg:text-4xl xl:text-5xl leading-[1.05] tracking-tight text-dark-ink"
-            >
-              How We Help <span className="text-electric-blue">Businesses</span> Grow with{' '}
-              <span className="text-electric-blue">Confidence</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.35 }}
-              className="mt-5 text-xl md:text-2xl font-body font-light tracking-tight text-dark-ink/70"
-            >
-              We give you the financial clarity to make decisions that matter.
-            </motion.p>
-          </div>
-        </motion.div>
 
-        {/* Services Showcase - Cards */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
-              className="flex justify-center"
-            >
-              <div className="block w-full max-w-[320px]">
-                <CardFlip
-                  title={service.title}
-                  subtitle={service.subtitle}
-                  description={service.description}
-                  features={service.features}
-                  color={service.color}
-                  icon={service.icon}
-                  backIcon={service.backIcon}
-                  href={service.href}
-                  linkLabel={service.linkLabel}
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </Container>
-    </section>
+        <Container size="xl" className="relative z-10">
+          {/* Opening Statement - KEPT UNCHANGED */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 1 }}
+            className="mb-24 lg:mb-32"
+          >
+            <div className="max-w-4xl">
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="font-accent text-3xl lg:text-4xl xl:text-5xl leading-[1.05] tracking-tight text-dark-ink"
+              >
+                How We Help <span className="text-electric-blue">Businesses</span> Grow with{' '}
+                <span className="text-electric-blue">Confidence</span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="mt-5 text-xl md:text-2xl font-body font-light tracking-tight text-dark-ink/70"
+              >
+                We give you the financial clarity to make decisions that matter.
+              </motion.p>
+            </div>
+          </motion.div>
+
+          {/* Services Showcase - Cards */}
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
+                className="flex justify-center"
+              >
+                <div className="block w-full max-w-[320px]">
+                  <CardFlip
+                    title={service.title}
+                    subtitle={service.subtitle}
+                    description={service.description}
+                    features={service.features}
+                    color={service.color}
+                    icon={service.icon}
+                    backIcon={service.backIcon}
+                    href={service.href}
+                    linkLabel={service.linkLabel}
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </Container>
+      </section>
     </>
   );
 }

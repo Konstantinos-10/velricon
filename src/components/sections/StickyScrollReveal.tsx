@@ -53,7 +53,7 @@ export function StickyScrollReveal() {
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <pattern id="gridStickyScroll" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(100, 116, 139, 0.1)" strokeWidth="0.5"/>
+              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(100, 116, 139, 0.1)" strokeWidth="0.5" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#gridStickyScroll)" />
@@ -69,76 +69,77 @@ export function StickyScrollReveal() {
           <circle cx="80%" cy="80%" r="2" className="detail-dot-dark" style={{ animationDelay: '1s' }} />
           <circle cx="50%" cy="50%" r="1.5" className="detail-dot-dark" style={{ animationDelay: '1.1s' }} />
         </svg>
-      <Container size="xl" className="relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-left mb-12 lg:mb-16"
-        >
-          <motion.h2
+        <Container size="xl" className="relative z-10">
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-3xl lg:text-4xl xl:text-5xl font-light tracking-tight leading-[1.05] text-white mb-6"
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-left mb-12 lg:mb-16"
           >
-            Who We <span className="text-electric-blue">Support</span>
-          </motion.h2>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="w-full py-4"
-        >
-          <div className="grid gap-10 md:grid-cols-2 items-start">
-            <div className="space-y-5">
-              <p className="text-base md:text-lg font-light tracking-tight text-white">
-                We work with business owners and management teams who need financial clarity to make important decisions.
-              </p>
-              <p className="text-base md:text-lg font-light tracking-tight text-white">
-                Our work typically starts when a business is:
-              </p>
-              <ul className="list-disc space-y-3 pl-5 text-base md:text-lg font-light text-slate">
-                <li>Preparing for bank financing or refinancing</li>
-                <li>Getting ready for investor discussions or funding</li>
-                <li>Seeking management reporting, budgeting, and deeper financial analysis</li>
-                <li>Strengthening cash flow forecasting and financial planning</li>
-                <li>Bringing structure and discipline to financial decision-making</li>
-                <li>Needing senior financial insight during periods of growth or change</li>
-              </ul>
-              <p className="text-base md:text-lg font-light text-white">
-                Our focus is on practical financial leadership that helps businesses move forward with confidence.
-              </p>
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-3xl lg:text-4xl xl:text-5xl font-light tracking-tight leading-[1.05] text-white mb-6"
+            >
+              Who We <span className="text-electric-blue">Support</span>
+            </motion.h2>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="w-full py-4"
+          >
+            <div className="grid gap-10 md:grid-cols-2 items-start">
+              <div className="space-y-5">
+                <p className="text-base md:text-lg font-light tracking-tight text-white">
+                  We work with business owners and management teams who need financial clarity to make important decisions.
+                </p>
+                <p className="text-base md:text-lg font-light tracking-tight text-white">
+                  Our work typically starts when a business is:
+                </p>
+                <ul className="list-disc space-y-3 pl-5 text-base md:text-lg font-light text-slate">
+                  <li>Preparing for bank financing or refinancing</li>
+                  <li>Getting ready for investor discussions or funding</li>
+                  <li>Seeking management reporting, budgeting, and deeper financial analysis</li>
+                  <li>Strengthening cash flow forecasting and financial planning</li>
+                  <li>Bringing structure and discipline to financial decision-making</li>
+                  <li>Needing senior financial insight during periods of growth or change</li>
+                  <li>Navigating restructuring, ownership changes, or complex financial decisions</li>
+                </ul>
+                <p className="text-base md:text-lg font-light text-white">
+                  Our focus is on practical financial leadership that helps businesses move forward with confidence.
+                </p>
+              </div>
+              <div className="relative h-[280px] md:h-[420px] w-full overflow-hidden rounded-2xl border border-white/10">
+                <Image
+                  src="/assets/images/sticky-scroll/modular_architecture.png"
+                  alt="Modular architecture"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-deep-void/40 via-transparent to-elevation-layer/60" />
+              </div>
             </div>
-            <div className="relative h-[280px] md:h-[420px] w-full overflow-hidden rounded-2xl border border-white/10">
-              <Image
-                src="/assets/images/sticky-scroll/modular_architecture.png"
-                alt="Modular architecture"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-deep-void/40 via-transparent to-elevation-layer/60" />
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-16 lg:mt-24"
-        >
-          <CallToAction />
-        </motion.div>
-      </Container>
-    </motion.section>
+          {/* CTA Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-16 lg:mt-24"
+          >
+            <CallToAction />
+          </motion.div>
+        </Container>
+      </motion.section>
     </>
   );
 }
