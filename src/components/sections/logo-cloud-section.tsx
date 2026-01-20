@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion"
 import { LogoCloud } from "@/components/ui/logo-cloud-3"
 
 const logos = [
@@ -97,7 +98,13 @@ export function LogoCloudSection() {
         <circle cx="50%" cy="50%" r="1.5" className="detail-dot-dark" style={{ animationDelay: "1.1s" }} />
       </svg>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-10 md:py-12 lg:px-20">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 mx-auto max-w-7xl px-6 py-10 md:py-12 lg:px-20"
+      >
         <h2 className="text-center text-3xl lg:text-4xl xl:text-5xl font-light tracking-tight leading-[1.05] text-platinum mb-4">
           <span className="text-electric-blue">Businesses</span> we've supported
         </h2>
@@ -105,7 +112,7 @@ export function LogoCloudSection() {
           Across different industries, stages, and financial situations.
         </p>
         <LogoCloud logos={logos} />
-      </div>
+      </motion.div>
     </section>
   )
 }
