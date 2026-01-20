@@ -3,6 +3,8 @@
 import React, { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
+import { Button } from '@/components/ui/Button'
+import Link from 'next/link'
 
 const IMG_PADDING = 12
 
@@ -12,16 +14,18 @@ interface TextParallaxContentProps {
   subheading: string
   heading: string
   subline?: React.ReactNode
+  cta?: string
   children?: React.ReactNode
 }
 
-export function TextParallaxContent({ 
-  imgUrl, 
+export function TextParallaxContent({
+  imgUrl,
   imgAlt = '',
-  subheading, 
-  heading, 
+  subheading,
+  heading,
   subline,
-  children 
+  cta,
+  children
 }: TextParallaxContentProps) {
   return (
     <div
@@ -33,7 +37,7 @@ export function TextParallaxContent({
     >
       <div className="relative h-[150vh]">
         <StickyImage imgUrl={imgUrl} imgAlt={imgAlt} />
-        <OverlayCopy subheading={subheading} heading={heading} subline={subline} />
+        <OverlayCopy subheading={subheading} heading={heading} subline={subline} cta={cta} />
       </div>
       {children && (
         <div className="bg-white">
@@ -93,9 +97,10 @@ interface OverlayCopyProps {
   subheading: string
   heading: string
   subline?: React.ReactNode
+  cta?: string
 }
 
-const OverlayCopy = ({ subheading, heading, subline }: OverlayCopyProps) => {
+const OverlayCopy = ({ subheading, heading, subline, cta }: OverlayCopyProps) => {
   const targetRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -123,6 +128,15 @@ const OverlayCopy = ({ subheading, heading, subline }: OverlayCopyProps) => {
       {subline && (
         <div className="mt-6 max-w-3xl px-4 text-center text-base md:text-lg lg:text-xl font-body font-light text-platinum/80 leading-relaxed">
           {subline}
+        </div>
+      )}
+      {cta && (
+        <div className="mt-8">
+          <Link href="/contact" passHref>
+            <Button size="lg" className="bg-strategy-blue hover:bg-strategy-blue/90 text-white border-none min-w-[200px] text-base font-medium font-body tracking-wide">
+              {cta}
+            </Button>
+          </Link>
         </div>
       )}
     </motion.div>

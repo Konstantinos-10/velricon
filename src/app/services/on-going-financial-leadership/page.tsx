@@ -3,7 +3,7 @@ import { ServicePageLayout } from '@/components/services/ServicePageLayout'
 import { getServicePageBySlug } from '@/config/service-pages'
 
 export const metadata: Metadata = {
-  title: 'Fractional CFO Services',
+  title: 'Fractional CFO',
   description: 'Senior financial leadership without full-time overhead. How Velricon applies CFO-level expertise to growing businesses.',
 }
 

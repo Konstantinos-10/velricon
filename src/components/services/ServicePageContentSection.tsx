@@ -7,22 +7,25 @@ import Image from 'next/image'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface ServicePageContentSectionProps {
+  title: string
   authorityAndControl: string
   impactOnDecisions: string
+  imageUrl: string
+  imageAlt: string
 }
 
-export function ServicePageContentSection({ authorityAndControl, impactOnDecisions }: ServicePageContentSectionProps) {
+export function ServicePageContentSection({ title, authorityAndControl, impactOnDecisions, imageUrl, imageAlt }: ServicePageContentSectionProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const prefersReducedMotion = useReducedMotion()
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="relative bg-soft-white py-24 md:py-32 lg:py-40 overflow-hidden"
     >
       {/* Subtle background gradient */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: 'linear-gradient(to bottom, #FFFFFF 0%, #F8F9FA 50%, #F4F6F9 100%)',
@@ -30,6 +33,16 @@ export function ServicePageContentSection({ authorityAndControl, impactOnDecisio
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="text-3xl lg:text-4xl font-accent font-light text-black mb-12 sm:mb-16 md:mb-20"
+        >
+          {title}
+        </motion.h2>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column - Main Content */}
           <div className="lg:col-span-7 space-y-8 md:space-y-10">
@@ -37,11 +50,11 @@ export function ServicePageContentSection({ authorityAndControl, impactOnDecisio
             <motion.p
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={prefersReducedMotion 
+              transition={prefersReducedMotion
                 ? { duration: 0.3 }
                 : { duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }
               }
-              className="text-lg md:text-xl lg:text-2xl font-body font-light text-dark-ink leading-relaxed"
+              className="text-base md:text-lg font-body font-light text-dark-ink leading-relaxed"
             >
               {authorityAndControl}
             </motion.p>
@@ -50,11 +63,11 @@ export function ServicePageContentSection({ authorityAndControl, impactOnDecisio
             <motion.p
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={prefersReducedMotion 
+              transition={prefersReducedMotion
                 ? { duration: 0.3 }
                 : { duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }
               }
-              className="text-lg md:text-xl lg:text-2xl font-body font-light text-dark-ink leading-relaxed"
+              className="text-base md:text-lg font-body font-light text-dark-ink leading-relaxed"
             >
               {impactOnDecisions}
             </motion.p>
@@ -65,7 +78,7 @@ export function ServicePageContentSection({ authorityAndControl, impactOnDecisio
             <motion.div
               initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={prefersReducedMotion 
+              transition={prefersReducedMotion
                 ? { duration: 0.3 }
                 : { duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }
               }
@@ -74,8 +87,8 @@ export function ServicePageContentSection({ authorityAndControl, impactOnDecisio
               {/* Image */}
               <div className="absolute inset-0">
                 <Image
-                  src="/assets/images/hero/sophisticated_boardroom.png"
-                  alt=""
+                  src={imageUrl}
+                  alt={imageAlt}
                   fill
                   className="object-cover"
                   style={{
@@ -85,9 +98,9 @@ export function ServicePageContentSection({ authorityAndControl, impactOnDecisio
                   aria-hidden="true"
                 />
               </div>
-              
+
               {/* Overlay for light theme integration */}
-              <div 
+              <div
                 className="absolute inset-0"
                 style={{
                   background: 'linear-gradient(135deg, rgba(244, 246, 249, 0.4) 0%, rgba(255, 255, 255, 0.2) 100%)',
@@ -104,10 +117,10 @@ export function ServicePageContentSection({ authorityAndControl, impactOnDecisio
                 >
                   <defs>
                     <pattern id="serviceContentGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                      <path 
-                        d="M 40 0 L 0 0 0 40" 
-                        fill="none" 
-                        stroke="#94A3B8" 
+                      <path
+                        d="M 40 0 L 0 0 0 40"
+                        fill="none"
+                        stroke="#94A3B8"
                         strokeWidth="0.5"
                         opacity="0.3"
                       />
