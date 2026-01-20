@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Hand, MousePointer2 } from 'lucide-react'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
@@ -31,7 +31,7 @@ const nodes: LifecycleNode[] = [
       'Early decisions around pricing, costs, and cash flow shape everything that follows. Financial clarity at this stage prevents avoidable problems later.',
     imageUrl: '/assets/images/sticky-scroll/vault_with_organized_interior.png',
     imageAlt: 'Vault with organized interior',
-    services: [{ label: 'View Fractional CFO', href: '/services/fractional-cfo' }],
+    services: [{ label: 'On-going Financial Leadership', href: '/services/fractional-cfo' }],
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ const nodes: LifecycleNode[] = [
       'As the business grows, reporting, budgeting, and cash flow discipline become essential to support hiring, expansion, and operational decisions.',
     imageUrl: '/assets/images/sticky-scroll/modular_architecture.png',
     imageAlt: 'Modular architecture',
-    services: [{ label: 'View Fractional CFO', href: '/services/fractional-cfo' }],
+    services: [{ label: 'On-going Financial Leadership', href: '/services/fractional-cfo' }],
   },
   {
     id: 3,
@@ -56,8 +56,8 @@ const nodes: LifecycleNode[] = [
     imageUrl: '/assets/images/sticky-scroll/modern_office_with_city_view.png',
     imageAlt: 'Modern office with city view',
     services: [
-      { label: 'View Bank-Ready Packages', href: '/services/bank-ready' },
-      { label: 'View Investor-Ready Packages', href: '/services/investor-ready' },
+      { label: 'Bank Financing & Refinancing', href: '/services/bank-ready' },
+      { label: 'Investor-Ready Packages', href: '/services/investor-ready' },
     ],
   },
   {
@@ -70,7 +70,7 @@ const nodes: LifecycleNode[] = [
       'At this stage, financial leadership supports strategic choices around optimisation, restructuring, or longer-term transition planning.',
     imageUrl: '/assets/images/sticky-scroll/cozy_meeting_space.png',
     imageAlt: 'Cozy meeting space',
-    services: [{ label: 'View Investor-Ready Packages', href: '/services/investor-ready' }],
+    services: [{ label: 'Investor-Ready Packages', href: '/services/investor-ready' }],
   },
 ]
 
@@ -151,7 +151,7 @@ export function LifecycleInterventionMap() {
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <pattern id="gridLifecycle" width="60" height="60" patternUnits="userSpaceOnUse">
-            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(100, 116, 139, 0.1)" strokeWidth="0.5"/>
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(100, 116, 139, 0.1)" strokeWidth="0.5" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#gridLifecycle)" />
@@ -191,6 +191,23 @@ export function LifecycleInterventionMap() {
                 transition={{ duration: 0.6, ease: 'easeInOut' }}
                 className="absolute left-10 right-10 top-1/2 hidden h-px origin-left bg-white/10 md:block"
               />
+
+              {/* Hint Indicator - Matching Flip Card Style */}
+              <div className="absolute top-4 right-4 z-20">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-deep-void/60 backdrop-blur-md border border-white/10 text-[10px] font-medium tracking-wide uppercase text-platinum/80 shadow-sm">
+                  {isCoarsePointer ? (
+                    <>
+                      <Hand className="w-3 h-3 text-strategy-blue" />
+                      <span>Tap node</span>
+                    </>
+                  ) : (
+                    <>
+                      <MousePointer2 className="w-3 h-3 text-strategy-blue" />
+                      <span>Hover & Click</span>
+                    </>
+                  )}
+                </div>
+              </div>
 
               <div className="hidden md:grid grid-cols-4 gap-6 relative z-10">
                 {nodes.map((node, index) => {
