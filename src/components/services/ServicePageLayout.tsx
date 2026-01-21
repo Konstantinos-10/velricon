@@ -43,12 +43,32 @@ export function ServicePageLayout({ content }: ServicePageLayoutProps) {
         />
       )}
       {content.subServices && <ServiceSubServices subServices={content.subServices} />}
-      {content.slug === 'on-going-financial-leadership' && <Feature />}
+
+      {/* Case 1: For Fractional CFO, process (Support Section) comes before coverage */}
+      {content.slug === 'on-going-financial-leadership' && content.supportSection && (
+        <Feature
+          sectionTitle={content.supportSection.title}
+          paragraphs={content.supportSection.paragraphs}
+          imageUrl={content.supportSection.imageUrl}
+          imageAlt={content.supportSection.imageAlt}
+        />
+      )}
+
       {content.typicalCoverage && (
         <ServicePageCoversSection
           intro={content.typicalCoverage.intro}
           items={content.typicalCoverage.items}
           exit={content.typicalCoverage.exit}
+        />
+      )}
+
+      {/* Case 2: For Bank Ready and Investor Ready, support section comes at the absolute bottom */}
+      {content.slug !== 'on-going-financial-leadership' && content.supportSection && (
+        <Feature
+          sectionTitle={content.supportSection.title}
+          paragraphs={content.supportSection.paragraphs}
+          imageUrl={content.supportSection.imageUrl}
+          imageAlt={content.supportSection.imageAlt}
         />
       )}
     </>

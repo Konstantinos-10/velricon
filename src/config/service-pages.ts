@@ -44,6 +44,14 @@ export interface ServicePageContent {
     exit: string
   }
 
+  // Section 5: How we support the process
+  supportSection?: {
+    title: string
+    paragraphs: string[]
+    imageUrl?: string
+    imageAlt?: string
+  }
+
   // Section 3: Sub-Services (Optional)
   subServices?: SubServiceConfig[]
 }
@@ -77,6 +85,18 @@ export const servicePages: ServicePageContent[] = [
       ],
       imageUrl: '/assets/images/hero/sophisticated_boardroom.png', // Reusing for now or user can update
       imageAlt: 'Confident financial leadership in action',
+    },
+    supportSection: {
+      title: 'How ongoing financial leadership works',
+      paragraphs: [
+        'Support is provided on a recurring basis, with clear priorities and regular engagement — without the commitment of a full-time executive.',
+        'We work alongside management and existing accountants, strengthening financial insight without disrupting established operations.',
+        'The level of involvement adjusts as the business evolves, focusing effort where decisions carry the most weight.',
+        'Financial work is guided by upcoming decisions, risks, and opportunities — not by reporting for its own sake.',
+        'Best when: You want clarity, structure, and senior financial input embedded into day-to-day decision-making.',
+      ],
+      imageUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2074&auto=format&fit=crop',
+      imageAlt: 'Collaborative financial strategy meeting',
     },
     typicalCoverage: {
       intro: 'Ongoing financial leadership is not a fixed checklist, but it commonly includes support across areas such as:',
@@ -152,6 +172,16 @@ export const servicePages: ServicePageContent[] = [
       ],
       exit: 'The focus is always on ensuring that financing decisions are based on realistic, well-structured financial information — not optimistic assumptions or reactive explanations.',
     },
+    supportSection: {
+      title: 'How we support the process',
+      paragraphs: [
+        'Our role is to support business owners and management teams through the preparation and decision-making phase of bank financing or refinancing — not to act as intermediaries or brokers.',
+        'We work closely with existing accountants, finance teams, and advisors to structure financial information, challenge assumptions, and ensure that projections and cash-flow analysis reflect how the business actually operates. This collaboration helps avoid last-minute surprises and reduces friction during bank discussions.',
+        'Support is focused and proportional. Involvement increases around key decision points and bank interactions, then scales back once clarity is achieved. The objective is to equip leadership with the financial insight and confidence needed to engage constructively with lenders — without adding unnecessary layers or long-term overhead',
+      ],
+      imageUrl: 'https://images.unsplash.com/photo-1560472355-536de3962603?q=80&w=2070&auto=format&fit=crop',
+      imageAlt: 'Professional bank financing consultation',
+    },
   },
   {
     slug: 'investor-ready',
@@ -194,6 +224,16 @@ export const servicePages: ServicePageContent[] = [
         'Support during investor meetings to explain numbers, scenarios, and trade-offs',
       ],
       exit: 'The focus is on creating financial information that investors can trust, interrogate, and use as a basis for decision-making — not on producing overly complex models or promotional materials.',
+    },
+    supportSection: {
+      title: 'How we support the process',
+      paragraphs: [
+        'Our role is to support founders and management teams through the preparation and evaluation phase of investor discussions — not to act as placement agents or fundraising intermediaries.',
+        'We work closely with founders, existing finance teams, and external advisors to ensure that financial models, assumptions, and valuation logic are internally consistent and aligned with how the business actually operates. This preparation helps founders respond confidently to investor questions and navigate scrutiny without losing control of the narrative.',
+        'Support is focused around key milestones: preparing materials ahead of discussions, stress-testing assumptions, and providing clarity during meetings when financial logic needs to be explained or challenged. The objective is to enable informed, professional investor conversations grounded in realistic financial insight.',
+      ],
+      imageUrl: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=2070&auto=format&fit=crop',
+      imageAlt: 'Strategic investor preparation session',
     },
   },
 ]
