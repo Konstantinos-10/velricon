@@ -37,6 +37,13 @@ export interface ServicePageContent {
     imageAlt: string
   }
 
+  // Section 4: What this typically covers
+  typicalCoverage?: {
+    intro: string
+    items: string[]
+    exit: string
+  }
+
   // Section 3: Sub-Services (Optional)
   subServices?: SubServiceConfig[]
 }
@@ -70,6 +77,20 @@ export const servicePages: ServicePageContent[] = [
       ],
       imageUrl: '/assets/images/hero/sophisticated_boardroom.png', // Reusing for now or user can update
       imageAlt: 'Confident financial leadership in action',
+    },
+    typicalCoverage: {
+      intro: 'Ongoing financial leadership is not a fixed checklist, but it commonly includes support across areas such as:',
+      items: [
+        'Management reporting and financial performance review.',
+        'Budgeting, forecasting, and cash-flow planning',
+        'Liquidity management and working capital optimisation',
+        'Financial analysis to support pricing, investments, and growth decisions',
+        'Scenario planning and risk assessment',
+        'Preparation for bank discussions or investor conversations',
+        'Support during acquisitions, restructurings, or complex transitions',
+        'Strengthening financial processes, controls, and financial discipline',
+      ],
+      exit: 'The focus is always on applying the right level of financial structure to support better decisions — not on producing reports for their own sake.',
     },
     subServices: [
       {
@@ -118,6 +139,19 @@ export const servicePages: ServicePageContent[] = [
       imageUrl: '/assets/images/hero/path_through_maze.png',
       imageAlt: 'Structured path representing organized financial preparation',
     },
+    typicalCoverage: {
+      intro: 'Bank financing and refinancing support is tailored to the specific situation, but typically includes:',
+      items: [
+        'Preparation of financial projections aligned with the purpose of the financing',
+        'Cash-flow forecasting and debt-servicing capacity analysis',
+        'Sensitivity and scenario analysis to assess downside risk',
+        'Review and structuring of existing debt and refinancing options',
+        'Clarification of funding use, repayment logic, and key assumptions',
+        'Support in presenting financial information clearly during bank discussions',
+        'Preparation for refinancing, restructuring, or more complex lending situations',
+      ],
+      exit: 'The focus is always on ensuring that financing decisions are based on realistic, well-structured financial information — not optimistic assumptions or reactive explanations.',
+    },
   },
   {
     slug: 'investor-ready',
@@ -147,6 +181,19 @@ export const servicePages: ServicePageContent[] = [
       ],
       imageUrl: '/assets/images/hero/modern_cityscape.png',
       imageAlt: 'Modern cityscape representing strategic vision and scale',
+    },
+    typicalCoverage: {
+      intro: 'Investor-ready support is tailored to the specific context of each business, but typically includes:',
+      items: [
+        'Integrated financial models that clearly link strategy, operations, and funding requirements',
+        'Scenario and sensitivity analysis to test assumptions and downside risk',
+        'Business valuation frameworks aligned with investor expectations',
+        'Clarification of funding use, milestones, and capital allocation logic',
+        'Preparation of financial materials to support due diligence discussions',
+        'Review and refinement of key financial assumptions and narratives',
+        'Support during investor meetings to explain numbers, scenarios, and trade-offs',
+      ],
+      exit: 'The focus is on creating financial information that investors can trust, interrogate, and use as a basis for decision-making — not on producing overly complex models or promotional materials.',
     },
   },
 ]

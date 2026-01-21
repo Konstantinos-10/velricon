@@ -4,6 +4,7 @@ import { ServicePageContentSection } from './ServicePageContentSection'
 import { ServicePageReverseContent } from './ServicePageReverseContent'
 import { ServiceSubServices } from './ServiceSubServices'
 import { Feature } from '@/components/ui/feature'
+import { ServicePageCoversSection } from './ServicePageCoversSection'
 import { ServicePageContent } from '@/config/service-pages'
 
 interface ServicePageLayoutProps {
@@ -43,6 +44,13 @@ export function ServicePageLayout({ content }: ServicePageLayoutProps) {
       )}
       {content.subServices && <ServiceSubServices subServices={content.subServices} />}
       {content.slug === 'on-going-financial-leadership' && <Feature />}
+      {content.typicalCoverage && (
+        <ServicePageCoversSection
+          intro={content.typicalCoverage.intro}
+          items={content.typicalCoverage.items}
+          exit={content.typicalCoverage.exit}
+        />
+      )}
     </>
   )
 }
