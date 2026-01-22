@@ -30,7 +30,7 @@ export function AboutUsSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-lg md:text-xl font-body font-normal text-[#333333] max-w-3xl mx-auto leading-relaxed"
           >
-            Dedicated to enhancing businesses by offering comprehensive solutions for substantial progress.
+            Focused on bringing clarity, structure, and sound financial judgment to important business decisions.
           </motion.p>
         </div>
 
@@ -51,14 +51,14 @@ export function AboutUsSection() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              
+
               {/* White Overlay Box */}
               <div className="absolute bottom-0 right-0 bg-white p-6 md:p-8 max-w-[80%] translate-x-4 md:translate-x-6 -translate-y-4 md:-translate-y-6">
                 <h3 className="text-xl md:text-2xl font-accent font-semibold md:font-bold text-black mb-2">
                   We Are Velricon
                 </h3>
-                <p className="text-lg md:text-xl font-accent font-normal md:font-light text-[#888888] md:text-[#A0A0A0]">
-                  Your Trusted CFO
+                <p className="text-md md:text-lg font-accent font-normal md:font-light text-[#888888] md:text-[#A0A0A0]">
+                  Your Financial Strategy Partner
                 </p>
               </div>
             </div>
@@ -73,15 +73,20 @@ export function AboutUsSection() {
           >
             {/* Accent Line Above First Paragraph */}
             <div className="w-1/4 h-0.5 bg-strategy-blue"></div>
-            
+
             {/* First Paragraph */}
             <p className="text-base md:text-lg font-body font-normal text-[#333333] leading-relaxed">
-              At Velricon, we meticulously assess your operations to increase business value and propel growth. We help your business achieve a competitive advantage that will allow you to fulfil your business goals.
+              Velricon was founded to bring clarity and structure to financial decision-making when complexity increases.
             </p>
 
             {/* Second Paragraph */}
             <p className="text-base md:text-lg font-body font-normal text-[#333333] leading-relaxed">
-              Our team consists of highly qualified professionals, dedicated to client satisfaction and building enduring relationships. With extensive hands-on financial and managerial experience, we offer tailored solutions, aiming for timely delivery of client-focused services.
+              We work alongside business owners and leadership teams to help them understand what their numbers are really telling them — and how those insights should inform important decisions around growth, financing, and risk.
+            </p>
+
+            {/* Second Paragraph */}
+            <p className="text-base md:text-lg font-body font-normal text-[#333333] leading-relaxed">
+              Our approach is grounded in disciplined financial logic, not generic advice or off-the-shelf frameworks. We focus on building financial understanding that supports sound judgment, long-term value, and confident leadership.
             </p>
 
             {/* Accent Line Below Second Paragraph */}
