@@ -8,7 +8,7 @@ const accordionItems = [
     id: 1,
     title: 'Fractional CFO',
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1974&auto=format&fit=crop',
-    href: '/services/fractional-cfo',
+    href: '/services/ongoing-financial-leadership',
   },
   {
     id: 2,
@@ -25,13 +25,13 @@ const accordionItems = [
 ]
 
 // --- Accordion Item Component ---
-const AccordionItem = ({ 
-  item, 
-  isActive, 
+const AccordionItem = ({
+  item,
+  isActive,
   onMouseEnter,
   onClick,
   index
-}: { 
+}: {
   item: typeof accordionItems[0]
   isActive: boolean
   onMouseEnter: () => void
@@ -74,8 +74,8 @@ const AccordionItem = ({
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
       `}
       style={{
-        transition: isVisible 
-          ? 'all 400ms ease-out, opacity 0.6s ease-out, transform 0.6s ease-out' 
+        transition: isVisible
+          ? 'all 400ms ease-out, opacity 0.6s ease-out, transform 0.6s ease-out'
           : 'opacity 0.6s ease-out, transform 0.6s ease-out',
         filter: isActive ? 'drop-shadow(0 0 20px rgba(116, 179, 255, 0.3))' : 'none',
         willChange: isVisible ? 'transform, opacity' : 'auto',
@@ -91,7 +91,7 @@ const AccordionItem = ({
         style={{
           transform: isActive ? 'scale(1.05)' : 'scale(1)',
         }}
-        onError={(e) => { 
+        onError={(e) => {
           const target = e.target as HTMLImageElement
           target.onerror = null
           target.src = 'https://placehold.co/400x450/1A1F2E/ffffff?text=Image+Error'
@@ -99,10 +99,10 @@ const AccordionItem = ({
       />
 
       {/* Animated gradient overlay */}
-      <div 
+      <div
         className="absolute inset-0 transition-opacity duration-500"
         style={{
-          background: isActive 
+          background: isActive
             ? 'linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.3), transparent)'
             : 'linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2), transparent)',
         }}
@@ -110,7 +110,7 @@ const AccordionItem = ({
 
       {/* Glow effect when active */}
       {isActive && (
-        <div 
+        <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: 'radial-gradient(circle at center, rgba(116, 179, 255, 0.1), transparent 70%)',
@@ -125,10 +125,9 @@ const AccordionItem = ({
           absolute text-white text-base font-light tracking-tight whitespace-nowrap
           transition-all duration-[250ms] ease-out
           ${isActive ? 'text-shadow-glow' : ''}
-          ${
-            isActive
-              ? 'bottom-6 left-1/2 -translate-x-1/2 rotate-0'
-              : 'w-auto text-left bottom-24 left-1/2 -translate-x-1/2 rotate-90'
+          ${isActive
+            ? 'bottom-6 left-1/2 -translate-x-1/2 rotate-0'
+            : 'w-auto text-left bottom-24 left-1/2 -translate-x-1/2 rotate-90'
           }
         `}
         style={{
@@ -151,7 +150,7 @@ const AccordionItem = ({
       {/* Floating decorative elements */}
       {isActive && (
         <>
-          <div 
+          <div
             className="absolute w-1 h-1 bg-[#74B3FF] rounded-full opacity-60"
             style={{
               top: '20%',
@@ -160,7 +159,7 @@ const AccordionItem = ({
               animationDelay: '0s',
             }}
           />
-          <div 
+          <div
             className="absolute w-1 h-1 bg-[#74B3FF] rounded-full opacity-40"
             style={{
               top: '60%',
@@ -169,7 +168,7 @@ const AccordionItem = ({
               animationDelay: '1s',
             }}
           />
-          <div 
+          <div
             className="absolute w-1 h-1 bg-[#74B3FF] rounded-full opacity-50"
             style={{
               bottom: '30%',
@@ -198,7 +197,7 @@ interface InteractiveImageAccordionProps {
   className?: string
 }
 
-export function InteractiveImageAccordion({ 
+export function InteractiveImageAccordion({
   onActiveChange,
   onSelect,
   className = ''
@@ -252,7 +251,7 @@ export function InteractiveImageAccordion({
   return (
     <>
       <style>{accordionStyles}</style>
-      <div 
+      <div
         className={`flex flex-row items-center justify-center gap-4 p-4 hide-scrollbar ${className}`}
         style={{
           overflowX: 'auto',

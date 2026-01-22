@@ -31,7 +31,7 @@ const nodes: LifecycleNode[] = [
       'Early decisions around pricing, costs, and cash flow shape everything that follows. Financial clarity at this stage prevents avoidable problems later.',
     imageUrl: '/assets/images/sticky-scroll/vault_with_organized_interior.png',
     imageAlt: 'Vault with organized interior',
-    services: [{ label: 'On-going Financial Leadership', href: '/services/fractional-cfo' }],
+    services: [{ label: 'On-going Financial Leadership', href: '/services/ongoing-financial-leadership' }],
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ const nodes: LifecycleNode[] = [
       'As the business grows, reporting, budgeting, and cash flow discipline become essential to support hiring, expansion, and operational decisions.',
     imageUrl: '/assets/images/sticky-scroll/modular_architecture.png',
     imageAlt: 'Modular architecture',
-    services: [{ label: 'On-going Financial Leadership', href: '/services/fractional-cfo' }],
+    services: [{ label: 'On-going Financial Leadership', href: '/services/ongoing-financial-leadership' }],
   },
   {
     id: 3,

@@ -31,14 +31,14 @@ interface ServiceSubServicesProps {
 	subServices: SubServiceConfig[]
 }
 
-function AnimatedContainer({ 
-	className, 
-	delay = 0.1, 
-	children 
-}: { 
+function AnimatedContainer({
+	className,
+	delay = 0.1,
+	children
+}: {
 	className?: string
 	delay?: number
-	children: React.ReactNode 
+	children: React.ReactNode
 }) {
 	const shouldReduceMotion = useReducedMotion()
 
@@ -97,7 +97,7 @@ export function ServiceSubServices({ subServices }: ServiceSubServicesProps) {
 	}, [subServices])
 
 	return (
-		<section 
+		<section
 			ref={sectionRef}
 			className="relative bg-deep-void py-24 md:py-32 lg:py-40 overflow-hidden"
 		>
@@ -115,7 +115,7 @@ export function ServiceSubServices({ subServices }: ServiceSubServicesProps) {
 			<svg className="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 				<defs>
 					<pattern id="gridSubServicesDark" width="60" height="60" patternUnits="userSpaceOnUse">
-						<path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(226, 232, 240, 0.12)" strokeWidth="0.5"/>
+						<path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(226, 232, 240, 0.12)" strokeWidth="0.5" />
 					</pattern>
 				</defs>
 				<rect width="100%" height="100%" fill="url(#gridSubServicesDark)" />
@@ -134,8 +134,8 @@ export function ServiceSubServices({ subServices }: ServiceSubServicesProps) {
 
 			<div className="mx-auto w-full max-w-5xl space-y-8 px-4 sm:px-6 lg:px-8">
 				<AnimatedContainer className="mx-auto max-w-3xl text-center">
-					<h2 className="text-3xl font-accent font-light tracking-tight text-balance lg:text-4xl xl:text-5xl text-platinum">
-						Capabilities
+					<h2 className="text-2xl font-accent font-light tracking-tight text-balance lg:text-4xl text-platinum">
+						<span className="text-electric-blue">Capabilities</span>
 					</h2>
 					<p className="text-platinum/70 mt-4 text-sm tracking-wide text-balance md:text-base font-body font-light">
 						What this service includes in practice.

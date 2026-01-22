@@ -52,17 +52,24 @@ export interface ServicePageContent {
     imageAlt?: string
   }
 
+  // Section 6: Final CTA
+  finalCta?: {
+    title: string
+    description: string
+    buttonText: string
+  }
+
   // Section 3: Sub-Services (Optional)
   subServices?: SubServiceConfig[]
 }
 
 export const servicePages: ServicePageContent[] = [
   {
-    slug: 'on-going-financial-leadership',
-    title: 'On-going Financial Leadership (Your Virtual CFO Partner)',
+    slug: 'ongoing-financial-leadership',
+    title: 'Ongoing Financial Leadership (Your Virtual CFO Partner)',
     metaDescription: 'Senior financial leadership without full-time overhead. How Velricon applies CFO-level expertise to growing businesses.',
     mandate: {
-      headline: 'Financial leadership to bring clarity, control, and better decisions',
+      headline: 'Financial leadership to bring clarity,\ncontrol, and better decisions',
       subline: 'Financial leadership means having someone who looks beyond accounting and helps you understand what the numbers are telling you — and what to do next. We work with business owners to improve financial visibility, strengthen cash-flow control, and support important decisions around growth, financing, and risk.This support is ongoing and tailored to your needs, providing senior financial guidance without the cost or complexity of a full-time executive.',
       cta: 'Financial Strategy Call',
       highlightPhrases: ['Financial Leadership', 'understand what the numbers are telling you', 'growth, financing, and risk.'],
@@ -97,6 +104,11 @@ export const servicePages: ServicePageContent[] = [
       ],
       imageUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2074&auto=format&fit=crop',
       imageAlt: 'Collaborative financial strategy meeting',
+    },
+    finalCta: {
+      title: 'Ready to bring clarity and structure to your financial decisions?',
+      description: 'Ongoing financial leadership is designed for businesses that need experienced financial judgment to support important decisions — without adding unnecessary complexity or overhead. \n\nIf you’re facing growth, financing, increased complexity, or a transition, a short conversation can help clarify whether this type of support is right for your situation.',
+      buttonText: 'Financial Strategy Call',
     },
     typicalCoverage: {
       intro: 'Ongoing financial leadership is not a fixed checklist, but it commonly includes support across areas such as:',
@@ -182,6 +194,11 @@ export const servicePages: ServicePageContent[] = [
       imageUrl: 'https://images.unsplash.com/photo-1560472355-536de3962603?q=80&w=2070&auto=format&fit=crop',
       imageAlt: 'Professional bank financing consultation',
     },
+    finalCta: {
+      title: 'Ready to approach banks with clarity and confidence?',
+      description: 'Bank financing and refinancing are significant commitments. Having clear financial logic, realistic assumptions, and well-structured cash-flow analysis makes a meaningful difference in how these discussions unfold. \n\nIf you are considering new financing, refinancing existing debt, or reassessing how your current facilities support the business, a short conversation can help clarify whether this type of preparation is appropriate for your situation.',
+      buttonText: 'Financial Strategy Call',
+    },
   },
   {
     slug: 'investor-ready',
@@ -234,6 +251,11 @@ export const servicePages: ServicePageContent[] = [
       ],
       imageUrl: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=2070&auto=format&fit=crop',
       imageAlt: 'Strategic investor preparation session',
+    },
+    finalCta: {
+      title: 'Ready to enter investor discussions with clarity and confidence?',
+      description: 'Investor discussions are defining moments. Having clear financial logic, well-tested assumptions, and credible analysis allows conversations to focus on strategy, value, and execution — rather than on defending numbers. \n\nIf you are preparing for funding, a strategic partnership, or an exit, a short conversation can help clarify whether this type of preparation is appropriate for your situation and stage.',
+      buttonText: 'Financial Strategy Call',
     },
   },
 ]

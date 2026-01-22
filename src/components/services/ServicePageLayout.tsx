@@ -5,6 +5,7 @@ import { ServicePageReverseContent } from './ServicePageReverseContent'
 import { ServiceSubServices } from './ServiceSubServices'
 import { Feature } from '@/components/ui/feature'
 import { ServicePageCoversSection } from './ServicePageCoversSection'
+import { ServicePageCTASection } from './ServicePageCTASection'
 import { ServicePageContent } from '@/config/service-pages'
 
 interface ServicePageLayoutProps {
@@ -45,12 +46,13 @@ export function ServicePageLayout({ content }: ServicePageLayoutProps) {
       {content.subServices && <ServiceSubServices subServices={content.subServices} />}
 
       {/* Case 1: For Fractional CFO, process (Support Section) comes before coverage */}
-      {content.slug === 'on-going-financial-leadership' && content.supportSection && (
+      {content.slug === 'ongoing-financial-leadership' && content.supportSection && (
         <Feature
           sectionTitle={content.supportSection.title}
           paragraphs={content.supportSection.paragraphs}
           imageUrl={content.supportSection.imageUrl}
           imageAlt={content.supportSection.imageAlt}
+          showBullets={true}
         />
       )}
 
@@ -63,12 +65,21 @@ export function ServicePageLayout({ content }: ServicePageLayoutProps) {
       )}
 
       {/* Case 2: For Bank Ready and Investor Ready, support section comes at the absolute bottom */}
-      {content.slug !== 'on-going-financial-leadership' && content.supportSection && (
+      {content.slug !== 'ongoing-financial-leadership' && content.supportSection && (
         <Feature
           sectionTitle={content.supportSection.title}
           paragraphs={content.supportSection.paragraphs}
           imageUrl={content.supportSection.imageUrl}
           imageAlt={content.supportSection.imageAlt}
+          showBullets={false}
+        />
+      )}
+
+      {content.finalCta && (
+        <ServicePageCTASection
+          title={content.finalCta.title}
+          description={content.finalCta.description}
+          buttonText={content.finalCta.buttonText}
         />
       )}
     </>

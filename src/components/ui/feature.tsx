@@ -14,6 +14,7 @@ interface FeatureProps {
     sectionTitle?: string;
     items?: FeatureItem[];
     paragraphs?: string[];
+    showBullets?: boolean;
     highlightPhrases?: string[];
     imageUrl?: string;
     imageAlt?: string;
@@ -23,6 +24,7 @@ function Feature({
     sectionTitle,
     items,
     paragraphs,
+    showBullets = true,
     highlightPhrases = ["Best when:"],
     imageUrl = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
     imageAlt = "Financial data and strategy"
@@ -68,7 +70,7 @@ function Feature({
                         transition={{ duration: 0.7 }}
                         className="text-2xl lg:text-4xl font-accent font-light text-platinum mb-10 text-left"
                     >
-                        {sectionTitle}
+                        {highlightText(sectionTitle, ["financial leadership", "process"], "text-electric-blue font-medium")}
                     </motion.h2>
                 )}
 
@@ -80,6 +82,7 @@ function Feature({
                         transition={{ duration: 0.8 }}
                         className="flex gap-8 flex-col"
                     >
+
                         {items && items.length > 0 && (
                             <div className="grid grid-cols-1 gap-6">
                                 {items.map((item, idx) => (
@@ -100,11 +103,26 @@ function Feature({
 
                         {paragraphs && paragraphs.length > 0 && (
                             <div className="flex flex-col gap-6">
-                                {paragraphs.map((para, idx) => (
-                                    <p key={idx} className="text-platinum/70 text-base md:text-lg font-body font-light leading-relaxed">
-                                        {highlightText(para, highlightPhrases, "text-electric-blue font-medium")}
-                                    </p>
-                                ))}
+                                {paragraphs.map((para, idx) => {
+                                    const isLast = idx === paragraphs.length - 1;
+                                    if (isLast || !showBullets) {
+                                        return (
+                                            <p key={idx} className="text-platinum/70 text-base md:text-lg font-body font-light leading-relaxed">
+                                                {highlightText(para, highlightPhrases, "text-electric-blue font-medium")}
+                                            </p>
+                                        );
+                                    }
+                                    return (
+                                        <div key={idx} className="flex flex-row gap-4 items-start group">
+                                            <div className="mt-1.5 bg-strategy-blue/10 p-1.5 rounded-lg border border-strategy-blue/20 group-hover:bg-strategy-blue/20 transition-colors">
+                                                <Check className="w-3.5 h-3.5 text-strategy-blue" />
+                                            </div>
+                                            <p className="text-platinum/70 text-base md:text-lg font-body font-light leading-relaxed">
+                                                {highlightText(para, highlightPhrases, "text-electric-blue font-medium")}
+                                            </p>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         )}
                     </motion.div>

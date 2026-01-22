@@ -3,7 +3,7 @@
 import React, { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
-import { Button } from '@/components/ui/Button'
+import { ShinyButton } from '@/components/ui/shiny-button'
 import Link from 'next/link'
 
 const IMG_PADDING = 12
@@ -117,25 +117,26 @@ const OverlayCopy = ({ subheading, heading, subline, cta }: OverlayCopyProps) =>
         y,
         opacity,
       }}
-      className="absolute left-0 top-0 flex h-screen w-full flex-col items-center justify-center text-white z-10"
+      className="absolute left-0 top-0 flex h-screen w-full flex-col items-center justify-center text-white z-10 px-4"
     >
-      <p className="mb-2 text-center text-sm md:text-base font-body font-medium tracking-[0.2em] text-platinum/70 uppercase">
+      <p className="mb-2 text-center text-[10px] md:text-sm font-body font-medium tracking-[0.2em] text-platinum/70 uppercase">
         {subheading}
       </p>
-      <p className="text-center text-3xl lg:text-4xl xl:text-5xl font-accent font-light tracking-tight leading-[1.05]">
-        {heading}
+      <p className="text-center text-2xl md:text-5xl font-accent font-light tracking-tight leading-[1.1] whitespace-pre-line md:whitespace-pre">
+        <span className="md:hidden">{heading.replace(/\n/g, ' ')}</span>
+        <span className="hidden md:inline">{heading}</span>
       </p>
       {subline && (
-        <div className="mt-6 max-w-3xl px-4 text-center text-base md:text-lg lg:text-xl font-body font-light text-platinum/80 leading-relaxed">
+        <div className="mt-6 max-w-3xl px-4 text-center text-sm md:text-lg font-body font-light text-platinum/80 leading-relaxed">
           {subline}
         </div>
       )}
       {cta && (
         <div className="mt-8">
           <Link href="/contact" passHref>
-            <Button size="lg" className="bg-strategy-blue hover:bg-strategy-blue/90 text-white border-none min-w-[200px] text-base font-medium font-body tracking-wide">
+            <ShinyButton className="text-xs md:text-sm px-6 py-2.5 min-w-[200px]">
               {cta}
-            </Button>
+            </ShinyButton>
           </Link>
         </div>
       )}

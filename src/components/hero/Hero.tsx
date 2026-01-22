@@ -19,7 +19,7 @@ const navLinks = [
 
 // Services dropdown items
 const servicesItems = [
-  { label: 'Ongoing Financial Leadership', href: '/services/fractional-cfo' },
+  { label: 'Ongoing Financial Leadership', href: '/services/ongoing-financial-leadership' },
   { label: 'Bank Financing & Refinancing', href: '/services/bank-ready' },
   { label: 'Investor-Ready Packages', href: '/services/investor-ready' },
 ]

@@ -30,7 +30,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services/fractional-cfo" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
+                <Link href="/services/ongoing-financial-leadership" className="text-slate hover:text-white transition-colors font-normal tracking-tight">
                   Ongoing Financial Leadership
                 </Link>
               </li>

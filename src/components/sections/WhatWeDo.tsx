@@ -44,7 +44,7 @@ const services = [
       'Growth planning',
     ],
     linkLabel: 'Explore Financial Support',
-    href: '/services/fractional-cfo',
+    href: '/services/ongoing-financial-leadership',
     color: '#74B3FF',
     icon: TrendingUp,
     backIcon: LineChart,

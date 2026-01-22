@@ -109,8 +109,8 @@ export function ServicePageCoversSection({ intro, items, exit }: ServicePageCove
                     transition={{ duration: 0.7 }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-3xl lg:text-4xl font-accent font-light text-black">
-                        What this typically covers
+                    <h2 className="text-2xl lg:text-4xl font-accent font-light text-black">
+                        What this typically <span className="text-electric-blue font-bold">covers</span>
                     </h2>
                 </motion.div>
 

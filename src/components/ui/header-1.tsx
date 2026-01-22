@@ -65,7 +65,7 @@ export function Header() {
 
 	const servicesLinks = {
 		primary: [
-			{ label: 'Ongoing Financial Leadership', href: '/services/fractional-cfo' },
+			{ label: 'Ongoing Financial Leadership', href: '/services/ongoing-financial-leadership' },
 		],
 		secondary: [
 			{ label: 'Bank Financing & Refinancing', href: '/services/bank-ready' },

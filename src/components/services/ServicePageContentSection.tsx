@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { useInView } from 'framer-motion'
 import Image from 'next/image'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { highlightText } from '@/lib/text-utils'
 
 interface ServicePageContentSectionProps {
   title: string
@@ -38,9 +39,9 @@ export function ServicePageContentSection({ title, authorityAndControl, impactOn
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="text-3xl lg:text-4xl font-accent font-light text-black mb-12 sm:mb-16 md:mb-20"
+          className="text-2xl lg:text-4xl font-accent font-light text-black mb-12 sm:mb-16 md:mb-20"
         >
-          {title}
+          {highlightText(title, ['financial decisions', 'financing decisions', 'investor discussions'], 'text-electric-blue font-bold')}
         </motion.h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -91,21 +92,10 @@ export function ServicePageContentSection({ title, authorityAndControl, impactOn
                   alt={imageAlt}
                   fill
                   className="object-cover"
-                  style={{
-                    filter: 'grayscale(80%) contrast(0.95) brightness(1.15)',
-                  }}
-                  sizes="(max-width: 1024px) 0vw, 40vw"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
                   aria-hidden="true"
                 />
               </div>
-
-              {/* Overlay for light theme integration */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(244, 246, 249, 0.4) 0%, rgba(255, 255, 255, 0.2) 100%)',
-                }}
-              />
 
               {/* Subtle grid pattern overlay */}
               <div className="absolute inset-0 pointer-events-none opacity-20">
