@@ -87,18 +87,18 @@ export function Navbar() {
       transition={{ duration: 0.3 }}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        ...(isScrolled 
+        ...(isScrolled
           ? {
-              backgroundColor: 'rgba(26, 31, 46, 0.95)',
-              backdropFilter: 'blur(10px)',
-              boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.3)',
-            }
+            backgroundColor: 'rgba(26, 31, 46, 0.95)',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.3)',
+          }
           : {
-              backgroundColor: 'transparent',
-              background: 'transparent',
-              backdropFilter: 'none',
-              boxShadow: 'none',
-            }
+            backgroundColor: 'transparent',
+            background: 'transparent',
+            backdropFilter: 'none',
+            boxShadow: 'none',
+          }
         ),
         transition: 'background-color 0.3s ease, background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease',
       }}
