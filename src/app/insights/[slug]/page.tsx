@@ -12,6 +12,10 @@ export const revalidate = 3600;
 
 // Fetch a single post/caseStudy/news by slug
 async function getPostBySlug(slug: string) {
+  if (!client) {
+    return null;
+  }
+
   const query = `
     *[slug.current == $slug && (_type == "post" || _type == "caseStudy" || _type == "news")][0] {
       _type,

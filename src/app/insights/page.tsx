@@ -7,6 +7,10 @@ import { urlForImage } from "@/sanity/image";
 export const revalidate = 3600;
 
 async function getInsights() {
+  if (!client) {
+    return { posts: [], caseStudies: [], news: [] };
+  }
+
   try {
     const query = `
       {
