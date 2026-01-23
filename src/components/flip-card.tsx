@@ -110,7 +110,7 @@ export default function CardFlip({
                 <h3 className="text-lg leading-snug font-semibold tracking-tight text-zinc-900 transition-all duration-500 ease-out group-hover:translate-y-[-4px] dark:text-white">
                   {title}
                 </h3>
-                <p className="line-clamp-2 text-sm tracking-tight text-zinc-600 transition-all delay-[50ms] duration-500 ease-out group-hover:translate-y-[-4px] dark:text-zinc-300">
+                <p className="line-clamp-2 text-sm tracking-tight text-zinc-600 transition-all [transition-delay:50ms] duration-500 ease-out group-hover:translate-y-[-4px] dark:text-zinc-300">
                   {subtitle}
                 </p>
               </div>

@@ -69,7 +69,7 @@ const AccordionItem = ({
       ref={itemRef}
       className={`
         relative h-[450px] rounded-2xl overflow-hidden cursor-pointer flex-shrink-0
-        transition-all duration-[400ms] ease-out
+        transition-all [transition-duration:400ms] ease-out
         ${isActive ? 'w-[400px]' : 'w-[60px]'}
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
       `}
@@ -123,7 +123,7 @@ const AccordionItem = ({
       <span
         className={`
           absolute text-white text-base font-light tracking-tight whitespace-nowrap
-          transition-all duration-[250ms] ease-out
+          transition-all [transition-duration:250ms] ease-out
           ${isActive ? 'text-shadow-glow' : ''}
           ${isActive
             ? 'bottom-6 left-1/2 -translate-x-1/2 rotate-0'
