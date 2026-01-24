@@ -26,7 +26,10 @@ async function getPostBySlug(slug: string) {
       publishedAt,
       author,
       readTime,
-      body
+      body,
+      challenge,
+      solution,
+      results
     }
   `;
   return await client.fetch(query, { slug });
@@ -151,6 +154,9 @@ export default async function InsightPostPage({ params }: { params: { slug: stri
 
   const typeLabel = post._type === 'caseStudy' ? 'Case Study' : post._type === 'news' ? 'News' : 'Article';
 
+  const isCaseStudy = post._type === 'caseStudy';
+  const hasCaseStudyContent = Boolean(post.challenge || post.solution || post.results);
+
   return (
     <main className="relative bg-deep-void min-h-screen" style={{ background: 'linear-gradient(180deg, #0E101A 0%, #0a0c12 100%)' }}>
       {/* Hero/Header Section */}
@@ -219,7 +225,40 @@ export default async function InsightPostPage({ params }: { params: { slug: stri
       {/* Article Body */}
       <section className="pb-24 lg:pb-32">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
-          {post.body ? (
+          {isCaseStudy && hasCaseStudyContent ? (
+            <div className="space-y-10">
+              {post.challenge && (
+                <div>
+                  <h2 className="text-2xl lg:text-3xl font-accent font-light text-platinum mb-4">
+                    The Challenge
+                  </h2>
+                  <p className="text-base lg:text-lg font-body text-platinum/80 leading-relaxed">
+                    {post.challenge}
+                  </p>
+                </div>
+              )}
+              {post.solution && (
+                <div>
+                  <h2 className="text-2xl lg:text-3xl font-accent font-light text-platinum mb-4">
+                    The Solution
+                  </h2>
+                  <p className="text-base lg:text-lg font-body text-platinum/80 leading-relaxed">
+                    {post.solution}
+                  </p>
+                </div>
+              )}
+              {post.results && (
+                <div>
+                  <h2 className="text-2xl lg:text-3xl font-accent font-light text-platinum mb-4">
+                    The Results
+                  </h2>
+                  <p className="text-base lg:text-lg font-body text-platinum/80 leading-relaxed">
+                    {post.results}
+                  </p>
+                </div>
+              )}
+            </div>
+          ) : post.body ? (
             <PortableText value={post.body} components={portableTextComponents} />
           ) : (
             <p className="text-platinum/60 font-body italic">
