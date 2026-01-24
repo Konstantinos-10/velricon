@@ -45,8 +45,8 @@ interface ServicePath {
 
 const servicePaths: ServicePath[] = [
   {
-    id: 'fractional-cfo',
-    slug: 'fractional-cfo',
+    id: 'ongoing-financial-leadership',
+    slug: 'ongoing-financial-leadership',
     title: (
       <>
         Ongoing Financial Leadership{' '}

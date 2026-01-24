@@ -9,21 +9,6 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    id: 'fractional-cfo',
-    slug: 'fractional-cfo',
-    title: 'Fractional CFO',
-    description: 'Strategic CFO expertise without the full-time commitment. Get the financial leadership you need, when you need it.',
-    metaDescription: 'Strategic CFO expertise without the full-time commitment. Get the financial leadership you need, when you need it.',
-    features: [
-      'Strategic financial planning and analysis',
-      'Monthly financial reporting and insights',
-      'Budgeting and forecasting',
-      'Cash flow management',
-      'Financial decision-making support',
-      'Investor and stakeholder communication',
-    ],
-  },
-  {
     id: 'bank-ready',
     slug: 'bank-ready',
     title: 'Bank-Ready Packages',

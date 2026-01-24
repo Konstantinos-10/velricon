@@ -1,6 +1,6 @@
 // src/components/hero/heroServiceRing.config.ts
 
-export type SegmentKey = "startups" | "scaleups" | "smes";
+export type SegmentKey = "ongoing" | "bank-ready" | "investor-ready";
 
 export interface Segment {
   key: SegmentKey;
@@ -16,9 +16,9 @@ export interface Segment {
 
 export const SEGMENTS: Segment[] = [
   {
-    key: "startups",
-    label: "For Startups",
-    route: "/services/startups",
+    key: "ongoing",
+    label: "Ongoing Leadership",
+    route: "/services/ongoing-financial-leadership",
     baseHeight: 0.02,
     startAngle: 0,
     endAngle: 115,
@@ -27,9 +27,9 @@ export const SEGMENTS: Segment[] = [
     gradientEnd: "#4A90E2",
   },
   {
-    key: "scaleups",
-    label: "For Scaleups",
-    route: "/services/scaleups",
+    key: "bank-ready",
+    label: "Bank Ready",
+    route: "/services/bank-ready",
     baseHeight: 0.03,
     startAngle: 125,
     endAngle: 235,
@@ -38,9 +38,9 @@ export const SEGMENTS: Segment[] = [
     gradientEnd: "#2563EB",
   },
   {
-    key: "smes",
-    label: "For Established SMEs",
-    route: "/services/smes",
+    key: "investor-ready",
+    label: "Investor Ready",
+    route: "/services/investor-ready",
     baseHeight: 0.025,
     startAngle: 245,
     endAngle: 350,

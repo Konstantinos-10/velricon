@@ -7,8 +7,8 @@ import { urlForImage } from '@/sanity/image'
 import { PortableText, PortableTextComponents } from '@portabletext/react'
 import { ArrowLeft } from 'lucide-react'
 
-// Revalidate every hour
-export const revalidate = 3600;
+// Revalidate frequently to surface new content quickly while keeping ISR caching.
+export const revalidate = 120;
 
 // Fetch a single post/caseStudy/news by slug
 async function getPostBySlug(slug: string) {

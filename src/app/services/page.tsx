@@ -5,7 +5,7 @@ import { StickyScrollCardsSection } from '@/components/ui/sticky-scroll-cards-se
 
 export const metadata: Metadata = {
   title: 'Services',
-  description: 'Financial leadership services tailored to your business needs. Fractional CFO, Bank-Ready Packages, and Investor-Ready Packages.',
+  description: 'Financial leadership services tailored to your business needs. Ongoing Financial Leadership, Bank-Ready Packages, and Investor-Ready Packages.',
 }
 
 export default function ServicesPage() {

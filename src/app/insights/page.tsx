@@ -3,8 +3,8 @@ import { BlogSection, BlogItem } from "@/components/ui/blog-section";
 import { InsightsHero } from "@/components/sections/InsightsHero";
 import { urlForImage } from "@/sanity/image";
 
-// Revalidate every hour
-export const revalidate = 3600;
+// Revalidate frequently to surface new content quickly while keeping ISR caching.
+export const revalidate = 120;
 
 async function getInsights() {
   if (!client) {

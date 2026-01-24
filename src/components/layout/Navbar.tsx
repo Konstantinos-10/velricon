@@ -19,16 +19,8 @@ const navItems: NavItem[] = [
     label: 'Services',
     children: [
       {
-        label: 'For Startups',
-        href: '/services/startups',
-      },
-      {
-        label: 'For Scaleups',
-        href: '/services/scaleups',
-      },
-      {
-        label: 'For Established SMEs',
-        href: '/services/smes',
+        label: 'Ongoing Financial Leadership',
+        href: '/services/ongoing-financial-leadership',
       },
       {
         label: 'Investor Ready Package',
